@@ -1,4 +1,5 @@
 #include "incliarray.h"
+#include <iostream>
 #include <vector>
 
 int main() {
@@ -6,6 +7,10 @@ int main() {
   NDArray arr(shape);
 
   arr.metadata(true, true, true, true);
+
+  std::vector<int> indices = {1, 1, 1, 1};
+  arr.set(5, indices);
+  std::cout << "Value at index [1, 1, 1, 1]: " << arr.get(indices) << std::endl;
 
   return 0;
 }

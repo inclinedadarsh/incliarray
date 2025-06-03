@@ -14,4 +14,7 @@ public:
   NDArray(std::vector<int> shape);
   void metadata(bool shapeInfo = true, bool stridesInfo = false,
                 bool ndimInfo = false, bool sizeInfo = false);
+
+  float get(std::vector<int> indices);
+  void set(float value, std::vector<int> indices);
 };

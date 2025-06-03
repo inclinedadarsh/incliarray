@@ -1,5 +1,6 @@
 #include "incliarray.h"
 #include <iostream>
+#include <stdexcept>
 #include <vector>
 
 NDArray::NDArray(std::vector<int> inputShape) {
@@ -62,4 +63,36 @@ void NDArray::metadata(bool shapeInfo, bool stridesInfo, bool ndimInfo,
   if (sizeInfo) {
     std::cout << "Size: " << size << std::endl;
   }
+}
+
+float NDArray::get(std::vector<int> indices) {
+  // Check for size of input indices == ndim
+  if (indices.size() != ndim) {
+    throw std::invalid_argument("Expected " + std::to_string(ndim) +
+                                " indices, got " +
+                                std::to_string(indices.size()));
+  }
+
+  int offset = 0;
+  for (int i = 0; i < ndim; i++) {
+    offset += indices[i] * strides[i];
+  }
+
+  return data[offset];
+}
+
+void NDArray::set(float value, std::vector<int> indices) {
+  // Check for size of input indices == ndim
+  if (indices.size() != ndim) {
+    throw std::invalid_argument("Expected " + std::to_string(ndim) +
+                                " indices, got " +
+                                std::to_string(indices.size()));
+  }
+
+  int offset = 0;
+  for (int i = 0; i < ndim; i++) {
+    offset += indices[i] * strides[i];
+  }
+
+  data[offset] = value;
 }

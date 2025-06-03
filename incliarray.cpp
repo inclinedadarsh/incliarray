@@ -41,7 +41,7 @@ void NDArray::metadata(bool shapeInfo, bool stridesInfo, bool ndimInfo,
                        bool sizeInfo, bool ownsDataInfo) {
   // Printing the shape
   if (shapeInfo) {
-    std::cout << "Shape for the array: (";
+    std::cout << "Shape of the array: (";
     for (int i = 0; i < shape.size() - 1; i++) {
       std::cout << shape[i] << ", ";
     }
@@ -50,7 +50,7 @@ void NDArray::metadata(bool shapeInfo, bool stridesInfo, bool ndimInfo,
 
   // Printing the strides
   if (stridesInfo) {
-    std::cout << "Shape for the array: (";
+    std::cout << "Stride of the array: (";
     for (int i = 0; i < strides.size() - 1; i++) {
       std::cout << strides[i] << ", ";
     }

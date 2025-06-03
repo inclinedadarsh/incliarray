@@ -15,7 +15,7 @@ NDArray::NDArray(std::vector<int> inputShape) {
   }
 
   // Initializing the data
-  data = std::vector<float>(size, 0.0f);
+  data = new float[size]();
 
   // Initializing the strides
   if (shape.size() > 1) {

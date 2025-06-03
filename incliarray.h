@@ -4,7 +4,7 @@
 
 class NDArray {
 public:
-  std::vector<float> data;
+  float *data;
   std::vector<int> shape;
   std::vector<int> strides;
   int ndim;

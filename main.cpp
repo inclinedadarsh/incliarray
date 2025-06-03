@@ -6,7 +6,7 @@ int main() {
   std::vector<int> shape = {5, 2, 3, 6};
   NDArray arr(shape);
 
-  arr.metadata(true, true, true, true);
+  arr.metadata(true, true, true, true, true);
 
   std::vector<int> indices = {1, 1, 1, 1};
   arr.set(5, indices);

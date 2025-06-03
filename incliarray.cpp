@@ -32,10 +32,13 @@ NDArray::NDArray(std::vector<int> inputShape) {
 
   // Initializing the ndim
   ndim = shape.size();
+
+  // Initializing owns_data property
+  ownsData = true;
 }
 
 void NDArray::metadata(bool shapeInfo, bool stridesInfo, bool ndimInfo,
-                       bool sizeInfo) {
+                       bool sizeInfo, bool ownsDataInfo) {
   // Printing the shape
   if (shapeInfo) {
     std::cout << "Shape for the array: (";
@@ -62,6 +65,11 @@ void NDArray::metadata(bool shapeInfo, bool stridesInfo, bool ndimInfo,
   // Printing the size
   if (sizeInfo) {
     std::cout << "Size: " << size << std::endl;
+  }
+
+  // Printing ownsData
+  if (ownsDataInfo) {
+    std::cout << "Owns Data: " << ownsData << std::endl;
   }
 }
 

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <tuple>
 #include <vector>
 
 class NDArray {
@@ -9,11 +10,12 @@ public:
   std::vector<int> strides;
   int ndim;
   int size = 0;
-  bool owns_data;
+  bool ownsData;
 
   NDArray(std::vector<int> shape);
   void metadata(bool shapeInfo = true, bool stridesInfo = false,
-                bool ndimInfo = false, bool sizeInfo = false);
+                bool ndimInfo = false, bool sizeInfo = false,
+                bool ownsDataInfo = false);
 
   float get(std::vector<int> indices);
   void set(float value, std::vector<int> indices);

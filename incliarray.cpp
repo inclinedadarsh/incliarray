@@ -1,6 +1,7 @@
 #include "incliarray.h"
 #include <iostream>
 #include <stdexcept>
+#include <tuple>
 #include <vector>
 
 NDArray::NDArray(std::vector<int> inputShape) {
@@ -35,6 +36,21 @@ NDArray::NDArray(std::vector<int> inputShape) {
 
   // Initializing owns_data property
   ownsData = true;
+}
+
+NDArray::NDArray(std::vector<int> inputShape, std::vector<int> inputStrides,
+                 float *inputData, bool inputOwnsData) {
+  shape = inputShape;
+  strides = inputStrides;
+  data = inputData;
+  ownsData = inputOwnsData;
+
+  size = 1;
+  for (int i = 0; i < shape.size(); i++) {
+    size *= shape[i];
+  }
+
+  ndim = shape.size();
 }
 
 void NDArray::metadata(bool shapeInfo, bool stridesInfo, bool ndimInfo,
@@ -103,4 +119,26 @@ void NDArray::set(float value, std::vector<int> indices) {
   }
 
   data[offset] = value;
+}
+
+NDArray NDArray::slice(std::vector<std::tuple<int, int>> slices) {
+  if (slices.size() != ndim) {
+    throw std::invalid_argument("Expected " + std::to_string(ndim) +
+                                " slices, got " +
+                                std::to_string(slices.size()));
+  }
+
+  int offset = 0;
+  for (int i = 0; i < ndim; i++) {
+    offset += std::get<0>(slices[i]) * strides[i];
+  }
+
+  std::vector<int> newShape;
+  for (int i = 0; i < slices.size(); i++) {
+    newShape.push_back(std::get<1>(slices[i]) - std::get<0>(slices[i]));
+  }
+
+  NDArray result(newShape, strides, data + offset, false);
+
+  return result;
 }

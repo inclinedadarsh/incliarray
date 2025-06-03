@@ -1,16 +1,18 @@
 #include "incliarray.h"
 #include <iostream>
-#include <vector>
 
 int main() {
-  std::vector<int> shape = {5, 2, 3, 6};
-  NDArray arr(shape);
+  NDArray arr({5, 6});
 
   arr.metadata(true, true, true, true, true);
 
-  std::vector<int> indices = {1, 1, 1, 1};
-  arr.set(5, indices);
-  std::cout << "Value at index [1, 1, 1, 1]: " << arr.get(indices) << std::endl;
+  arr.set(5, {1, 1});
+  std::cout << "Value at index [1, 1]: " << arr.get({1, 1}) << std::endl;
+
+  std::cout << "-----------------------" << std::endl;
+
+  NDArray newArr = arr.slice({{2, 4}, {2, 5}});
+  newArr.metadata(true, true, true, true, true);
 
   return 0;
 }

@@ -132,7 +132,7 @@ float NDArray::get(int index) {
   return data[index];
 }
 
-void NDArray::set(float value, std::vector<int> indices) {
+void NDArray::set(std::vector<int> indices, float value) {
   // Check for size of input indices == ndim
   if (indices.size() != ndim) {
     throw std::invalid_argument("Expected " + std::to_string(ndim) +

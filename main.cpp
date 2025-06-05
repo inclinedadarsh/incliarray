@@ -6,7 +6,7 @@ int main() {
 
   arr.metadata(true, true, true, true, true);
 
-  arr.set(5, {1, 1});
+  arr.set({1, 1}, 5);
   std::cout << "Value at index [1, 1]: " << arr.get({1, 1}) << std::endl;
 
   std::cout << "-----------------------" << std::endl;

@@ -22,6 +22,10 @@ public:
   int size = 0;
   bool ownsData;
 
+  /*
+   Public functions for usage
+  */
+
   // To create an object (for general usage)
   NDArray(std::vector<int> shape);
 
@@ -37,7 +41,7 @@ public:
   float get(int index);
 
   // To set an element based on the indices
-  void set(float value, std::vector<int> indices);
+  void set(std::vector<int> indices, float value);
 
   // To set an element based on a flat index
   void set(int index, float value);

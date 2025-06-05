@@ -1,5 +1,6 @@
 #include "incliarray.h"
 #include <iostream>
+#include <random>
 #include <stdexcept>
 #include <tuple>
 #include <vector>
@@ -257,4 +258,51 @@ void NDArray::reshape(std::vector<int> newShape) {
 
   strides = _compute_strides(newShape);
   shape = newShape;
+}
+
+void NDArray::fillSequential() {
+  if (!ownsData) {
+    throw std::runtime_error("Cannot fill a view or non-owning array.");
+  }
+
+  for (int i = 0; i < size; i++) {
+    data[i] = i;
+  }
+}
+
+void NDArray::fill(float value) {
+  if (!ownsData) {
+    throw std::runtime_error("Cannot fill a view or non-owning array.");
+  }
+
+  for (int i = 0; i < size; i++) {
+    data[i] = value;
+  }
+}
+
+void NDArray::zeros() {
+  if (!ownsData) {
+    throw std::runtime_error("Cannot fill a view or non-owning array.");
+  }
+  fill(0.0);
+}
+
+void NDArray::ones() {
+  if (!ownsData) {
+    throw std::runtime_error("Cannot fill a view or non-owning array.");
+  }
+  fill(1.0);
+}
+
+void NDArray::randint(int low, int high) {
+  if (!ownsData) {
+    throw std::runtime_error("Cannot fill a view or non-owning array.");
+  }
+
+  std::mt19937 engine(std::random_device{}());
+  std::uniform_int_distribution<int> dist(low, high - 1);
+
+  for (int i = 0; i < size; i++) {
+    data[i] = static_cast<float>(dist(engine));
+  }
 }

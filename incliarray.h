@@ -61,4 +61,19 @@ public:
 
   // Print the array
   void print();
+
+  // Fill the array with sequential data
+  void fillSequential();
+
+  // Fill the data with a constant value
+  void fill(float value);
+
+  // Fill the data with 0s
+  void zeros();
+
+  // Fill the data with 1s
+  void ones();
+
+  // Fill the data with random numbers
+  void randint(int low, int high);
 };

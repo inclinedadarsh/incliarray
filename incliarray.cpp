@@ -192,3 +192,29 @@ bool NDArray::isContiguous() {
   else
     return false;
 }
+
+void NDArray::print() {
+  if (ndim == 1) {
+    std::cout << "[";
+    for (int i = 0; i < size - 1; i++) {
+      std::cout << data[i] << ", ";
+    }
+    std::cout << data[size - 1] << "]" << std::endl;
+  }
+
+  if (ndim == 2) {
+    for (int i = 0; i < shape[0]; i++) {
+      std::cout << " [";
+      for (int j = 0; j < shape[1]; j++) {
+        std::cout << get({i, j});
+      }
+      std::cout << "]," << std::endl;
+    }
+  }
+
+  std::cout << "[";
+  for (int i = 0; i < size - 1; i++) {
+    std::cout << data[i] << ", ";
+  }
+  std::cout << data[size - 1] << "]" << std::endl;
+}

@@ -14,5 +14,9 @@ int main() {
   NDArray newArr = arr.slice({{2, 4}, {2, 5}});
   newArr.metadata(true, true, true, true, true);
 
+  std::cout << "-----------------------" << std::endl;
+
+  arr.print();
+
   return 0;
 }

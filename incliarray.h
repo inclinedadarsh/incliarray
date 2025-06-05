@@ -51,4 +51,7 @@ public:
 
   // Returns if if the data is contiguous or not
   bool isContiguous();
+
+  // Print the array
+  void print();
 };

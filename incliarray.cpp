@@ -27,6 +27,24 @@ std::vector<int> NDArray::_compute_strides() {
   return computedStrides;
 }
 
+std::vector<int> NDArray::_compute_strides(std::vector<int> newShape) {
+  std::vector<int> computedStrides;
+
+  if (newShape.size() > 1) {
+    for (int i = 0; i < newShape.size() - 1; i++) {
+      int currentStrideValue = 1;
+      for (int j = i + 1; j < newShape.size(); j++) {
+        currentStrideValue *= newShape[j];
+      }
+      computedStrides.push_back(currentStrideValue);
+    }
+  }
+
+  computedStrides.push_back(1);
+
+  return computedStrides;
+}
+
 NDArray::NDArray(std::vector<int> inputShape) {
   // Initializing the shape
   shape = inputShape;
@@ -217,4 +235,28 @@ void NDArray::print() {
     std::cout << data[i] << ", ";
   }
   std::cout << data[size - 1] << "]" << std::endl;
+}
+
+void NDArray::reshape(std::vector<int> newShape) {
+  if (!isContiguous() || !ownsData) {
+    throw std::runtime_error(
+        "Reshaping is only allowed on contiguous and self-owned data.");
+  }
+
+  if (newShape.size() == 0) {
+    throw std::invalid_argument(
+        "The new shape should have al least one dimension, got 0.");
+  }
+
+  int newSize = 1;
+  for (int i = 0; i < newShape.size(); i++) {
+    newSize *= newShape[i];
+  }
+
+  if (newSize != size) {
+    throw std::invalid_argument("New shape not compatible with the old shape.");
+  }
+
+  strides = _compute_strides(newShape);
+  shape = newShape;
 }

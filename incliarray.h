@@ -12,7 +12,11 @@ private:
     Private utility functions
     These functions start with an underscore.
   */
-  std::vector<int> _compute_strides(); // To compute strides based on the shape
+
+  // To compute strides based on the current shape
+  std::vector<int> _compute_strides();
+  // Compute strides for a new shape
+  static std::vector<int> _compute_strides(std::vector<int> newShape);
 
 public:
   float *data;
@@ -51,6 +55,9 @@ public:
 
   // Returns if if the data is contiguous or not
   bool isContiguous();
+
+  // Reshapes the original array
+  void reshape(std::vector<int> newShape);
 
   // Print the array
   void print();

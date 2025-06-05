@@ -33,9 +33,18 @@ public:
   // To get an element based on the indices
   float get(std::vector<int> indices);
 
+  // To get an element based on a flat index
+  float get(int index);
+
   // To set an element based on the indices
   void set(float value, std::vector<int> indices);
 
+  // To set an element based on a flat index
+  void set(int index, float value);
+
   // To get a sliced object
   NDArray slice(std::vector<std::tuple<int, int>> indices);
+
+  // Returns if if the data is contiguous or not
+  bool isContiguous();
 };

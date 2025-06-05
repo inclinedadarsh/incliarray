@@ -118,6 +118,20 @@ float NDArray::get(std::vector<int> indices) {
   return data[offset];
 }
 
+float NDArray::get(int index) {
+  // Check for out of bound index
+  if (index < 0 || index >= size) {
+    throw std::out_of_range("Flat index out of bounds.");
+  }
+
+  // Only allow if the array is contiguous
+  if (!isContiguous() || !ownsData) {
+    throw std::runtime_error("Flat indexing only valid on base arrays.");
+  }
+
+  return data[index];
+}
+
 void NDArray::set(float value, std::vector<int> indices) {
   // Check for size of input indices == ndim
   if (indices.size() != ndim) {
@@ -132,6 +146,20 @@ void NDArray::set(float value, std::vector<int> indices) {
   }
 
   data[offset] = value;
+}
+
+void NDArray::set(int index, float value) {
+  // Check for out of bound index
+  if (index < 0 || index >= size) {
+    throw std::out_of_range("Flat index out of bounds.");
+  }
+
+  // Only allow if the array is contiguous
+  if (!isContiguous() || !ownsData) {
+    throw std::runtime_error("Flat indexing only valid on base arrays.");
+  }
+
+  data[index] = value;
 }
 
 NDArray NDArray::slice(std::vector<std::tuple<int, int>> slices) {
@@ -154,4 +182,13 @@ NDArray NDArray::slice(std::vector<std::tuple<int, int>> slices) {
   NDArray result(newShape, strides, data + offset, false);
 
   return result;
+}
+
+bool NDArray::isContiguous() {
+  std::vector<int> computedStrides = _compute_strides();
+
+  if (computedStrides == strides)
+    return true;
+  else
+    return false;
 }

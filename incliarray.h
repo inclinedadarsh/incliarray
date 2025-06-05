@@ -8,14 +8,22 @@ private:
   NDArray(std::vector<int> shape, std::vector<int> strides, float *data,
           bool ownsData);
 
-  /*
-    Private utility functions
-    These functions start with an underscore.
-  */
+  // ================
+  // Private utility functions.
+  // These functions start with an underscore.
+  // ================
 
-  // To compute strides based on the current shape
+  /**
+   * @brief Computes strides based on the current shape.
+   * @return Computed strides
+   */
   std::vector<int> _compute_strides();
-  // Compute strides for a new shape
+
+  /**
+   * @brief Computes strides from a new shape.
+   * @param newShape Shape with which strides should be computed
+   * @return Computed strides
+   */
   static std::vector<int> _compute_strides(std::vector<int> newShape);
 
 public:
@@ -26,54 +34,126 @@ public:
   int size = 0;
   bool ownsData;
 
-  /*
-   Public functions for usage
-  */
-
-  // To create an object (for general usage)
   NDArray(std::vector<int> shape);
 
-  // To display the metadata information of the object
+  // ================
+  // Public functions for general usage
+  // ================
+
+  /**
+   * @brief Prints the metadata information of the object.
+   * @param shapeInfo Print shape?
+   * @param stridesInfo Print strides?
+   * @param ndimInfo Print ndim?
+   * @param sizeInfo Print size?
+   * @param ownsDataInfo Print ownsData?
+   */
   void metadata(bool shapeInfo = true, bool stridesInfo = false,
                 bool ndimInfo = false, bool sizeInfo = false,
                 bool ownsDataInfo = false);
 
-  // To get an element based on the indices
+  /**
+   * @brief Returns an element based on the indices.
+   * @param indices Indices of the element asked
+   * @return Element at the given indices
+   */
   float get(std::vector<int> indices);
 
-  // To get an element based on a flat index
+  /**
+   * @brief Returns an element based on a flat index.
+   *
+   * It disregards any shape or stride, and returns the element as if it was a
+   * flat array.
+   *
+   * @param index Flat index of the element asked
+   * @return Element at the given index
+   */
   float get(int index);
 
-  // To set an element based on the indices
+  /**
+   * @brief Sets a value of the element at the given indices.
+   * @param indices Indices of the element where the value has to be set
+   * @param value The value which is to be set at the given indices
+   */
   void set(std::vector<int> indices, float value);
 
-  // To set an element based on a flat index
+  /**
+   * @brief Sets a value of the element at the given flat index.
+   *
+   * It disregards any shape or stride, and finds the element as if it was a
+   * flat array.
+   *
+   * @param index Flat index of the element where the value has to be set
+   * @param value The value which is to be set at the given flat index
+   */
   void set(int index, float value);
 
-  // To get a sliced object
+  /**
+   * @brief Returns a sliced object.
+   *
+   * Given the indices, this function returns an NDArray which is a view of the
+   * original data but with the indices boundary.
+   *
+   * @param indices Vector (same size as the axis of the object) of tuple, where
+   * the first element is start (inclusive) and second element is stop
+   * (exclusive)
+   *
+   * @return Sliced object with new boundaries. This object DOES NOT own the
+   * data
+   */
   NDArray slice(std::vector<std::tuple<int, int>> indices);
 
-  // Returns if if the data is contiguous or not
+  /**
+   * @brief Returns boolean if the data inside is contiguous or not.
+   * @return Boolean value, true if the data is contiguous, false otherwise
+   */
   bool isContiguous();
 
-  // Reshapes the original array
+  /**
+   * @brief Reshapes the original data.
+   *
+   * The new shape should be compatible with the old shape.
+   *
+   * @param newShape The new shape in which the data has to be shaped
+   */
   void reshape(std::vector<int> newShape);
 
-  // Print the array
+  /**
+   * @brief Prints the data.
+   *
+   * Prints the data in layout if it's 1d or 2d, otherwise prints the flattened
+   * array.
+   */
   void print();
 
-  // Fill the array with sequential data
+  /**
+   * @brief Fills the data in the object with sequential numbers starting from
+   * 0.
+   */
   void fillSequential();
 
-  // Fill the data with a constant value
+  /**
+   * @brief Fills the data inthe object with the given floating point value.
+   * @param value The value to be used to fill the data
+   */
   void fill(float value);
 
-  // Fill the data with 0s
+  /**
+   * @brief Fills the data in the object with 0s.
+   */
   void zeros();
 
-  // Fill the data with 1s
+  /**
+   * @brief Fills the data in the object with 1s.
+   */
   void ones();
 
-  // Fill the data with random numbers
+  /**
+   * @brief Fills the data in the object with random numbers between the given
+   * boundaries.
+   *
+   * @param low The lower end of the boundary (inclusive)
+   * @param high The higher end of the boundary (exclusive)
+   */
   void randint(int low, int high);
 };

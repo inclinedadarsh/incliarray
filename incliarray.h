@@ -8,6 +8,12 @@ private:
   NDArray(std::vector<int> shape, std::vector<int> strides, float *data,
           bool ownsData);
 
+  /*
+    Private utility functions
+    These functions start with an underscore.
+  */
+  std::vector<int> _compute_strides(); // To compute strides based on the shape
+
 public:
   float *data;
   std::vector<int> shape;

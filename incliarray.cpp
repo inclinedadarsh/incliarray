@@ -4,6 +4,29 @@
 #include <tuple>
 #include <vector>
 
+/*
+ Private utility functions
+ These function start with an underscore.
+*/
+
+std::vector<int> NDArray::_compute_strides() {
+  std::vector<int> computedStrides;
+
+  if (shape.size() > 1) {
+    for (int i = 0; i < shape.size() - 1; i++) {
+      int currentStrideValue = 1;
+      for (int j = i + 1; j < shape.size(); j++) {
+        currentStrideValue *= shape[j];
+      }
+      computedStrides.push_back(currentStrideValue);
+    }
+  }
+
+  computedStrides.push_back(1);
+
+  return computedStrides;
+}
+
 NDArray::NDArray(std::vector<int> inputShape) {
   // Initializing the shape
   shape = inputShape;
@@ -19,17 +42,7 @@ NDArray::NDArray(std::vector<int> inputShape) {
   data = new float[size]();
 
   // Initializing the strides
-  if (shape.size() > 1) {
-    for (int i = 0; i < shape.size() - 1; i++) {
-      int currentStrideValue = 1;
-      for (int j = i + 1; j < shape.size(); j++) {
-        currentStrideValue *= shape[j];
-      }
-      strides.push_back(currentStrideValue);
-    }
-  }
-
-  strides.push_back(1);
+  strides = _compute_strides();
 
   // Initializing the ndim
   ndim = shape.size();

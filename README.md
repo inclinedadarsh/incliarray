@@ -38,14 +38,41 @@ D.fill(42);           // Fill with a single value
 
 ## Build with CMake
 
-```bash
-git clone https://github.com/inclinedadarsh/incliarray.git
-cd incliarray
-mkdir build && cd build
-cmake ..
-make
-./IncliArray
-```
+1. Clone this repository and change directory
+    ```bash
+    git clone https://github.com/inclinedadarsh/incliarray.git
+    cd incliarray
+    ```
+
+2. Create and change directory to the `build` directory
+    ```bash
+    mkdir build && cd build
+    ```
+
+3. Use `cmake` to build the program
+    ```bash
+    cmake ..
+    make
+    ```
+
+4. Run the executable
+    ```bash
+    ./IncliArray
+    ```
+
+## Build Doxygen documentation
+
+1. Install Doxygen and `graphviz`
+    ```bash
+    sudo apt install doxygen graphviz
+    ```
+
+2. Generate HTML docs
+    ```bash
+    doxygen Doxyfile
+    ```
+
+3. Open the docs in your browser. The index file can be found at `html/index.html`.
 
 ## Project Structure
 
@@ -57,17 +84,10 @@ incliarray/
 └── main.cpp          // Example/test runner
 ```
 
-## Roadmap
-
-* [ ] `sum()` and `mean()` along axis
-* [ ] Matrix multiplication
-* [ ] Fancy indexing support
-* [ ] Templated types (int, double, etc.)
-
 ## Author
 
 Built with some neovim and some maths by [**Adarsh Dubey**](https://x.com/inclinedadarsh).
 
-## 📜 License
+## License
 
 MIT License. Do whatever you want, just don’t sue me.

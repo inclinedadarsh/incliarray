@@ -4,6 +4,8 @@
 Minimal NumPy-like N-dimensional float array library in C++.  
 Built from scratch to understand memory layout, strides, slicing, and broadcasting.
 
+![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white) ![CMake](https://img.shields.io/badge/CMake-%23008FBA.svg?style=for-the-badge&logo=cmake&logoColor=white) ![Doxygen](https://img.shields.io/badge/doxygen-2C4AA8?style=for-the-badge&logo=doxygen&logoColor=white)
+
 ## Examples
 
 ```cpp

@@ -1,0 +1,9 @@
+PROJECT_NAME           = "IncliArray"
+INPUT                  = . README.md
+RECURSIVE              = YES
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+FILE_PATTERNS          = *.cpp *.h *.md
+GENERATE_LATEX         = NO
+GENERATE_HTML          = YES
+USE_MDFILE_AS_MAINPAGE = README.md

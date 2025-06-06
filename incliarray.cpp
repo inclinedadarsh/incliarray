@@ -46,6 +46,56 @@ std::vector<int> NDArray::_compute_strides(std::vector<int> newShape) {
   return computedStrides;
 }
 
+int NDArray::_compute_offset(std::vector<int> index, std::vector<int> strides) {
+  int offset = 0;
+  for (size_t i = 0; i < index.size(); ++i) {
+    offset += index[i] * strides[i];
+  }
+  return offset;
+}
+
+std::vector<int> NDArray::_broadcast_strides(std::vector<int> orig_shape,
+                                             std::vector<int> orig_strides,
+                                             std::vector<int> target_shape) {
+  int ndim = target_shape.size();
+  int offset = ndim - orig_shape.size();
+  std::vector<int> result(ndim, 0);
+
+  for (int i = 0; i < ndim; ++i) {
+    if (i < offset) {
+      result[i] = 0;
+    } else if (orig_shape[i - offset] == 1) {
+      result[i] = 0;
+    } else {
+      result[i] = orig_strides[i - offset];
+    }
+  }
+
+  return result;
+}
+
+std::vector<int> NDArray::_broadcast_shape(std::vector<int> a,
+                                           std::vector<int> b) {
+  std::vector<int> result;
+
+  int a_len = a.size();
+  int b_len = b.size();
+  int result_ndim = std::max(a_len, b_len);
+
+  for (int i = 0; i < result_ndim; i++) {
+    int a_dim = (i < result_ndim - a_len) ? 1 : a[i - (result_ndim - a_len)];
+    int b_dim = (i < result_ndim - b_len) ? 1 : b[i - (result_ndim - b_len)];
+
+    if (a_dim != b_dim && a_dim != 1 && b_dim != 1) {
+      throw std::invalid_argument("Shapes not broadcastable.");
+    }
+
+    result.push_back(std::max(a_dim, b_dim));
+  }
+
+  return result;
+}
+
 NDArray::NDArray(std::vector<int> inputShape) {
   // Initializing the shape
   shape = inputShape;

@@ -356,3 +356,79 @@ void NDArray::randint(int low, int high) {
     data[i] = static_cast<float>(dist(engine));
   }
 }
+
+NDArray NDArray::operator+(const NDArray &other) const {
+  std::vector<int> out_shape = _broadcast_shape(shape, other.shape);
+  std::vector<int> strides_a = _broadcast_strides(shape, strides, out_shape);
+  std::vector<int> strides_b =
+      _broadcast_strides(other.shape, other.strides, out_shape);
+
+  NDArray result(out_shape);
+  std::vector<int> index(out_shape.size(), 0);
+
+  for (int i = 0; i < result.size; ++i) {
+    int offset_a = _compute_offset(index, strides_a);
+    int offset_b = _compute_offset(index, strides_b);
+    result.data[i] = this->data[offset_a] + other.data[offset_b];
+
+    // Increment multi-dimensional index
+    for (int dim = out_shape.size() - 1; dim >= 0; --dim) {
+      index[dim]++;
+      if (index[dim] < out_shape[dim])
+        break;
+      index[dim] = 0;
+    }
+  }
+
+  return result;
+}
+
+NDArray NDArray::operator-(const NDArray &other) const {
+  std::vector<int> out_shape = _broadcast_shape(shape, other.shape);
+  std::vector<int> strides_a = _broadcast_strides(shape, strides, out_shape);
+  std::vector<int> strides_b =
+      _broadcast_strides(other.shape, other.strides, out_shape);
+
+  NDArray result(out_shape);
+  std::vector<int> index(out_shape.size(), 0);
+
+  for (int i = 0; i < result.size; ++i) {
+    int offset_a = _compute_offset(index, strides_a);
+    int offset_b = _compute_offset(index, strides_b);
+    result.data[i] = this->data[offset_a] - other.data[offset_b];
+
+    for (int dim = out_shape.size() - 1; dim >= 0; --dim) {
+      index[dim]++;
+      if (index[dim] < out_shape[dim])
+        break;
+      index[dim] = 0;
+    }
+  }
+
+  return result;
+}
+
+NDArray NDArray::operator*(const NDArray &other) const {
+  std::vector<int> out_shape = _broadcast_shape(shape, other.shape);
+  std::vector<int> strides_a = _broadcast_strides(shape, strides, out_shape);
+  std::vector<int> strides_b =
+      _broadcast_strides(other.shape, other.strides, out_shape);
+
+  NDArray result(out_shape);
+  std::vector<int> index(out_shape.size(), 0);
+
+  for (int i = 0; i < result.size; ++i) {
+    int offset_a = _compute_offset(index, strides_a);
+    int offset_b = _compute_offset(index, strides_b);
+    result.data[i] = this->data[offset_a] * other.data[offset_b];
+
+    for (int dim = out_shape.size() - 1; dim >= 0; --dim) {
+      index[dim]++;
+      if (index[dim] < out_shape[dim])
+        break;
+      index[dim] = 0;
+    }
+  }
+
+  return result;
+}

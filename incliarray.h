@@ -186,4 +186,25 @@ public:
    * @param high The higher end of the boundary (exclusive)
    */
   void randint(int low, int high);
+
+  /**
+   * @brief Performs broadcasted arithmetic addition operation.
+   * @param other Other object taking part in addition operation
+   * @return A new object with the result of the addition operation
+   */
+  NDArray operator+(const NDArray &other) const;
+
+  /**
+   * @brief Performs broadcasted arithmetic subtraction operation.
+   * @param other Other object taking part in subtraction operation
+   * @return A new object with the result of the subtraction operation
+   */
+  NDArray operator-(const NDArray &other) const;
+
+  /**
+   * @brief Performs broadcasted arithmetic multiplication operation.
+   * @param other Other object taking part in multiplication operation
+   * @return A new object with the result of the multiplication operation
+   */
+  NDArray operator*(const NDArray &other) const;
 };

@@ -275,7 +275,7 @@ void NDArray::print() {
       for (int j = 0; j < shape[1] - 1; j++) {
         std::cout << get({i, j}) << ", ";
       }
-      std::cout << data[shape[1] - 1] << "]" << std::endl;
+      std::cout << get({i, shape[1] - 1}) << "]" << std::endl;
     }
   } else {
     std::cout << "[";

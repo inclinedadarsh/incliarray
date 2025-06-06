@@ -3,23 +3,26 @@
 
 int main() {
   NDArray a({2, 6});
-  a.randint(10, 20);
+  a.randint(1, 100);
+  std::cout << "Matrix A:" << std::endl;
   a.print();
-  std::cout << "--------------------------" << std::endl;
+
+  // -------------------------
+
   NDArray b({1, 6});
   b.ones();
+  std::cout << std::endl << "Matrix B:" << std::endl;
   b.print();
-  std::cout << "--------------------------" << std::endl;
+
+  // -------------------------
+
   NDArray c = a + b;
+  std::cout << std::endl << "Matrix C:" << std::endl;
   c.print();
-  c.metadata(true, true, true, true, true);
-  std::cout << "--------------------------" << std::endl;
-  NDArray d = a - b;
+
+  // -------------------------
+
+  NDArray d = c.slice({{0, 2}, {2, 5}});
+  std::cout << std::endl << "Matrix D:" << std::endl;
   d.print();
-  d.metadata(true, true, true, true, true);
-  std::cout << "--------------------------" << std::endl;
-  NDArray e = a * b;
-  e.print();
-  e.metadata(true, true, true, true, true);
-  return 0;
 }

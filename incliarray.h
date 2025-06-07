@@ -17,14 +17,14 @@ private:
    * @brief Computes strides based on the current shape.
    * @return Computed strides
    */
-  std::vector<int> _compute_strides();
+  std::vector<int> _computeStrides();
 
   /**
    * @brief Computes strides from a new shape.
    * @param newShape Shape with which strides should be computed
    * @return Computed strides
    */
-  static std::vector<int> _compute_strides(std::vector<int> newShape);
+  static std::vector<int> _computeStrides(std::vector<int> newShape);
 
   /**
    * @brief Computes the broadcasted shape of a and b together.
@@ -32,8 +32,8 @@ private:
    * @param a Second object for shape broadcasting
    * @return Broadcasted shape
    */
-  static std::vector<int> _broadcast_shape(std::vector<int> a,
-                                           std::vector<int> b);
+  static std::vector<int> _broadcastShape(std::vector<int> a,
+                                          std::vector<int> b);
 
   /**
    * @brief Computes offset based on the index and strides.
@@ -41,20 +41,20 @@ private:
    * @param strides Strides that will be used to compute the offset
    * @return Computed offset value
    */
-  static int _compute_offset(std::vector<int> index, std::vector<int> strides);
+  static int _computeOffset(std::vector<int> index, std::vector<int> strides);
 
   /**
    * @brief Computes the broadcasted strides based on original shape and
    * strides, and target shape.
-   * @param orig_shape Original shape
-   * @param orig_strides Original strides
-   * @param target_shape The target shape. It is the shape which the new stride
+   * @param originalShape Original shape
+   * @param originalStrides Original strides
+   * @param targetShape The target shape. It is the shape which the new stride
    * will correspond to
    * @return Computed strides
    */
-  static std::vector<int> _broadcast_strides(std::vector<int> orig_shape,
-                                             std::vector<int> orig_strides,
-                                             std::vector<int> target_shape);
+  static std::vector<int> _broadcastStrides(std::vector<int> originalShape,
+                                             std::vector<int> originalStrides,
+                                             std::vector<int> targetShape);
 
 public:
   float *data;

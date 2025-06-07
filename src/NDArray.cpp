@@ -1,100 +1,10 @@
-#include "incliarray.h"
+#include "../include/NDArray.h"
+#include "../include/utils.h"
 #include <iostream>
 #include <random>
 #include <stdexcept>
 #include <tuple>
 #include <vector>
-
-/*
- Private utility functions
- These function start with an underscore.
-*/
-
-std::vector<int> NDArray::_computeStrides() {
-  std::vector<int> computedStrides;
-
-  if (shape.size() > 1) {
-    for (int i = 0; i < shape.size() - 1; i++) {
-      int currentStrideValue = 1;
-      for (int j = i + 1; j < shape.size(); j++) {
-        currentStrideValue *= shape[j];
-      }
-      computedStrides.push_back(currentStrideValue);
-    }
-  }
-
-  computedStrides.push_back(1);
-
-  return computedStrides;
-}
-
-std::vector<int> NDArray::_computeStrides(std::vector<int> newShape) {
-  std::vector<int> computedStrides;
-
-  if (newShape.size() > 1) {
-    for (int i = 0; i < newShape.size() - 1; i++) {
-      int currentStrideValue = 1;
-      for (int j = i + 1; j < newShape.size(); j++) {
-        currentStrideValue *= newShape[j];
-      }
-      computedStrides.push_back(currentStrideValue);
-    }
-  }
-
-  computedStrides.push_back(1);
-
-  return computedStrides;
-}
-
-int NDArray::_computeOffset(std::vector<int> index, std::vector<int> strides) {
-  int offset = 0;
-  for (size_t i = 0; i < index.size(); ++i) {
-    offset += index[i] * strides[i];
-  }
-  return offset;
-}
-
-std::vector<int> NDArray::_broadcastStrides(std::vector<int> originalShape,
-                                            std::vector<int> originalStrides,
-                                            std::vector<int> targetShape) {
-  int ndim = targetShape.size();
-  int offset = ndim - originalShape.size();
-  std::vector<int> result(ndim, 0);
-
-  for (int i = 0; i < ndim; ++i) {
-    if (i < offset) {
-      result[i] = 0;
-    } else if (originalShape[i - offset] == 1) {
-      result[i] = 0;
-    } else {
-      result[i] = originalStrides[i - offset];
-    }
-  }
-
-  return result;
-}
-
-std::vector<int> NDArray::_broadcastShape(std::vector<int> a,
-                                          std::vector<int> b) {
-  std::vector<int> result;
-
-  int aLength = a.size();
-  int bLength = b.size();
-  int resultNdim = std::max(aLength, bLength);
-
-  for (int i = 0; i < resultNdim; i++) {
-    int aDim = (i < resultNdim - aLength) ? 1 : a[i - (resultNdim - aLength)];
-    int bDim = (i < resultNdim - bLength) ? 1 : b[i - (resultNdim - bLength)];
-
-    if (aDim != bDim && aDim != 1 && bDim != 1) {
-      throw std::invalid_argument("Shapes not broadcastable.");
-    }
-
-    result.push_back(std::max(aDim, bDim));
-  }
-
-  return result;
-}
 
 NDArray::NDArray(std::vector<int> inputShape) {
   // Initializing the shape
@@ -111,7 +21,7 @@ NDArray::NDArray(std::vector<int> inputShape) {
   data = new float[size]();
 
   // Initializing the strides
-  strides = _computeStrides();
+  strides = detail::_computeStrides(shape);
 
   // Initializing the ndim
   ndim = shape.size();
@@ -254,7 +164,7 @@ NDArray NDArray::slice(std::vector<std::tuple<int, int>> slices) {
 }
 
 bool NDArray::isContiguous() {
-  std::vector<int> computedStrides = _computeStrides();
+  std::vector<int> computedStrides = detail::_computeStrides(shape);
 
   if (computedStrides == strides)
     return true;
@@ -306,7 +216,7 @@ void NDArray::reshape(std::vector<int> newShape) {
     throw std::invalid_argument("New shape not compatible with the old shape.");
   }
 
-  strides = _computeStrides(newShape);
+  strides = detail::_computeStrides(newShape);
   shape = newShape;
 }
 
@@ -358,17 +268,18 @@ void NDArray::randint(int low, int high) {
 }
 
 NDArray NDArray::operator+(const NDArray &other) const {
-  std::vector<int> outShape = _broadcastShape(shape, other.shape);
-  std::vector<int> stridesA = _broadcastStrides(shape, strides, outShape);
+  std::vector<int> outShape = detail::_broadcastShape(shape, other.shape);
+  std::vector<int> stridesA =
+      detail::_broadcastStrides(shape, strides, outShape);
   std::vector<int> stridesB =
-      _broadcastStrides(other.shape, other.strides, outShape);
+      detail::_broadcastStrides(other.shape, other.strides, outShape);
 
   NDArray result(outShape);
   std::vector<int> index(outShape.size(), 0);
 
   for (int i = 0; i < result.size; ++i) {
-    int offsetA = _computeOffset(index, stridesA);
-    int offsetB = _computeOffset(index, stridesB);
+    int offsetA = detail::_computeOffset(index, stridesA);
+    int offsetB = detail::_computeOffset(index, stridesB);
     result.data[i] = this->data[offsetA] + other.data[offsetB];
 
     // Increment multi-dimensional index
@@ -384,17 +295,18 @@ NDArray NDArray::operator+(const NDArray &other) const {
 }
 
 NDArray NDArray::operator-(const NDArray &other) const {
-  std::vector<int> outShape = _broadcastShape(shape, other.shape);
-  std::vector<int> stridesA = _broadcastStrides(shape, strides, outShape);
+  std::vector<int> outShape = detail::_broadcastShape(shape, other.shape);
+  std::vector<int> stridesA =
+      detail::_broadcastStrides(shape, strides, outShape);
   std::vector<int> stridesB =
-      _broadcastStrides(other.shape, other.strides, outShape);
+      detail::_broadcastStrides(other.shape, other.strides, outShape);
 
   NDArray result(outShape);
   std::vector<int> index(outShape.size(), 0);
 
   for (int i = 0; i < result.size; ++i) {
-    int offsetA = _computeOffset(index, stridesA);
-    int offsetB = _computeOffset(index, stridesB);
+    int offsetA = detail::_computeOffset(index, stridesA);
+    int offsetB = detail::_computeOffset(index, stridesB);
     result.data[i] = this->data[offsetA] - other.data[offsetB];
 
     for (int dim = outShape.size() - 1; dim >= 0; --dim) {
@@ -409,17 +321,18 @@ NDArray NDArray::operator-(const NDArray &other) const {
 }
 
 NDArray NDArray::operator*(const NDArray &other) const {
-  std::vector<int> outShape = _broadcastShape(shape, other.shape);
-  std::vector<int> stridesA = _broadcastStrides(shape, strides, outShape);
+  std::vector<int> outShape = detail::_broadcastShape(shape, other.shape);
+  std::vector<int> stridesA =
+      detail::_broadcastStrides(shape, strides, outShape);
   std::vector<int> stridesB =
-      _broadcastStrides(other.shape, other.strides, outShape);
+      detail::_broadcastStrides(other.shape, other.strides, outShape);
 
   NDArray result(outShape);
   std::vector<int> index(outShape.size(), 0);
 
   for (int i = 0; i < result.size; ++i) {
-    int offsetA = _computeOffset(index, stridesA);
-    int offsetB = _computeOffset(index, stridesB);
+    int offsetA = detail::_computeOffset(index, stridesA);
+    int offsetB = detail::_computeOffset(index, stridesB);
     result.data[i] = this->data[offsetA] * other.data[offsetB];
 
     for (int dim = outShape.size() - 1; dim >= 0; --dim) {

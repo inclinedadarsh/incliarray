@@ -3,4 +3,8 @@ project(IncliArray)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(IncliArray main.cpp incliarray.cpp)
+include_directories(include)
+
+file(GLOB SOURCES "src/*.cpp")
+
+add_executable(IncliArray main.cpp ${SOURCES})

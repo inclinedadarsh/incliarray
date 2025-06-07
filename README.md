@@ -77,11 +77,18 @@ D.fill(42);           // Fill with a single value
 ## Project Structure
 
 ```
-incliarray/
-├── CMakeLists.txt
-├── incliarray.h      // Header with NDArray class
-├── incliarray.cpp    // Implementation
-└── main.cpp          // Example/test runner
+.
+├── CMakeLists.txt      // Build configuration
+├── Doxyfile            // Doxygen config for documentation
+├── include/            // Header files
+│   ├── NDArray.h       // NDArray class declaration
+│   └── utils.h         // Helper functions
+├── src/                // Source files
+│   ├── NDArray.cpp     // NDArray class implementation
+│   └── utils.cpp       // Helper function definitions
+├── main.cpp            // Example/test runner
+├── LICENSE             // Project license
+└── README.md           // Project documentation
 ```
 
 ## Author

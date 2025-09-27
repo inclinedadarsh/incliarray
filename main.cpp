@@ -30,4 +30,10 @@ int main() {
   NDArray e = a / b;
   std::cout << std::endl << "Matrix E:" << std::endl;
   e.print();
+
+  NDArray f = a + 10;
+  std::cout << std::endl << "Matrix F:" << std::endl;
+  c.print();
+
+  return 0;
 }

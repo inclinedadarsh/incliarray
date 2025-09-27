@@ -154,6 +154,14 @@ public:
   NDArray operator+(const NDArray &other) const;
 
   /**
+   * @brief Performs broadcasted arithmetic addition operation with a constant
+   * value.
+   * @param value Constant value taking part in the addition operation.
+   * @return A new object with the result of the addition operation
+   */
+  NDArray operator+(float value) const;
+
+  /**
    * @brief Performs broadcasted arithmetic subtraction operation.
    * @param other Other object taking part in subtraction operation
    * @return A new object with the result of the subtraction operation
@@ -161,11 +169,27 @@ public:
   NDArray operator-(const NDArray &other) const;
 
   /**
+   * @brief Performs broadcasted arithmetic subtraction operation with a
+   * constant value.
+   * @param value Constant value taking part in the subtraction operation.
+   * @return A new object with the result of the subtraction operation
+   */
+  NDArray operator-(float value) const;
+
+  /**
    * @brief Performs broadcasted arithmetic multiplication operation.
    * @param other Other object taking part in multiplication operation
    * @return A new object with the result of the multiplication operation
    */
   NDArray operator*(const NDArray &other) const;
+
+  /**
+   * @brief Performs broadcasted arithmetic multiplication operation with a
+   * constant value.
+   * @param value Constant value taking part in the multiplication operation.
+   * @return A new object with the result of the multiplication operation
+   */
+  NDArray operator*(float value) const;
 
   /**
    * @brief Performs broadcasted arithmetic division operation.
@@ -177,4 +201,16 @@ public:
    * @return A new object with the result of the division operation
    */
   NDArray operator/(const NDArray &other) const;
+
+  /**
+   * @brief Performs broadcasted arithmetic division operation with a constant
+   * as a divisor.
+   *
+   * The object on which this operation is being performed will be the dividend
+   * and the value will be the divisor.
+   *
+   * @param value Divisor value taking part in division operation
+   * @return A new object with the result of the division operation
+   */
+  NDArray operator/(float value) const;
 };

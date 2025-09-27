@@ -345,3 +345,34 @@ NDArray NDArray::operator*(const NDArray &other) const {
 
   return result;
 }
+
+NDArray NDArray::operator/(const NDArray &other) const {
+  std::vector<int> outShape = detail::_broadcastShape(shape, other.shape);
+  std::vector<int> stridesA =
+      detail::_broadcastStrides(shape, strides, outShape);
+  std::vector<int> stridesB =
+      detail::_broadcastStrides(other.shape, other.strides, outShape);
+
+  NDArray result(outShape);
+  std::vector<int> index(outShape.size(), 0);
+
+  for (int i = 0; i < result.size; ++i) {
+    int offsetA = detail::_computeOffset(index, stridesA);
+    int offsetB = detail::_computeOffset(index, stridesB);
+    if (other.data[offsetB] == 0) {
+      std::cerr << "\nWarning: Division by zero attempted. Result will be "
+                   "'inf'."
+                << std::endl;
+    }
+    result.data[i] = this->data[offsetA] / other.data[offsetB];
+
+    for (int dim = outShape.size() - 1; dim >= 0; --dim) {
+      index[dim]++;
+      if (index[dim] < outShape[dim])
+        break;
+      index[dim] = 0;
+    }
+  }
+
+  return result;
+}

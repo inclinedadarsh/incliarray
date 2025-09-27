@@ -166,4 +166,15 @@ public:
    * @return A new object with the result of the multiplication operation
    */
   NDArray operator*(const NDArray &other) const;
+
+  /**
+   * @brief Performs broadcasted arithmetic division operation.
+   *
+   * The object on which this operation is being performed will be the dividend
+   * and the other object will be the divisor.
+   *
+   * @param other Divisor object taking part in division operation
+   * @return A new object with the result of the division operation
+   */
+  NDArray operator/(const NDArray &other) const;
 };

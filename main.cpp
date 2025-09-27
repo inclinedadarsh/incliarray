@@ -11,6 +11,7 @@ int main() {
 
   NDArray b({1, 6});
   b.ones();
+  b.set(4, 0);
   std::cout << std::endl << "Matrix B:" << std::endl;
   b.print();
 
@@ -25,4 +26,8 @@ int main() {
   NDArray d = c.slice({{0, 2}, {2, 5}});
   std::cout << std::endl << "Matrix D:" << std::endl;
   d.print();
+
+  NDArray e = a / b;
+  std::cout << std::endl << "Matrix E:" << std::endl;
+  e.print();
 }

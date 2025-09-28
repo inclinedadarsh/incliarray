@@ -177,21 +177,6 @@ public:
   NDArray operator-(float value) const;
 
   /**
-   * @brief Performs broadcasted arithmetic multiplication operation.
-   * @param other Other object taking part in multiplication operation
-   * @return A new object with the result of the multiplication operation
-   */
-  NDArray operator*(const NDArray &other) const;
-
-  /**
-   * @brief Performs broadcasted arithmetic multiplication operation with a
-   * constant value.
-   * @param value Constant value taking part in the multiplication operation.
-   * @return A new object with the result of the multiplication operation
-   */
-  NDArray operator*(float value) const;
-
-  /**
    * @brief Performs broadcasted arithmetic division operation.
    *
    * The object on which this operation is being performed will be the dividend
@@ -213,4 +198,20 @@ public:
    * @return A new object with the result of the division operation
    */
   NDArray operator/(float value) const;
+
+  /**
+   * @brief Performs broadcasted arithmetic element wise multiplication
+   * operation.
+   * @param other Other object taking part in multiplication operation
+   * @return A new object with the result of the multiplication operation
+   */
+  NDArray element_wise_multiply(const NDArray &other) const;
+
+  /**
+   * @brief Performs broadcasted arithmetic element wise multiplication
+   * operation with a constant value.
+   * @param value Constant value taking part in the multiplication operation.
+   * @return A new object with the result of the multiplication operation
+   */
+  NDArray element_wise_multiply(float value) const;
 };

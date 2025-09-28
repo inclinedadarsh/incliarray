@@ -358,51 +358,6 @@ NDArray NDArray::operator-(float value) const {
   return result;
 }
 
-NDArray NDArray::operator*(const NDArray &other) const {
-  std::vector<int> outShape = detail::_broadcastShape(shape, other.shape);
-  std::vector<int> stridesA =
-      detail::_broadcastStrides(shape, strides, outShape);
-  std::vector<int> stridesB =
-      detail::_broadcastStrides(other.shape, other.strides, outShape);
-
-  NDArray result(outShape);
-  std::vector<int> index(outShape.size(), 0);
-
-  for (int i = 0; i < result.size; ++i) {
-    int offsetA = detail::_computeOffset(index, stridesA);
-    int offsetB = detail::_computeOffset(index, stridesB);
-    result.data[i] = this->data[offsetA] * other.data[offsetB];
-
-    for (int dim = outShape.size() - 1; dim >= 0; --dim) {
-      index[dim]++;
-      if (index[dim] < outShape[dim])
-        break;
-      index[dim] = 0;
-    }
-  }
-
-  return result;
-}
-
-NDArray NDArray::operator*(float value) const {
-  NDArray result(shape);
-  std::vector<int> index(shape.size(), 0);
-
-  for (int i = 0; i < result.size; ++i) {
-    int offset = detail::_computeOffset(index, strides);
-    result.data[i] = data[offset] * value;
-
-    for (int dim = shape.size() - 1; dim >= 0; --dim) {
-      index[dim]++;
-      if (index[dim] < shape[dim])
-        break;
-      index[dim] = 0;
-    }
-  }
-
-  return result;
-}
-
 NDArray NDArray::operator/(const NDArray &other) const {
   std::vector<int> outShape = detail::_broadcastShape(shape, other.shape);
   std::vector<int> stridesA =
@@ -446,6 +401,51 @@ NDArray NDArray::operator/(float value) const {
                 << std::endl;
     }
     result.data[i] = data[offset] / value;
+
+    for (int dim = shape.size() - 1; dim >= 0; --dim) {
+      index[dim]++;
+      if (index[dim] < shape[dim])
+        break;
+      index[dim] = 0;
+    }
+  }
+
+  return result;
+}
+
+NDArray NDArray::element_wise_multiply(const NDArray &other) const {
+  std::vector<int> outShape = detail::_broadcastShape(shape, other.shape);
+  std::vector<int> stridesA =
+      detail::_broadcastStrides(shape, strides, outShape);
+  std::vector<int> stridesB =
+      detail::_broadcastStrides(other.shape, other.strides, outShape);
+
+  NDArray result(outShape);
+  std::vector<int> index(outShape.size(), 0);
+
+  for (int i = 0; i < result.size; ++i) {
+    int offsetA = detail::_computeOffset(index, stridesA);
+    int offsetB = detail::_computeOffset(index, stridesB);
+    result.data[i] = this->data[offsetA] * other.data[offsetB];
+
+    for (int dim = outShape.size() - 1; dim >= 0; --dim) {
+      index[dim]++;
+      if (index[dim] < outShape[dim])
+        break;
+      index[dim] = 0;
+    }
+  }
+
+  return result;
+}
+
+NDArray NDArray::element_wise_multiply(float value) const {
+  NDArray result(shape);
+  std::vector<int> index(shape.size(), 0);
+
+  for (int i = 0; i < result.size; ++i) {
+    int offset = detail::_computeOffset(index, strides);
+    result.data[i] = data[offset] * value;
 
     for (int dim = shape.size() - 1; dim >= 0; --dim) {
       index[dim]++;

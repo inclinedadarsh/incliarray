@@ -7,4 +7,6 @@ EXTRACT_PRIVATE        = YES
 FILE_PATTERNS          = *.cpp *.h *.md
 GENERATE_LATEX         = NO
 GENERATE_HTML          = YES
+GENERATE_TREEVIEW      = YES
 USE_MDFILE_AS_MAINPAGE = README.md
+HTML_EXTRA_STYLESHEET  = doxygen-awesome-css/doxygen-awesome.css

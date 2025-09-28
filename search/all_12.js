@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['zeros_0',['zeros',['../classNDArray.html#af6c76aa73291942db05591fe7b3f9aea',1,'NDArray']]]
+  ['variables_0',['variables',['../md_doxygen-awesome-css_2docs_2customization.html#autotoc_md3',1,'Available variables'],['../md_doxygen-awesome-css_2docs_2customization.html#autotoc_md1',1,'CSS-Variables']]]
 ];

@@ -35,5 +35,21 @@ int main() {
   std::cout << std::endl << "Matrix F:" << std::endl;
   c.print();
 
+  std::cout << "----------------------------" << std::endl;
+
+  NDArray g({3, 4});
+  g.randint(1, 10);
+  std::cout << "Matrix G:" << std::endl;
+  g.print();
+
+  NDArray h({4, 5});
+  h.randint(1, 10);
+  std::cout << "Matrix H:" << std::endl;
+  h.print();
+
+  NDArray i = g * h;
+  std::cout << "Matrix I:" << std::endl;
+  i.print();
+
   return 0;
 }

@@ -177,6 +177,13 @@ public:
   NDArray operator-(float value) const;
 
   /**
+   * @brief Performs matrix multiplication operation.
+   * @param other Other object taking part in the matrix multiplication.
+   * @return A new object with the result of the multiplication operator
+   */
+  NDArray operator*(const NDArray &other) const;
+
+  /**
    * @brief Performs broadcasted arithmetic division operation.
    *
    * The object on which this operation is being performed will be the dividend

@@ -358,6 +358,39 @@ NDArray NDArray::operator-(float value) const {
   return result;
 }
 
+NDArray NDArray::operator*(const NDArray &other) const {
+  if (this->ndim != 2 || other.ndim != 2) {
+    throw std::invalid_argument(
+        "Matrix multiplication is only supported for 2d arrays! Exiting.");
+  }
+
+  if (this->shape[1] != other.shape[0]) {
+    throw std::invalid_argument(
+        "The column axis of first matrix and row axis of second matrix should "
+        "be equal for matrix multiplication. Instead got " +
+        std::to_string(this->shape[1]) +
+        " for first matrix "
+        "and " +
+        std::to_string(other.shape[0]) + " for second matrix. Exiting.");
+  }
+
+  NDArray result({this->shape[0], other.shape[1]});
+
+  for (int i = 0; i < result.shape[0]; i++) {
+    for (int j = 0; j < result.shape[1]; j++) {
+      float sum = 0.f;
+
+      for (int k = 0; k < this->shape[1]; k++) {
+        sum += get({i, k}) * other.get({k, j});
+      }
+
+      result.set({i, j}, sum);
+    }
+  }
+
+  return result;
+}
+
 NDArray NDArray::operator/(const NDArray &other) const {
   std::vector<int> outShape = detail::_broadcastShape(shape, other.shape);
   std::vector<int> stridesA =

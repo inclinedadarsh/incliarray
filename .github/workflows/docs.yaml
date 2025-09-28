@@ -4,6 +4,21 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "include/**"
+      - "src/**"
+      - ".github/workflows/**"
+      - "README.md"
+      - "Doxyfile"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "include/**"
+      - "src/**"
+      - ".github/workflows/**"
+      - "README.md"
+      - "Doxyfile"
 
 permissions:
   contents: write

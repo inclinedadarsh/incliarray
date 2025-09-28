@@ -81,7 +81,7 @@ void NDArray::metadata(bool shapeInfo, bool stridesInfo, bool ndimInfo,
   }
 }
 
-float NDArray::get(std::vector<int> indices) {
+float NDArray::get(std::vector<int> indices) const {
   // Check for size of input indices == ndim
   if (indices.size() != ndim) {
     throw std::invalid_argument("Expected " + std::to_string(ndim) +
@@ -97,7 +97,7 @@ float NDArray::get(std::vector<int> indices) {
   return data[offset];
 }
 
-float NDArray::get(int index) {
+float NDArray::get(int index) const {
   // Check for out of bound index
   if (index < 0 || index >= size) {
     throw std::out_of_range("Flat index out of bounds.");
@@ -163,7 +163,7 @@ NDArray NDArray::slice(std::vector<std::tuple<int, int>> slices) {
   return result;
 }
 
-bool NDArray::isContiguous() {
+bool NDArray::isContiguous() const {
   std::vector<int> computedStrides = detail::_computeStrides(shape);
 
   if (computedStrides == strides)

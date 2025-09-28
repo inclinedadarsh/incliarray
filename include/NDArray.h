@@ -46,7 +46,7 @@ public:
    * @param indices Indices of the element asked
    * @return Element at the given indices
    */
-  float get(std::vector<int> indices);
+  float get(std::vector<int> indices) const;
 
   /**
    * @brief Returns an element based on a flat index.
@@ -57,7 +57,7 @@ public:
    * @param index Flat index of the element asked
    * @return Element at the given index
    */
-  float get(int index);
+  float get(int index) const;
 
   /**
    * @brief Sets a value of the element at the given indices.
@@ -96,7 +96,7 @@ public:
    * @brief Returns boolean if the data inside is contiguous or not.
    * @return Boolean value, true if the data is contiguous, false otherwise
    */
-  bool isContiguous();
+  bool isContiguous() const;
 
   /**
    * @brief Reshapes the original data.

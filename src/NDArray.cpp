@@ -6,7 +6,8 @@
 #include <tuple>
 #include <vector>
 
-NDArray::NDArray(std::vector<int> inputShape) {
+NDArray::NDArray(std::vector<int> inputShape, std::string inputLabel,
+                 std::string inputOp, std::vector<NDArray *> inputPrev) {
   // Initializing the shape
   shape = inputShape;
 
@@ -28,14 +29,23 @@ NDArray::NDArray(std::vector<int> inputShape) {
 
   // Initializing owns_data property
   ownsData = true;
+
+  // Initializing label, op and prev
+  label = inputLabel;
+  op = inputOp;
+  prev = inputPrev;
 }
 
 NDArray::NDArray(std::vector<int> inputShape, std::vector<int> inputStrides,
-                 float *inputData, bool inputOwnsData) {
+                 float *inputData, bool inputOwnsData, std::string inputLabel,
+                 std::string inputOp, std::vector<NDArray *> inputPrev) {
   shape = inputShape;
   strides = inputStrides;
   data = inputData;
   ownsData = inputOwnsData;
+  label = inputLabel;
+  op = inputOp;
+  prev = inputPrev;
 
   size = 1;
   for (int i = 0; i < shape.size(); i++) {

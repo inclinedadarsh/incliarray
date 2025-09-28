@@ -7,13 +7,20 @@
  */
 #pragma once
 
+#include <functional>
+#include <string>
 #include <tuple>
+#include <unordered_set>
 #include <vector>
 
 class NDArray {
 private:
   NDArray(std::vector<int> shape, std::vector<int> strides, float *data,
-          bool ownsData);
+          bool ownsData, std::string label = "", std::string op = "",
+          std::vector<NDArray *> prev = {});
+
+  void build_topo(std::unordered_set<NDArray *> &visited, NDArray *arr,
+                  std::vector<NDArray *> &topo);
 
 public:
   float *data;
@@ -23,7 +30,15 @@ public:
   int size = 0;
   bool ownsData;
 
-  NDArray(std::vector<int> shape);
+  // For autograd
+  float *grad;
+  std::string op;
+  std::string label;
+  std::vector<NDArray *> prev;
+  std::function<void()> _backward;
+
+  NDArray(std::vector<int> shape, std::string label = "", std::string op = "",
+          std::vector<NDArray *> prev = {});
 
   // ================
   // Public functions for general usage
@@ -221,4 +236,6 @@ public:
    * @return A new object with the result of the multiplication operation
    */
   NDArray element_wise_multiply(float value) const;
+
+  void backward();
 };

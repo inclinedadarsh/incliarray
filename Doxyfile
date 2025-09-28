@@ -1,6 +1,7 @@
 PROJECT_NAME           = "IncliArray"
 INPUT                  = . README.md
 RECURSIVE              = YES
+EXCLUDE                = build
 EXTRACT_ALL            = YES
 EXTRACT_PRIVATE        = YES
 FILE_PATTERNS          = *.cpp *.h *.md

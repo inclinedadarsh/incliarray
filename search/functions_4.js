@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['iscontiguous_0',['isContiguous',['../classNDArray.html#a1c0b930db0f13f98eff2c45e879ea5e1',1,'NDArray']]]
+  ['iscontiguous_0',['isContiguous',['../classNDArray.html#ae0c9759f4af71f48bfa62bca7b1aa0b5',1,'NDArray']]]
 ];

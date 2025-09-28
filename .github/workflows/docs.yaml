@@ -15,8 +15,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install Doxygen
+      - name: Install Doxygen and Graphviz
         run: sudo apt-get install -y doxygen graphviz
+
+      - name: Clone Doxygen Awesome CSS
+        run: git clone https://github.com/jothepro/doxygen-awesome-css.git doxygen-awesome-css
 
       - name: Run Doxygen to generate docs
         run: doxygen Doxyfile

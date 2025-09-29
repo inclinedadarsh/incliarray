@@ -1,5 +1,6 @@
 #include "../include/NDArray.h"
 #include "../include/utils.h"
+#include <algorithm>
 #include <iostream>
 #include <random>
 #include <stdexcept>
@@ -300,6 +301,29 @@ void NDArray::randint(int low, int high) {
   for (int i = 0; i < size; i++) {
     data[i] = static_cast<float>(dist(engine));
   }
+}
+
+NDArray NDArray::clone() {
+  NDArray result(shape);
+
+  if (isContiguous()) {
+    std::copy(data, data + size, result.data);
+  } else {
+    std::vector<int> index(shape.size(), 0);
+    for (int i = 0; i < result.size; ++i) {
+      int offset = detail::_computeOffset(index, strides);
+      result.data[i] = data[offset];
+
+      for (int dim = static_cast<int>(shape.size()) - 1; dim >= 0; --dim) {
+        index[dim]++;
+        if (index[dim] < shape[dim])
+          break;
+        index[dim] = 0;
+      }
+    }
+  }
+
+  return result;
 }
 
 NDArray NDArray::operator+(NDArray &other) {

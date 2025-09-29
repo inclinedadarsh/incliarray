@@ -242,4 +242,12 @@ public:
   NDArray element_wise_multiply(float value);
 
   void backward();
+
+  /**
+   * @brief Materializes a contiguous, owning copy of this array.
+   *
+   * The cloned tensor participates in autograd and will pass gradients back
+   * to the source tensor with appropriate stride-aware accumulation.
+   */
+  NDArray clone();
 };

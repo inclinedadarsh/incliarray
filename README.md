@@ -19,6 +19,7 @@ Built from scratch to learn memory layout, strides, slicing, broadcasting, and a
 - Introspection helpers: `metadata`, `isContiguous`, `print` (data or grads)
 - Initialization/fill: `zeros`, `ones`, `fill`, `fillSequential`, `randint(low, high)`
 - Slicing: `slice` returns a detached view (non-owning, no autograd) with shared data
+- Materialization: use `clone()` to get an owning tensor (detached, no autograd link)
 - Reshape: `reshape` on contiguous, owning arrays
 - Broadcasting arithmetic between arrays:
   - `+`, `-`, `/`, and element-wise `element_wise_multiply`

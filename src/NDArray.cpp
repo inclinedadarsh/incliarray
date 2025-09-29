@@ -279,7 +279,7 @@ void NDArray::randint(int low, int high) {
   }
 }
 
-NDArray NDArray::operator+(const NDArray &other) {
+NDArray NDArray::operator+(NDArray &other) {
   std::vector<int> outShape = detail::_broadcastShape(shape, other.shape);
   std::vector<int> stridesA =
       detail::_broadcastStrides(shape, strides, outShape);
@@ -325,7 +325,7 @@ NDArray NDArray::operator+(float value) {
   return result;
 }
 
-NDArray NDArray::operator-(const NDArray &other) {
+NDArray NDArray::operator-(NDArray &other) {
   std::vector<int> outShape = detail::_broadcastShape(shape, other.shape);
   std::vector<int> stridesA =
       detail::_broadcastStrides(shape, strides, outShape);
@@ -370,7 +370,7 @@ NDArray NDArray::operator-(float value) {
   return result;
 }
 
-NDArray NDArray::operator*(const NDArray &other) {
+NDArray NDArray::operator*(NDArray &other) {
   if (this->ndim != 2 || other.ndim != 2) {
     throw std::invalid_argument(
         "Matrix multiplication is only supported for 2d arrays! Exiting.");
@@ -403,7 +403,7 @@ NDArray NDArray::operator*(const NDArray &other) {
   return result;
 }
 
-NDArray NDArray::operator/(const NDArray &other) {
+NDArray NDArray::operator/(NDArray &other) {
   std::vector<int> outShape = detail::_broadcastShape(shape, other.shape);
   std::vector<int> stridesA =
       detail::_broadcastStrides(shape, strides, outShape);
@@ -458,7 +458,7 @@ NDArray NDArray::operator/(float value) {
   return result;
 }
 
-NDArray NDArray::element_wise_multiply(const NDArray &other) {
+NDArray NDArray::element_wise_multiply(NDArray &other) {
   std::vector<int> outShape = detail::_broadcastShape(shape, other.shape);
   std::vector<int> stridesA =
       detail::_broadcastStrides(shape, strides, outShape);

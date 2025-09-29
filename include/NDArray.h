@@ -166,7 +166,7 @@ public:
    * @param other Other object taking part in addition operation
    * @return A new object with the result of the addition operation
    */
-  NDArray operator+(const NDArray &other);
+  NDArray operator+(NDArray &other);
 
   /**
    * @brief Performs broadcasted arithmetic addition operation with a constant
@@ -181,7 +181,7 @@ public:
    * @param other Other object taking part in subtraction operation
    * @return A new object with the result of the subtraction operation
    */
-  NDArray operator-(const NDArray &other);
+  NDArray operator-(NDArray &other);
 
   /**
    * @brief Performs broadcasted arithmetic subtraction operation with a
@@ -196,7 +196,7 @@ public:
    * @param other Other object taking part in the matrix multiplication.
    * @return A new object with the result of the multiplication operator
    */
-  NDArray operator*(const NDArray &other);
+  NDArray operator*(NDArray &other);
 
   /**
    * @brief Performs broadcasted arithmetic division operation.
@@ -207,7 +207,7 @@ public:
    * @param other Divisor object taking part in division operation
    * @return A new object with the result of the division operation
    */
-  NDArray operator/(const NDArray &other);
+  NDArray operator/(NDArray &other);
 
   /**
    * @brief Performs broadcasted arithmetic division operation with a constant
@@ -227,7 +227,7 @@ public:
    * @param other Other object taking part in multiplication operation
    * @return A new object with the result of the multiplication operation
    */
-  NDArray element_wise_multiply(const NDArray &other);
+  NDArray element_wise_multiply(NDArray &other);
 
   /**
    * @brief Performs broadcasted arithmetic element wise multiplication

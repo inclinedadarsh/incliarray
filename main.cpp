@@ -2,79 +2,62 @@
 #include <iostream>
 
 int main() {
-  // NDArray a({2, 6});
-  // a.randint(1, 100);
-  // std::cout << "Matrix A:" << std::endl;
-  // a.print();
-  //
-  // // -------------------------
-  //
-  // NDArray b({1, 6});
-  // b.ones();
-  // b.set(4, 0);
-  // std::cout << std::endl << "Matrix B:" << std::endl;
-  // b.print();
-  //
-  // // -------------------------
-  //
-  // NDArray c = a + b;
-  // std::cout << std::endl << "Matrix C:" << std::endl;
-  // c.print();
-  //
-  // // -------------------------
-  //
-  // NDArray d = c.slice({{0, 2}, {2, 5}});
-  // std::cout << std::endl << "Matrix D:" << std::endl;
-  // d.print();
-  //
-  // NDArray e = a / b;
-  // std::cout << std::endl << "Matrix E:" << std::endl;
-  // e.print();
-  //
-  // NDArray f = a + 10;
-  // std::cout << std::endl << "Matrix F:" << std::endl;
-  // c.print();
-  //
-  // std::cout << "----------------------------" << std::endl;
-  //
-  // NDArray g({3, 4});
-  // g.randint(1, 10);
-  // std::cout << "Matrix G:" << std::endl;
-  // g.print();
-  //
-  // NDArray h({4, 5});
-  // h.randint(1, 10);
-  // std::cout << "Matrix H:" << std::endl;
-  // h.print();
-  //
-  // NDArray i = g * h;
-  // std::cout << "Matrix I:" << std::endl;
-  // i.print();
+  // Base tensor and initialization
+  NDArray A({2, 3});
+  A.fillSequential();
+  A.set({0, 1}, 10.0f);
+  std::cout << "A:" << std::endl;
+  A.print();
 
-  NDArray a({2, 3});
-  a.randint(1, 10);
-  std::cout << "Matrix A:" << std::endl;
-  a.print();
+  // Broadcasting row vector
+  NDArray B({1, 3});
+  B.ones();
+  std::cout << "\nB:" << std::endl;
+  B.print();
 
-  NDArray b({3, 2});
-  b.randint(1, 10);
-  std::cout << "Matrix B:" << std::endl;
-  b.print();
+  // Broadcasted add then slice (view)
+  NDArray C = A + B;                     // (2x3)
+  NDArray D = C.slice({{0, 2}, {1, 3}}); // (2x2) view
+  std::cout << "\nC = A + B:" << std::endl;
+  C.print();
+  std::cout << "\nD = C[:,1:3] (view):" << std::endl;
+  D.print();
 
-  NDArray c = a * b;
-  std::cout << "Matrix C:" << std::endl;
-  c.print();
+  // Scalar ops and element-wise multiply
+  NDArray E = D.element_wise_multiply(2.0f);
+  NDArray F = E - 3.0f;
+  std::cout << "\nE = D * 2:" << std::endl;
+  E.print();
+  std::cout << "\nF = E - 3:" << std::endl;
+  F.print();
 
-  c.backward();
+  // Division with broadcasting (use a sub-slice of B)
+  NDArray Bb = B.slice({{0, 1}, {1, 3}}); // (1x2)
+  NDArray Tmp = Bb + 1.0f;
+  NDArray G = F / Tmp;
+  std::cout << "\nG = F / (Bb + 1):" << std::endl;
+  G.print();
 
-  std::cout << "Grad C:" << std::endl;
-  c.print();
+  // Matrix multiply
+  NDArray W({2, 2});
+  W.randint(1, 5);
+  NDArray H = G * W; // (2x2) * (2x2)
+  std::cout << "\nW:" << std::endl;
+  W.print();
+  std::cout << "\nH = G * W:" << std::endl;
+  H.print();
+
+  // Autograd
+  H.backward();
 
   std::cout << "\nGrad A:" << std::endl;
-  a.print(NDArray::PrintType::Grad);
+  A.print(NDArray::PrintType::Grad);
 
   std::cout << "\nGrad B:" << std::endl;
-  b.print(NDArray::PrintType::Grad);
+  B.print(NDArray::PrintType::Grad);
+
+  std::cout << "\nGrad W:" << std::endl;
+  W.print(NDArray::PrintType::Grad);
 
   return 0;
 }

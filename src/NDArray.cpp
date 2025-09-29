@@ -7,7 +7,8 @@
 #include <vector>
 
 NDArray::NDArray(std::vector<int> inputShape, std::string inputLabel,
-                 std::string inputOp, std::vector<NDArray *> inputPrev) {
+                 std::string inputOp,
+                 std::vector<std::reference_wrapper<NDArray>> inputPrev) {
   // Initializing the shape
   shape = inputShape;
 
@@ -38,7 +39,8 @@ NDArray::NDArray(std::vector<int> inputShape, std::string inputLabel,
 
 NDArray::NDArray(std::vector<int> inputShape, std::vector<int> inputStrides,
                  float *inputData, bool inputOwnsData, std::string inputLabel,
-                 std::string inputOp, std::vector<NDArray *> inputPrev) {
+                 std::string inputOp,
+                 std::vector<std::reference_wrapper<NDArray>> inputPrev) {
   shape = inputShape;
   strides = inputStrides;
   data = inputData;

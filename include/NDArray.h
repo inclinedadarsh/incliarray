@@ -17,10 +17,10 @@ class NDArray {
 private:
   NDArray(std::vector<int> shape, std::vector<int> strides, float *data,
           bool ownsData, std::string label = "", std::string op = "",
-          std::vector<NDArray *> prev = {});
+          std::vector<std::reference_wrapper<NDArray>> prev = {});
 
   void build_topo(std::unordered_set<NDArray *> &visited, NDArray *arr,
-                  std::vector<NDArray *> &topo);
+                  std::vector<std::reference_wrapper<NDArray>> &topo);
 
 public:
   float *data;
@@ -34,11 +34,11 @@ public:
   float *grad;
   std::string op;
   std::string label;
-  std::vector<NDArray *> prev;
+  std::vector<std::reference_wrapper<NDArray>> prev;
   std::function<void()> _backward;
 
   NDArray(std::vector<int> shape, std::string label = "", std::string op = "",
-          std::vector<NDArray *> prev = {});
+          std::vector<std::reference_wrapper<NDArray>> prev = {});
 
   // ================
   // Public functions for general usage

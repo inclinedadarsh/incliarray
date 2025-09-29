@@ -384,7 +384,7 @@ NDArray NDArray::operator-(NDArray &other) {
   std::vector<int> stridesB =
       detail::_broadcastStrides(other.shape, other.strides, outShape);
 
-  NDArray result(outShape);
+  NDArray result(outShape, "", "-", {std::ref(*this), std::ref(other)});
   std::vector<int> index(outShape.size(), 0);
 
   for (int i = 0; i < result.size; ++i) {
@@ -399,6 +399,35 @@ NDArray NDArray::operator-(NDArray &other) {
       index[dim] = 0;
     }
   }
+
+  // Backward pass: dL/dA += 1 * dL/dOut (with broadcasting reduction)
+  //                dL/dB += -1 * dL/dOut
+  float *aGradPtr = this->grad;
+  float *bGradPtr = other.grad;
+  float *outGradPtr = result.grad;
+  int outSize = result.size;
+  std::vector<int> outShapeCopy = outShape;
+  std::vector<int> stridesACopy = stridesA;
+  std::vector<int> stridesBCopy = stridesB;
+
+  result._backward = [aGradPtr, bGradPtr, outGradPtr, outSize, outShapeCopy,
+                      stridesACopy, stridesBCopy]() mutable {
+    std::vector<int> idx(outShapeCopy.size(), 0);
+    for (int i = 0; i < outSize; ++i) {
+      int offA = detail::_computeOffset(idx, stridesACopy);
+      int offB = detail::_computeOffset(idx, stridesBCopy);
+      float upstream = outGradPtr[i];
+      aGradPtr[offA] += upstream;
+      bGradPtr[offB] -= upstream;
+
+      for (int d = static_cast<int>(outShapeCopy.size()) - 1; d >= 0; --d) {
+        idx[d]++;
+        if (idx[d] < outShapeCopy[d])
+          break;
+        idx[d] = 0;
+      }
+    }
+  };
 
   return result;
 }

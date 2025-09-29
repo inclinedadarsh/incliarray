@@ -180,38 +180,8 @@ NDArray NDArray::slice(std::vector<std::tuple<int, int>> slices) {
     newShape.push_back(std::get<1>(slices[i]) - std::get<0>(slices[i]));
   }
 
-  NDArray result(newShape, strides, data + offset, false, "", "slice",
-                 {std::ref(*this)});
-
-  // Backward: propagate view grads back to base using base strides and start
-  // offset
-  float *baseGradPtr = this->grad;
-  int startOffset = offset;
-  std::vector<int> baseStridesCopy = this->strides;
-  std::vector<int> viewShapeCopy = newShape;
-  float *outGradPtr = result.grad;
-  int outSize = 1;
-  for (int d = 0; d < static_cast<int>(viewShapeCopy.size()); ++d)
-    outSize *= viewShapeCopy[d];
-  std::vector<int> viewStridesContig = detail::_computeStrides(viewShapeCopy);
-
-  result._backward = [baseGradPtr, startOffset, baseStridesCopy, viewShapeCopy,
-                      outGradPtr, outSize, viewStridesContig]() mutable {
-    std::vector<int> idx(viewShapeCopy.size(), 0);
-    for (int i = 0; i < outSize; ++i) {
-      int offBase = startOffset + detail::_computeOffset(idx, baseStridesCopy);
-      float upstream = outGradPtr[i];
-      baseGradPtr[offBase] += upstream;
-
-      for (int d = static_cast<int>(viewShapeCopy.size()) - 1; d >= 0; --d) {
-        idx[d]++;
-        if (idx[d] < viewShapeCopy[d])
-          break;
-        idx[d] = 0;
-      }
-    }
-  };
-
+  // Detached non-owning view: no autograd graph capture
+  NDArray result(newShape, strides, data + offset, false);
   return result;
 }
 

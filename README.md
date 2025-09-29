@@ -18,7 +18,7 @@ Built from scratch to learn memory layout, strides, slicing, broadcasting, and a
 - Manual stride-based indexing: `get`, `set`, flat `get(int)`, `set(int)`
 - Introspection helpers: `metadata`, `isContiguous`, `print` (data or grads)
 - Initialization/fill: `zeros`, `ones`, `fill`, `fillSequential`, `randint(low, high)`
-- Slicing: `slice` returns a view (non-owning) with shared data
+- Slicing: `slice` returns a detached view (non-owning, no autograd) with shared data
 - Reshape: `reshape` on contiguous, owning arrays
 - Broadcasting arithmetic between arrays:
   - `+`, `-`, `/`, and element-wise `element_wise_multiply`

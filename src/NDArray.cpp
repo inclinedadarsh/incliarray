@@ -22,6 +22,9 @@ NDArray::NDArray(std::vector<int> inputShape, std::string inputLabel,
   // Initializing the data
   data = new float[size]();
 
+  // Initializing the grad
+  grad = new float[size]();
+
   // Initializing the strides
   strides = detail::_computeStrides(shape);
 
@@ -35,6 +38,9 @@ NDArray::NDArray(std::vector<int> inputShape, std::string inputLabel,
   label = inputLabel;
   op = inputOp;
   prev = inputPrev;
+
+  // Default no-op backward
+  _backward = []() {};
 }
 
 NDArray::NDArray(std::vector<int> inputShape, std::vector<int> inputStrides,
@@ -55,6 +61,10 @@ NDArray::NDArray(std::vector<int> inputShape, std::vector<int> inputStrides,
   }
 
   ndim = shape.size();
+
+  // Initialize grad and default backward
+  grad = new float[size]();
+  _backward = []() {};
 }
 
 void NDArray::metadata(bool shapeInfo, bool stridesInfo, bool ndimInfo,
@@ -299,7 +309,7 @@ NDArray NDArray::operator+(NDArray &other) {
   std::vector<int> stridesB =
       detail::_broadcastStrides(other.shape, other.strides, outShape);
 
-  NDArray result(outShape);
+  NDArray result(outShape, "", "+", {std::ref(*this), std::ref(other)});
   std::vector<int> index(outShape.size(), 0);
 
   for (int i = 0; i < result.size; ++i) {
@@ -315,6 +325,35 @@ NDArray NDArray::operator+(NDArray &other) {
       index[dim] = 0;
     }
   }
+
+  // Backward pass: dL/dA += 1 * dL/dOut (with broadcasting reduction)
+  //                dL/dB += 1 * dL/dOut
+  float *aGradPtr = this->grad;
+  float *bGradPtr = other.grad;
+  float *outGradPtr = result.grad;
+  int outSize = result.size;
+  std::vector<int> outShapeCopy = outShape;
+  std::vector<int> stridesACopy = stridesA;
+  std::vector<int> stridesBCopy = stridesB;
+
+  result._backward = [aGradPtr, bGradPtr, outGradPtr, outSize, outShapeCopy,
+                      stridesACopy, stridesBCopy]() mutable {
+    std::vector<int> idx(outShapeCopy.size(), 0);
+    for (int i = 0; i < outSize; ++i) {
+      int offA = detail::_computeOffset(idx, stridesACopy);
+      int offB = detail::_computeOffset(idx, stridesBCopy);
+      float upstream = outGradPtr[i];
+      aGradPtr[offA] += upstream;
+      bGradPtr[offB] += upstream;
+
+      for (int d = static_cast<int>(outShapeCopy.size()) - 1; d >= 0; --d) {
+        idx[d]++;
+        if (idx[d] < outShapeCopy[d])
+          break;
+        idx[d] = 0;
+      }
+    }
+  };
 
   return result;
 }
@@ -514,4 +553,30 @@ NDArray NDArray::element_wise_multiply(float value) {
   }
 
   return result;
+}
+
+void NDArray::build_topo(std::unordered_set<NDArray *> &visited, NDArray *arr,
+                         std::vector<std::reference_wrapper<NDArray>> &topo) {
+  if (visited.find(arr) == visited.end()) {
+    visited.insert(arr);
+    for (auto &p : arr->prev) {
+      build_topo(visited, &p.get(), topo);
+    }
+    topo.push_back(*arr);
+  }
+}
+
+void NDArray::backward() {
+  std::unordered_set<NDArray *> visited;
+  std::vector<std::reference_wrapper<NDArray>> topo;
+  build_topo(visited, this, topo);
+
+  // Initialize gradient of the output w.r.t itself to ones
+  for (int i = 0; i < size; ++i) {
+    grad[i] = 1.0f;
+  }
+
+  for (int i = static_cast<int>(topo.size()) - 1; i >= 0; --i) {
+    topo[i].get()._backward();
+  }
 }

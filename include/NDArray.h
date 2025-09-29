@@ -35,6 +35,7 @@ public:
   std::string op;
   std::string label;
   std::vector<std::reference_wrapper<NDArray>> prev;
+  enum class PrintType { Data, Grad };
   std::function<void()> _backward;
 
   NDArray(std::vector<int> shape, std::string label = "", std::string op = "",
@@ -61,7 +62,7 @@ public:
    * @param indices Indices of the element asked
    * @return Element at the given indices
    */
-  float get(std::vector<int> indices) const;
+  float get(std::vector<int> indices, PrintType type = PrintType::Data) const;
 
   /**
    * @brief Returns an element based on a flat index.
@@ -72,7 +73,7 @@ public:
    * @param index Flat index of the element asked
    * @return Element at the given index
    */
-  float get(int index) const;
+  float get(int index, PrintType type = PrintType::Data) const;
 
   /**
    * @brief Sets a value of the element at the given indices.
@@ -123,12 +124,15 @@ public:
   void reshape(std::vector<int> newShape);
 
   /**
-   * @brief Prints the data.
+   * @brief Prints the data or gradients.
    *
-   * Prints the data in layout if it's 1d or 2d, otherwise prints the flattened
-   * array.
+   * Prints the data/grads in layout if it's 1d or 2d, otherwise prints the
+   * flattened array.
+   *
+   * @param type Can be either of type NDArray::Data or NDArray::Grad. Decideds
+   * what to print. Defaults to NDArray::Data.
    */
-  void print();
+  void print(PrintType type = PrintType::Data);
 
   /**
    * @brief Fills the data in the object with sequential numbers starting from

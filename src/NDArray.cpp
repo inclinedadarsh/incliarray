@@ -93,7 +93,7 @@ void NDArray::metadata(bool shapeInfo, bool stridesInfo, bool ndimInfo,
   }
 }
 
-float NDArray::get(std::vector<int> indices) const {
+float NDArray::get(std::vector<int> indices, NDArray::PrintType type) const {
   // Check for size of input indices == ndim
   if (indices.size() != ndim) {
     throw std::invalid_argument("Expected " + std::to_string(ndim) +
@@ -106,10 +106,10 @@ float NDArray::get(std::vector<int> indices) const {
     offset += indices[i] * strides[i];
   }
 
-  return data[offset];
+  return type == NDArray::PrintType::Data ? data[offset] : grad[offset];
 }
 
-float NDArray::get(int index) const {
+float NDArray::get(int index, NDArray::PrintType type) const {
   // Check for out of bound index
   if (index < 0 || index >= size) {
     throw std::out_of_range("Flat index out of bounds.");
@@ -120,7 +120,7 @@ float NDArray::get(int index) const {
     throw std::runtime_error("Flat indexing only valid on base arrays.");
   }
 
-  return data[index];
+  return type == NDArray::PrintType::Data ? data[index] : grad[index];
 }
 
 void NDArray::set(std::vector<int> indices, float value) {
@@ -184,27 +184,40 @@ bool NDArray::isContiguous() const {
     return false;
 }
 
-void NDArray::print() {
+void NDArray::print(NDArray::PrintType type) {
   if (ndim == 1) {
     std::cout << "[";
     for (int i = 0; i < size - 1; i++) {
-      std::cout << data[i] << ", ";
+      if (type == NDArray::PrintType::Data) {
+        std::cout << data[i] << ", ";
+      } else {
+        std::cout << grad[i] << ", ";
+      }
     }
-    std::cout << data[size - 1] << "]" << std::endl;
+    if (type == NDArray::PrintType::Data)
+      std::cout << data[size - 1] << "]" << std::endl;
+    else
+      std::cout << grad[size - 1] << "]" << std::endl;
   } else if (ndim == 2) {
     for (int i = 0; i < shape[0]; i++) {
       std::cout << "[";
       for (int j = 0; j < shape[1] - 1; j++) {
-        std::cout << get({i, j}) << ", ";
+        std::cout << get({i, j}, type) << ", ";
       }
-      std::cout << get({i, shape[1] - 1}) << "]" << std::endl;
+      std::cout << get({i, shape[1] - 1}, type) << "]" << std::endl;
     }
   } else {
     std::cout << "[";
     for (int i = 0; i < size - 1; i++) {
-      std::cout << data[i] << ", ";
+      if (type == NDArray::PrintType::Data)
+        std::cout << data[i] << ", ";
+      else
+        std::cout << grad[i] << ", ";
     }
-    std::cout << data[size - 1] << "]" << std::endl;
+    if (type == NDArray::PrintType::Data)
+      std::cout << data[size - 1] << "]" << std::endl;
+    else
+      std::cout << grad[size - 1] << "]" << std::endl;
   }
 }
 

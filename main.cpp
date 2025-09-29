@@ -56,12 +56,12 @@ int main() {
   std::cout << "Matrix A:" << std::endl;
   a.print();
 
-  NDArray b({1, 3});
+  NDArray b({3, 2});
   b.randint(1, 10);
   std::cout << "Matrix B:" << std::endl;
   b.print();
 
-  NDArray c = a + b;
+  NDArray c = a * b;
   std::cout << "Matrix C:" << std::endl;
   c.print();
 

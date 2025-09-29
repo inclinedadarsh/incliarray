@@ -467,7 +467,8 @@ NDArray NDArray::operator*(NDArray &other) {
         std::to_string(other.shape[0]) + " for second matrix. Exiting.");
   }
 
-  NDArray result({this->shape[0], other.shape[1]});
+  NDArray result({this->shape[0], other.shape[1]}, "", "*",
+                 {std::ref(*this), std::ref(other)});
 
   for (int i = 0; i < result.shape[0]; i++) {
     for (int j = 0; j < result.shape[1]; j++) {
@@ -480,6 +481,56 @@ NDArray NDArray::operator*(NDArray &other) {
       result.set({i, j}, sum);
     }
   }
+
+  // Backward pass for matrix multiplication:
+  // If C = A * B, then
+  // dA += dC * B^T and dB += A^T * dC
+  int m = this->shape[0];
+  int k = this->shape[1];
+  int n = other.shape[1];
+
+  float *aGradPtr = this->grad;
+  float *bGradPtr = other.grad;
+  float *outGradPtr = result.grad;
+  float *aDataPtr = this->data;
+  float *bDataPtr = other.data;
+
+  std::vector<int> aStridesCopy = this->strides;
+  std::vector<int> bStridesCopy = other.strides;
+  std::vector<int> outShapeCopy = {m, n};
+  std::vector<int> outStridesCopy = detail::_computeStrides(outShapeCopy);
+
+  result._backward = [m, k, n, aGradPtr, bGradPtr, outGradPtr, aDataPtr,
+                      bDataPtr, aStridesCopy, bStridesCopy,
+                      outStridesCopy]() mutable {
+    // Accumulate into A's gradient: dA(i,k) += sum_j dC(i,j) * B(k,j)
+    for (int i = 0; i < m; ++i) {
+      for (int kk = 0; kk < k; ++kk) {
+        float accum = 0.0f;
+        for (int j = 0; j < n; ++j) {
+          int offOut = detail::_computeOffset({i, j}, outStridesCopy);
+          int offB = detail::_computeOffset({kk, j}, bStridesCopy);
+          accum += outGradPtr[offOut] * bDataPtr[offB];
+        }
+        int offA = detail::_computeOffset({i, kk}, aStridesCopy);
+        aGradPtr[offA] += accum;
+      }
+    }
+
+    // Accumulate into B's gradient: dB(k,j) += sum_i A(i,k) * dC(i,j)
+    for (int kk = 0; kk < k; ++kk) {
+      for (int j = 0; j < n; ++j) {
+        float accum = 0.0f;
+        for (int i = 0; i < m; ++i) {
+          int offOut = detail::_computeOffset({i, j}, outStridesCopy);
+          int offAData = detail::_computeOffset({i, kk}, aStridesCopy);
+          accum += aDataPtr[offAData] * outGradPtr[offOut];
+        }
+        int offB = detail::_computeOffset({kk, j}, bStridesCopy);
+        bGradPtr[offB] += accum;
+      }
+    }
+  };
 
   return result;
 }

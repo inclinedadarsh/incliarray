@@ -359,7 +359,7 @@ NDArray NDArray::operator+(NDArray &other) {
 }
 
 NDArray NDArray::operator+(float value) {
-  NDArray result(shape);
+  NDArray result(shape, "", "+", {std::ref(*this)});
   std::vector<int> index(shape.size(), 0);
 
   for (int i = 0; i < result.size; ++i) {
@@ -373,6 +373,16 @@ NDArray NDArray::operator+(float value) {
       index[dim] = 0;
     }
   }
+
+  // Backward: dA += 1 * dOut
+  float *aGradPtr = this->grad;
+  float *outGradPtr = result.grad;
+  int outSize = result.size;
+  result._backward = [aGradPtr, outGradPtr, outSize]() mutable {
+    for (int i = 0; i < outSize; ++i) {
+      aGradPtr[i] += outGradPtr[i];
+    }
+  };
 
   return result;
 }
@@ -433,7 +443,7 @@ NDArray NDArray::operator-(NDArray &other) {
 }
 
 NDArray NDArray::operator-(float value) {
-  NDArray result(shape);
+  NDArray result(shape, "", "-", {std::ref(*this)});
   std::vector<int> index(shape.size(), 0);
 
   for (int i = 0; i < result.size; ++i) {
@@ -447,6 +457,16 @@ NDArray NDArray::operator-(float value) {
       index[dim] = 0;
     }
   }
+
+  // Backward: dA += 1 * dOut (constant has no grad)
+  float *aGradPtr = this->grad;
+  float *outGradPtr = result.grad;
+  int outSize = result.size;
+  result._backward = [aGradPtr, outGradPtr, outSize]() mutable {
+    for (int i = 0; i < outSize; ++i) {
+      aGradPtr[i] += outGradPtr[i];
+    }
+  };
 
   return result;
 }
@@ -542,7 +562,7 @@ NDArray NDArray::operator/(NDArray &other) {
   std::vector<int> stridesB =
       detail::_broadcastStrides(other.shape, other.strides, outShape);
 
-  NDArray result(outShape);
+  NDArray result(outShape, "", "/", {std::ref(*this), std::ref(other)});
   std::vector<int> index(outShape.size(), 0);
 
   for (int i = 0; i < result.size; ++i) {
@@ -563,11 +583,51 @@ NDArray NDArray::operator/(NDArray &other) {
     }
   }
 
+  // Backward pass: y = a / b =>
+  // dA += (1/b) * dOut, dB += (-a / b^2) * dOut
+  float *aGradPtr = this->grad;
+  float *bGradPtr = other.grad;
+  float *outGradPtr = result.grad;
+  float *aDataPtr = this->data;
+  float *bDataPtr = other.data;
+  int outSize = result.size;
+  std::vector<int> outShapeCopy = outShape;
+  std::vector<int> stridesACopy = stridesA;
+  std::vector<int> stridesBCopy = stridesB;
+
+  result._backward = [aGradPtr, bGradPtr, outGradPtr, aDataPtr, bDataPtr,
+                      outSize, outShapeCopy, stridesACopy,
+                      stridesBCopy]() mutable {
+    std::vector<int> idx(outShapeCopy.size(), 0);
+    for (int i = 0; i < outSize; ++i) {
+      int offA = detail::_computeOffset(idx, stridesACopy);
+      int offB = detail::_computeOffset(idx, stridesBCopy);
+      float upstream = outGradPtr[i];
+      float aVal = aDataPtr[offA];
+      float bVal = bDataPtr[offB];
+      if (bVal != 0.0f) {
+        aGradPtr[offA] += upstream / bVal;
+        bGradPtr[offB] -= upstream * (aVal / (bVal * bVal));
+      } else {
+        // Follow same semantics as forward warning; avoid NaN in grad
+        // accumulation By convention, treat contribution as 0 when dividing by
+        // zero here
+      }
+
+      for (int d = static_cast<int>(outShapeCopy.size()) - 1; d >= 0; --d) {
+        idx[d]++;
+        if (idx[d] < outShapeCopy[d])
+          break;
+        idx[d] = 0;
+      }
+    }
+  };
+
   return result;
 }
 
 NDArray NDArray::operator/(float value) {
-  NDArray result(shape);
+  NDArray result(shape, "", "/", {std::ref(*this)});
   std::vector<int> index(shape.size(), 0);
 
   for (int i = 0; i < result.size; ++i) {
@@ -587,6 +647,19 @@ NDArray NDArray::operator/(float value) {
     }
   }
 
+  // Backward: y = a / c => dA += (1/c) * dOut
+  float *aGradPtr = this->grad;
+  float *outGradPtr = result.grad;
+  int outSize = result.size;
+  float c = value;
+  result._backward = [aGradPtr, outGradPtr, outSize, c]() mutable {
+    if (c == 0.0f)
+      return; // already warned; skip accumulation to avoid NaNs
+    for (int i = 0; i < outSize; ++i) {
+      aGradPtr[i] += outGradPtr[i] / c;
+    }
+  };
+
   return result;
 }
 
@@ -597,7 +670,7 @@ NDArray NDArray::element_wise_multiply(NDArray &other) {
   std::vector<int> stridesB =
       detail::_broadcastStrides(other.shape, other.strides, outShape);
 
-  NDArray result(outShape);
+  NDArray result(outShape, "", "elem_mul", {std::ref(*this), std::ref(other)});
   std::vector<int> index(outShape.size(), 0);
 
   for (int i = 0; i < result.size; ++i) {
@@ -613,11 +686,42 @@ NDArray NDArray::element_wise_multiply(NDArray &other) {
     }
   }
 
+  // Backward pass: y = a * b => dA += b * dOut; dB += a * dOut
+  float *aGradPtr = this->grad;
+  float *bGradPtr = other.grad;
+  float *outGradPtr = result.grad;
+  float *aDataPtr = this->data;
+  float *bDataPtr = other.data;
+  int outSize = result.size;
+  std::vector<int> outShapeCopy = outShape;
+  std::vector<int> stridesACopy = stridesA;
+  std::vector<int> stridesBCopy = stridesB;
+
+  result._backward = [aGradPtr, bGradPtr, outGradPtr, aDataPtr, bDataPtr,
+                      outSize, outShapeCopy, stridesACopy,
+                      stridesBCopy]() mutable {
+    std::vector<int> idx(outShapeCopy.size(), 0);
+    for (int i = 0; i < outSize; ++i) {
+      int offA = detail::_computeOffset(idx, stridesACopy);
+      int offB = detail::_computeOffset(idx, stridesBCopy);
+      float upstream = outGradPtr[i];
+      aGradPtr[offA] += upstream * bDataPtr[offB];
+      bGradPtr[offB] += upstream * aDataPtr[offA];
+
+      for (int d = static_cast<int>(outShapeCopy.size()) - 1; d >= 0; --d) {
+        idx[d]++;
+        if (idx[d] < outShapeCopy[d])
+          break;
+        idx[d] = 0;
+      }
+    }
+  };
+
   return result;
 }
 
 NDArray NDArray::element_wise_multiply(float value) {
-  NDArray result(shape);
+  NDArray result(shape, "", "elem_mul", {std::ref(*this)});
   std::vector<int> index(shape.size(), 0);
 
   for (int i = 0; i < result.size; ++i) {
@@ -631,6 +735,17 @@ NDArray NDArray::element_wise_multiply(float value) {
       index[dim] = 0;
     }
   }
+
+  // Backward: y = a * c => dA += c * dOut
+  float *aGradPtr = this->grad;
+  float *outGradPtr = result.grad;
+  int outSize = result.size;
+  float c = value;
+  result._backward = [aGradPtr, outGradPtr, outSize, c]() mutable {
+    for (int i = 0; i < outSize; ++i) {
+      aGradPtr[i] += outGradPtr[i] * c;
+    }
+  };
 
   return result;
 }

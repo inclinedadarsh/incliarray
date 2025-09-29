@@ -15,33 +15,29 @@ int main() {
   std::cout << "\nB:" << std::endl;
   B.print();
 
-  // Broadcasted add then slice (view)
-  NDArray C = A + B;                     // (2x3)
-  NDArray D = C.slice({{0, 2}, {1, 3}}); // (2x2) view
+  // Broadcasted add
+  NDArray C = A + B; // (2x3)
   std::cout << "\nC = A + B:" << std::endl;
   C.print();
-  std::cout << "\nD = C[:,1:3] (view):" << std::endl;
-  D.print();
 
   // Scalar ops and element-wise multiply
-  NDArray E = D.element_wise_multiply(2.0f);
+  NDArray E = C.element_wise_multiply(2.0f);
   NDArray F = E - 3.0f;
   std::cout << "\nE = D * 2:" << std::endl;
   E.print();
   std::cout << "\nF = E - 3:" << std::endl;
   F.print();
 
-  // Division with broadcasting (use a sub-slice of B)
-  NDArray Bb = B.slice({{0, 1}, {1, 3}}); // (1x2)
-  NDArray Tmp = Bb + 1.0f;
-  NDArray G = F / Tmp;
-  std::cout << "\nG = F / (Bb + 1):" << std::endl;
+  // Division with broadcasting
+  NDArray Tmp = B + 1.0f; // (1x3)
+  NDArray G = F / Tmp;    // (2x3) / (1x3)
+  std::cout << "\nG = F / (B + 1):" << std::endl;
   G.print();
 
   // Matrix multiply
-  NDArray W({2, 2});
+  NDArray W({3, 2});
   W.randint(1, 5);
-  NDArray H = G * W; // (2x2) * (2x2)
+  NDArray H = G * W; // (2x3) * (3x2) -> (2x2)
   std::cout << "\nW:" << std::endl;
   W.print();
   std::cout << "\nH = G * W:" << std::endl;
@@ -50,11 +46,29 @@ int main() {
   // Autograd
   H.backward();
 
+  std::cout << "\nGrad H:" << std::endl;
+  H.print(NDArray::PrintType::Grad);
+
   std::cout << "\nGrad A:" << std::endl;
   A.print(NDArray::PrintType::Grad);
 
   std::cout << "\nGrad B:" << std::endl;
   B.print(NDArray::PrintType::Grad);
+
+  std::cout << "\nGrad C:" << std::endl;
+  C.print(NDArray::PrintType::Grad);
+
+  std::cout << "\nGrad E:" << std::endl;
+  E.print(NDArray::PrintType::Grad);
+
+  std::cout << "\nGrad F:" << std::endl;
+  F.print(NDArray::PrintType::Grad);
+
+  std::cout << "\nGrad Tmp:" << std::endl;
+  Tmp.print(NDArray::PrintType::Grad);
+
+  std::cout << "\nGrad G:" << std::endl;
+  G.print(NDArray::PrintType::Grad);
 
   std::cout << "\nGrad W:" << std::endl;
   W.print(NDArray::PrintType::Grad);

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['incliarray_0',['incliarray',['../index.html',1,'']]]
+  ['incliarray_0',['IncliArray',['../index.html',1,'']]]
 ];

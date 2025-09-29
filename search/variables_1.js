@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ndim_0',['ndim',['../classNDArray.html#a39a06988a7e06b40a0cde84d7df86662',1,'NDArray']]]
+  ['data_0',['data',['../classNDArray.html#a505f5266b3b604a1ff1e11ae1489cdea',1,'NDArray']]]
 ];

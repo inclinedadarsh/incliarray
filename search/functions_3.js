@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['get_0',['get',['../classNDArray.html#aff2550b30d523d0b5d10a051ca8f43a4',1,'NDArray::get(std::vector&lt; int &gt; indices) const'],['../classNDArray.html#accd6c075a430fb01b724af8adc62cb99',1,'NDArray::get(int index) const']]]
+  ['element_5fwise_5fmultiply_0',['element_wise_multiply',['../classNDArray.html#a767b098ca200ff9ee96f9020ada1053e',1,'NDArray::element_wise_multiply(NDArray &amp;other)'],['../classNDArray.html#a4823e50fb1783e936460539d452dc5ca',1,'NDArray::element_wise_multiply(float value)']]]
 ];

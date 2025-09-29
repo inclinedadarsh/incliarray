@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['zeros_0',['zeros',['../classNDArray.html#af6c76aa73291942db05591fe7b3f9aea',1,'NDArray']]]
+  ['utils_2ecpp_0',['utils.cpp',['../utils_8cpp.html',1,'']]],
+  ['utils_2eh_1',['utils.h',['../utils_8h.html',1,'']]]
 ];

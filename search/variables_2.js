@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ownsdata_0',['ownsData',['../classNDArray.html#abf82db8bbbf88b88fd9aed4a8635ac96',1,'NDArray']]]
+  ['grad_0',['grad',['../classNDArray.html#ace16ea9cc48f8b27caa41a3914869058',1,'NDArray']]]
 ];

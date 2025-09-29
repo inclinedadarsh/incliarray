@@ -25,13 +25,14 @@
 var NAVTREE =
 [
   [ "IncliArray", "index.html", [
-    [ "Examples", "index.html#autotoc_md1", null ],
+    [ "Highlights", "index.html#autotoc_md1", null ],
     [ "Features", "index.html#autotoc_md2", null ],
     [ "Build with CMake", "index.html#autotoc_md3", null ],
     [ "Build Doxygen documentation", "index.html#autotoc_md4", null ],
     [ "Project Structure", "index.html#autotoc_md5", null ],
-    [ "Author", "index.html#autotoc_md6", null ],
-    [ "License", "index.html#autotoc_md7", null ],
+    [ "Quickstart Example", "index.html#autotoc_md6", null ],
+    [ "Author", "index.html#autotoc_md7", null ],
+    [ "License", "index.html#autotoc_md8", null ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -45,7 +46,8 @@ var NAVTREE =
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", null ],
         [ "Functions", "functions_func.html", null ],
-        [ "Variables", "functions_vars.html", null ]
+        [ "Variables", "functions_vars.html", null ],
+        [ "Enumerations", "functions_enum.html", null ]
       ] ]
     ] ],
     [ "Files", "files.html", [

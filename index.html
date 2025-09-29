@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>IncliArray: incliarray</title>
+<title>IncliArray: IncliArray</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,47 +90,48 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">incliarray </div></div>
+  <div class="headertitle"><div class="title">IncliArray </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md_README"></a> Minimal NumPy-like N-dimensional float array library in C++. <br  />
- Built from scratch to understand memory layout, strides, slicing, and broadcasting.</p>
+<div class="textblock"><p><a class="anchor" id="md_README"></a> Minimal N-dimensional float array library in C++. <br  />
+ Built from scratch to learn memory layout, strides, slicing, broadcasting, and autograd.</p>
+<p>Checkout the <a href="https://inclinedadarsh.github.io/incliarray/">documentation</a>.</p>
 <p><img src="https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&amp;logo=c%2B%2B&amp;logoColor=white" alt="C++" style="pointer-events: none;" class="inline"/> <img src="https://img.shields.io/badge/CMake-%23008FBA.svg?style=for-the-badge&amp;logo=cmake&amp;logoColor=white" alt="CMake" style="pointer-events: none;" class="inline"/> <img src="https://img.shields.io/badge/doxygen-2C4AA8?style=for-the-badge&amp;logo=doxygen&amp;logoColor=white" alt="Doxygen" class="inline"/></p>
 <h1><a class="anchor" id="autotoc_md1"></a>
-Examples</h1>
-<div class="fragment"><div class="line"><a class="code hl_class" href="classNDArray.html">NDArray</a> A({2, 3});</div>
-<div class="line">A.<a class="code hl_function" href="classNDArray.html#ad0b362f11d536d13838bf0ede8c7387a">fillSequential</a>();   <span class="comment">// A = [[0, 1, 2], [3, 4, 5]]</span></div>
-<div class="line"> </div>
-<div class="line"><a class="code hl_class" href="classNDArray.html">NDArray</a> B({1, 3});</div>
-<div class="line">B.<a class="code hl_function" href="classNDArray.html#a9c0f50839fc21b0cb43c520088ba201c">ones</a>();             <span class="comment">// B = [[1, 1, 1]]</span></div>
-<div class="line"> </div>
-<div class="line"><a class="code hl_class" href="classNDArray.html">NDArray</a> C = A + B;    <span class="comment">// Broadcasting + addition</span></div>
-<div class="line"> </div>
-<div class="line">C.<a class="code hl_function" href="classNDArray.html#aac7dd909848ec151e7e6e377326a46ea">metadata</a>();         <span class="comment">// View shape, strides, etc.</span></div>
-<div class="line">std::cout &lt;&lt; C.<a class="code hl_function" href="classNDArray.html#aff2550b30d523d0b5d10a051ca8f43a4">get</a>({1, 2}) &lt;&lt; std::endl;  <span class="comment">// prints 6</span></div>
-<div class="line"> </div>
-<div class="line"><a class="code hl_class" href="classNDArray.html">NDArray</a> D = A.<a class="code hl_function" href="classNDArray.html#a86d70a70722d96294974fe3f675dbc83">slice</a>({{1, 2}, {0, 3}});</div>
-<div class="line">D.<a class="code hl_function" href="classNDArray.html#aa426ea20b8318201651b0bc9d7492094">reshape</a>({3});       <span class="comment">// Reshape slice</span></div>
-<div class="line">D.<a class="code hl_function" href="classNDArray.html#ac20a83eaac2aa30c83701d9ef0850e30">fill</a>(42);           <span class="comment">// Fill with a single value</span></div>
-<div class="ttc" id="aclassNDArray_html"><div class="ttname"><a href="classNDArray.html">NDArray</a></div><div class="ttdef"><b>Definition</b> NDArray.h:13</div></div>
-<div class="ttc" id="aclassNDArray_html_a86d70a70722d96294974fe3f675dbc83"><div class="ttname"><a href="classNDArray.html#a86d70a70722d96294974fe3f675dbc83">NDArray::slice</a></div><div class="ttdeci">NDArray slice(std::vector&lt; std::tuple&lt; int, int &gt; &gt; indices)</div><div class="ttdoc">Returns a sliced object.</div><div class="ttdef"><b>Definition</b> NDArray.cpp:144</div></div>
-<div class="ttc" id="aclassNDArray_html_a9c0f50839fc21b0cb43c520088ba201c"><div class="ttname"><a href="classNDArray.html#a9c0f50839fc21b0cb43c520088ba201c">NDArray::ones</a></div><div class="ttdeci">void ones()</div><div class="ttdoc">Fills the data in the object with 1s.</div><div class="ttdef"><b>Definition</b> NDArray.cpp:250</div></div>
-<div class="ttc" id="aclassNDArray_html_aa426ea20b8318201651b0bc9d7492094"><div class="ttname"><a href="classNDArray.html#aa426ea20b8318201651b0bc9d7492094">NDArray::reshape</a></div><div class="ttdeci">void reshape(std::vector&lt; int &gt; newShape)</div><div class="ttdoc">Reshapes the original data.</div><div class="ttdef"><b>Definition</b> NDArray.cpp:199</div></div>
-<div class="ttc" id="aclassNDArray_html_aac7dd909848ec151e7e6e377326a46ea"><div class="ttname"><a href="classNDArray.html#aac7dd909848ec151e7e6e377326a46ea">NDArray::metadata</a></div><div class="ttdeci">void metadata(bool shapeInfo=true, bool stridesInfo=false, bool ndimInfo=false, bool sizeInfo=false, bool ownsDataInfo=false)</div><div class="ttdoc">Prints the metadata information of the object.</div><div class="ttdef"><b>Definition</b> NDArray.cpp:48</div></div>
-<div class="ttc" id="aclassNDArray_html_ac20a83eaac2aa30c83701d9ef0850e30"><div class="ttname"><a href="classNDArray.html#ac20a83eaac2aa30c83701d9ef0850e30">NDArray::fill</a></div><div class="ttdeci">void fill(float value)</div><div class="ttdoc">Fills the data inthe object with the given floating point value.</div><div class="ttdef"><b>Definition</b> NDArray.cpp:233</div></div>
-<div class="ttc" id="aclassNDArray_html_ad0b362f11d536d13838bf0ede8c7387a"><div class="ttname"><a href="classNDArray.html#ad0b362f11d536d13838bf0ede8c7387a">NDArray::fillSequential</a></div><div class="ttdeci">void fillSequential()</div><div class="ttdoc">Fills the data in the object with sequential numbers starting from 0.</div><div class="ttdef"><b>Definition</b> NDArray.cpp:223</div></div>
-<div class="ttc" id="aclassNDArray_html_aff2550b30d523d0b5d10a051ca8f43a4"><div class="ttname"><a href="classNDArray.html#aff2550b30d523d0b5d10a051ca8f43a4">NDArray::get</a></div><div class="ttdeci">float get(std::vector&lt; int &gt; indices) const</div><div class="ttdoc">Returns an element based on the indices.</div><div class="ttdef"><b>Definition</b> NDArray.cpp:84</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md2"></a>
+Highlights</h1>
+<ul>
+<li>Tiny, readable implementation (~single header+source) focused on concepts</li>
+<li>Explicit strides and offsets; safe guards around views/ownership</li>
+<li>Lightweight reverse-mode autograd for core ops</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md2"></a>
 Features</h1>
 <ul>
-<li>N-dimensional float arrays</li>
-<li>Row-major memory layout</li>
-<li>Manual stride-based indexing</li>
-<li>Broadcasting with <code>+</code>, <code>-</code>, <code>*</code></li>
-<li>Basic slicing (views, no copy)</li>
-<li>Reshape support</li>
-<li>Fill methods: <code>ones</code>, <code>zeroes</code>, <code>randint</code>, <code>fillSequential</code></li>
-<li>Contiguity and memory ownership checks</li>
+<li>N-dimensional float arrays with row‑major layout</li>
+<li>Manual stride-based indexing: <code>get</code>, <code>set</code>, flat <code>get(int)</code>, <code>set(int)</code></li>
+<li>Introspection helpers: <code>metadata</code>, <code>isContiguous</code>, <code>print</code> (data or grads)</li>
+<li>Initialization/fill: <code>zeros</code>, <code>ones</code>, <code>fill</code>, <code>fillSequential</code>, <code>randint(low, high)</code></li>
+<li>Slicing: <code>slice</code> returns a detached view (non-owning, no autograd) with shared data</li>
+<li>Materialization: use <code>clone()</code> to get an owning tensor (detached, no autograd link)</li>
+<li>Reshape: <code>reshape</code> on contiguous, owning arrays</li>
+<li>Broadcasting arithmetic between arrays:<ul>
+<li><code>+</code>, <code>-</code>, <code>/</code>, and element-wise <code>element_wise_multiply</code></li>
+</ul>
+</li>
+<li>Scalar arithmetic on arrays: <code>+ float</code>, <code>- float</code>, <code>/ float</code>, <code>element_wise_multiply(float)</code></li>
+<li>Matrix multiplication for 2D arrays: <code>operator*</code> (no broadcasting)</li>
+<li>Autograd (reverse-mode) support:<ul>
+<li>Graph capture with <code>prev</code>, <code>op</code>, <code>label</code></li>
+<li><code>backward()</code> builds a topo order and accumulates gradients</li>
+<li>Implemented grads for: add/sub (array &amp; scalar), div (array &amp; scalar), element-wise multiply (array &amp; scalar), and matrix multiply</li>
+</ul>
+</li>
+<li>Safety and constraints:<ul>
+<li>Flat indexing and reshape allowed only on contiguous, owning arrays</li>
+<li>Slice views do not own memory; fill operations disallowed on non-owning views</li>
+<li>Division warns on divisor 0; grad contributions on zero divisors are skipped</li>
+</ul>
+</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md3"></a>
 Build with CMake</h1>
@@ -170,9 +171,61 @@ Project Structure</h1>
 <div class="line">├── LICENSE             // Project license</div>
 <div class="line">└── README.md           // Project documentation</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md6"></a>
+Quickstart Example</h1>
+<p>A compact example that demonstrates slicing, reshape, broadcasting, scalar ops, element‑wise ops, division, matrix multiplication, and a backward pass.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="NDArray_8h.html">./include/NDArray.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main() {</div>
+<div class="line">  <a class="code hl_class" href="classNDArray.html">NDArray</a> A({2, 3});</div>
+<div class="line">  A.<a class="code hl_function" href="classNDArray.html#ad0b362f11d536d13838bf0ede8c7387a">fillSequential</a>();</div>
+<div class="line">  A.set({0, 1}, 10.0f);         <span class="comment">// manual set using indices</span></div>
+<div class="line"> </div>
+<div class="line">  <a class="code hl_class" href="classNDArray.html">NDArray</a> B({1, 3});</div>
+<div class="line">  B.<a class="code hl_function" href="classNDArray.html#a9c0f50839fc21b0cb43c520088ba201c">ones</a>();                      <span class="comment">// broadcast row vector</span></div>
+<div class="line"> </div>
+<div class="line">  <a class="code hl_class" href="classNDArray.html">NDArray</a> C = A + B;             <span class="comment">// broadcasted add</span></div>
+<div class="line">  <a class="code hl_class" href="classNDArray.html">NDArray</a> D = C.<a class="code hl_function" href="classNDArray.html#a86d70a70722d96294974fe3f675dbc83">slice</a>({{0, 2}, {1, 3}});  <span class="comment">// view: shape (2, 2)</span></div>
+<div class="line">  </div>
+<div class="line">  <a class="code hl_class" href="classNDArray.html">NDArray</a> E = D.<a class="code hl_function" href="classNDArray.html#a767b098ca200ff9ee96f9020ada1053e">element_wise_multiply</a>(2.0f); <span class="comment">// scalar mul</span></div>
+<div class="line">  <a class="code hl_class" href="classNDArray.html">NDArray</a> F = E - 3.0f;            <span class="comment">// scalar sub</span></div>
+<div class="line"> </div>
+<div class="line">  <a class="code hl_class" href="classNDArray.html">NDArray</a> Bb = B.<a class="code hl_function" href="classNDArray.html#a86d70a70722d96294974fe3f675dbc83">slice</a>({{0, 1}, {1, 3}});    <span class="comment">// shape (1, 2)</span></div>
+<div class="line">  <a class="code hl_class" href="classNDArray.html">NDArray</a> G = F / (Bb + 1.0f);     <span class="comment">// broadcasted div with scalar add</span></div>
+<div class="line"> </div>
+<div class="line">  <a class="code hl_class" href="classNDArray.html">NDArray</a> W({2, 2});</div>
+<div class="line">  W.<a class="code hl_function" href="classNDArray.html#a2ddcd1b60e7c30be0e5822f5a77fcb6a">randint</a>(1, 5);</div>
+<div class="line">  <a class="code hl_class" href="classNDArray.html">NDArray</a> H = G * W;               <span class="comment">// matrix multiply (2x2) * (2x2)</span></div>
+<div class="line"> </div>
+<div class="line">  H.<a class="code hl_function" href="classNDArray.html#aac7dd909848ec151e7e6e377326a46ea">metadata</a>();</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;H(1,1) = &quot;</span> &lt;&lt; H.<a class="code hl_function" href="classNDArray.html#a7f76278064ed7fecaf282b13a40b9a04">get</a>({1, 1}) &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">  H.<a class="code hl_function" href="classNDArray.html#a12b89fe097fec83562a8dcefbaf889c9">backward</a>();                    <span class="comment">// autograd</span></div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;\nGrad A:&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  A.print(<a class="code hl_enumvalue" href="classNDArray.html#afa8645bfb974eb764ebc3c66eb9d172baf616db79db9836441c1b11837ba197ce">NDArray::PrintType::Grad</a>);</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;\nGrad B:&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  B.print(<a class="code hl_enumvalue" href="classNDArray.html#afa8645bfb974eb764ebc3c66eb9d172baf616db79db9836441c1b11837ba197ce">NDArray::PrintType::Grad</a>);</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;\nGrad W:&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  W.print(<a class="code hl_enumvalue" href="classNDArray.html#afa8645bfb974eb764ebc3c66eb9d172baf616db79db9836441c1b11837ba197ce">NDArray::PrintType::Grad</a>);</div>
+<div class="line">}</div>
+<div class="ttc" id="aNDArray_8h_html"><div class="ttname"><a href="NDArray_8h.html">NDArray.h</a></div><div class="ttdoc">NDArray: a minimal NumPy-like N-dimensional float array.</div></div>
+<div class="ttc" id="aclassNDArray_html"><div class="ttname"><a href="classNDArray.html">NDArray</a></div><div class="ttdef"><b>Definition</b> NDArray.h:31</div></div>
+<div class="ttc" id="aclassNDArray_html_a12b89fe097fec83562a8dcefbaf889c9"><div class="ttname"><a href="classNDArray.html#a12b89fe097fec83562a8dcefbaf889c9">NDArray::backward</a></div><div class="ttdeci">void backward()</div><div class="ttdoc">Reverse‑mode backprop: accumulate gradients into all reachable parents from this node.</div><div class="ttdef"><b>Definition</b> NDArray.cpp:788</div></div>
+<div class="ttc" id="aclassNDArray_html_a2ddcd1b60e7c30be0e5822f5a77fcb6a"><div class="ttname"><a href="classNDArray.html#a2ddcd1b60e7c30be0e5822f5a77fcb6a">NDArray::randint</a></div><div class="ttdeci">void randint(int low, int high)</div><div class="ttdoc">Fill with uniform integer values in [low, high).</div><div class="ttdef"><b>Definition</b> NDArray.cpp:293</div></div>
+<div class="ttc" id="aclassNDArray_html_a767b098ca200ff9ee96f9020ada1053e"><div class="ttname"><a href="classNDArray.html#a767b098ca200ff9ee96f9020ada1053e">NDArray::element_wise_multiply</a></div><div class="ttdeci">NDArray element_wise_multiply(NDArray &amp;other)</div><div class="ttdoc">Broadcasted element‑wise multiplication.</div><div class="ttdef"><b>Definition</b> NDArray.cpp:690</div></div>
+<div class="ttc" id="aclassNDArray_html_a7f76278064ed7fecaf282b13a40b9a04"><div class="ttname"><a href="classNDArray.html#a7f76278064ed7fecaf282b13a40b9a04">NDArray::get</a></div><div class="ttdeci">float get(std::vector&lt; int &gt; indices, PrintType type=PrintType::Data) const</div><div class="ttdoc">Read an element by multi‑dimensional indices.</div><div class="ttdef"><b>Definition</b> NDArray.cpp:107</div></div>
+<div class="ttc" id="aclassNDArray_html_a86d70a70722d96294974fe3f675dbc83"><div class="ttname"><a href="classNDArray.html#a86d70a70722d96294974fe3f675dbc83">NDArray::slice</a></div><div class="ttdeci">NDArray slice(std::vector&lt; std::tuple&lt; int, int &gt; &gt; indices)</div><div class="ttdoc">Return a non‑owning view restricted by per‑axis [start, stop) slices.</div><div class="ttdef"><b>Definition</b> NDArray.cpp:167</div></div>
+<div class="ttc" id="aclassNDArray_html_a9c0f50839fc21b0cb43c520088ba201c"><div class="ttname"><a href="classNDArray.html#a9c0f50839fc21b0cb43c520088ba201c">NDArray::ones</a></div><div class="ttdeci">void ones()</div><div class="ttdoc">Set all elements to 1.</div><div class="ttdef"><b>Definition</b> NDArray.cpp:286</div></div>
+<div class="ttc" id="aclassNDArray_html_aac7dd909848ec151e7e6e377326a46ea"><div class="ttname"><a href="classNDArray.html#aac7dd909848ec151e7e6e377326a46ea">NDArray::metadata</a></div><div class="ttdeci">void metadata(bool shapeInfo=true, bool stridesInfo=false, bool ndimInfo=false, bool sizeInfo=false, bool ownsDataInfo=false)</div><div class="ttdoc">Print selected metadata fields.</div><div class="ttdef"><b>Definition</b> NDArray.cpp:71</div></div>
+<div class="ttc" id="aclassNDArray_html_ad0b362f11d536d13838bf0ede8c7387a"><div class="ttname"><a href="classNDArray.html#ad0b362f11d536d13838bf0ede8c7387a">NDArray::fillSequential</a></div><div class="ttdeci">void fillSequential()</div><div class="ttdoc">Fill with sequential values 0, 1, 2, ... (for demos/testing).</div><div class="ttdef"><b>Definition</b> NDArray.cpp:259</div></div>
+<div class="ttc" id="aclassNDArray_html_afa8645bfb974eb764ebc3c66eb9d172baf616db79db9836441c1b11837ba197ce"><div class="ttname"><a href="classNDArray.html#afa8645bfb974eb764ebc3c66eb9d172baf616db79db9836441c1b11837ba197ce">NDArray::PrintType::Grad</a></div><div class="ttdeci">@ Grad</div></div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md7"></a>
 Author</h1>
 <p>Built with some neovim and some maths by <a href="https://x.com/inclinedadarsh"><b>Adarsh Dubey</b></a>.</p>
-<h1><a class="anchor" id="autotoc_md7"></a>
+<h1><a class="anchor" id="autotoc_md8"></a>
 License</h1>
 <p>MIT License. Do whatever you want, just don’t sue me. </p>
 </div></div><!-- PageDoc -->

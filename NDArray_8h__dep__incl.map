@@ -1,5 +1,5 @@
 <map id="include/NDArray.h" name="include/NDArray.h">
-<area shape="rect" id="Node000001" title="Defines the NDArray class for multidimensional array operations." alt="" coords="5,5,144,31"/>
+<area shape="rect" id="Node000001" title="NDArray: a minimal NumPy&#45;like N&#45;dimensional float array." alt="" coords="5,5,144,31"/>
 <area shape="rect" id="Node000002" href="$NDArray_8cpp.html" title=" " alt="" coords="12,79,137,104"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="77,44,77,79,72,79,72,44"/>
 </map>

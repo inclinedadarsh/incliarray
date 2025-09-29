@@ -91,6 +91,7 @@ $(document).ready(function(){initNavTree('classNDArray.html',''); initResizable(
 
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
@@ -101,79 +102,93 @@ $(document).ready(function(){initNavTree('classNDArray.html',''); initResizable(
 
 <p><code>#include &lt;<a class="el" href="NDArray_8h_source.html">NDArray.h</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:afa8645bfb974eb764ebc3c66eb9d172b" id="r_afa8645bfb974eb764ebc3c66eb9d172b"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#afa8645bfb974eb764ebc3c66eb9d172b">PrintType</a> { <a class="el" href="classNDArray.html#afa8645bfb974eb764ebc3c66eb9d172baf6068daa29dbb05a7ead1e3b5a48bbee">Data</a>
+, <a class="el" href="classNDArray.html#afa8645bfb974eb764ebc3c66eb9d172baf616db79db9836441c1b11837ba197ce">Grad</a>
+ }</td></tr>
+<tr class="separator:afa8645bfb974eb764ebc3c66eb9d172b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aefb68f7a38397870e2a9a4336c7a0317" id="r_aefb68f7a38397870e2a9a4336c7a0317"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#aefb68f7a38397870e2a9a4336c7a0317">NDArray</a> (std::vector&lt; int &gt; <a class="el" href="classNDArray.html#ac0e40023142d42437d0eabd1aa6269c0">shape</a>)</td></tr>
-<tr class="separator:aefb68f7a38397870e2a9a4336c7a0317"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4204ffbe47363debc7278e7dc996eb1c" id="r_a4204ffbe47363debc7278e7dc996eb1c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#a4204ffbe47363debc7278e7dc996eb1c">NDArray</a> (std::vector&lt; int &gt; <a class="el" href="classNDArray.html#ac0e40023142d42437d0eabd1aa6269c0">shape</a>, std::string <a class="el" href="classNDArray.html#a21d9bfde9187671beeac8edd958135d4">label</a>=&quot;&quot;, std::string <a class="el" href="classNDArray.html#a176c16acf4d856a49c42371a867aa322">op</a>=&quot;&quot;, std::vector&lt; std::reference_wrapper&lt; <a class="el" href="classNDArray.html">NDArray</a> &gt; &gt; <a class="el" href="classNDArray.html#a9a6a7bd2362317464e3ccf48f8bddfd6">prev</a>={})</td></tr>
+<tr class="memdesc:a4204ffbe47363debc7278e7dc996eb1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct an owning, contiguous <a class="el" href="classNDArray.html">NDArray</a> of given shape.  <br /></td></tr>
+<tr class="separator:a4204ffbe47363debc7278e7dc996eb1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac7dd909848ec151e7e6e377326a46ea" id="r_aac7dd909848ec151e7e6e377326a46ea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#aac7dd909848ec151e7e6e377326a46ea">metadata</a> (bool shapeInfo=true, bool stridesInfo=false, bool ndimInfo=false, bool sizeInfo=false, bool ownsDataInfo=false)</td></tr>
-<tr class="memdesc:aac7dd909848ec151e7e6e377326a46ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints the metadata information of the object.  <br /></td></tr>
+<tr class="memdesc:aac7dd909848ec151e7e6e377326a46ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print selected metadata fields.  <br /></td></tr>
 <tr class="separator:aac7dd909848ec151e7e6e377326a46ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff2550b30d523d0b5d10a051ca8f43a4" id="r_aff2550b30d523d0b5d10a051ca8f43a4"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#aff2550b30d523d0b5d10a051ca8f43a4">get</a> (std::vector&lt; int &gt; indices) const</td></tr>
-<tr class="memdesc:aff2550b30d523d0b5d10a051ca8f43a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an element based on the indices.  <br /></td></tr>
-<tr class="separator:aff2550b30d523d0b5d10a051ca8f43a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:accd6c075a430fb01b724af8adc62cb99" id="r_accd6c075a430fb01b724af8adc62cb99"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#accd6c075a430fb01b724af8adc62cb99">get</a> (int index) const</td></tr>
-<tr class="memdesc:accd6c075a430fb01b724af8adc62cb99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an element based on a flat index.  <br /></td></tr>
-<tr class="separator:accd6c075a430fb01b724af8adc62cb99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f76278064ed7fecaf282b13a40b9a04" id="r_a7f76278064ed7fecaf282b13a40b9a04"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#a7f76278064ed7fecaf282b13a40b9a04">get</a> (std::vector&lt; int &gt; indices, <a class="el" href="classNDArray.html#afa8645bfb974eb764ebc3c66eb9d172b">PrintType</a> type=<a class="el" href="classNDArray.html#afa8645bfb974eb764ebc3c66eb9d172baf6068daa29dbb05a7ead1e3b5a48bbee">PrintType::Data</a>) const</td></tr>
+<tr class="memdesc:a7f76278064ed7fecaf282b13a40b9a04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read an element by multi‑dimensional indices.  <br /></td></tr>
+<tr class="separator:a7f76278064ed7fecaf282b13a40b9a04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3190ee0cf61937dae7dcb5d9121f9ad2" id="r_a3190ee0cf61937dae7dcb5d9121f9ad2"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#a3190ee0cf61937dae7dcb5d9121f9ad2">get</a> (int index, <a class="el" href="classNDArray.html#afa8645bfb974eb764ebc3c66eb9d172b">PrintType</a> type=<a class="el" href="classNDArray.html#afa8645bfb974eb764ebc3c66eb9d172baf6068daa29dbb05a7ead1e3b5a48bbee">PrintType::Data</a>) const</td></tr>
+<tr class="memdesc:a3190ee0cf61937dae7dcb5d9121f9ad2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read an element by flat index.  <br /></td></tr>
+<tr class="separator:a3190ee0cf61937dae7dcb5d9121f9ad2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a62ae0b79bdde41869f2f8cbf7cd53ef0" id="r_a62ae0b79bdde41869f2f8cbf7cd53ef0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#a62ae0b79bdde41869f2f8cbf7cd53ef0">set</a> (std::vector&lt; int &gt; indices, float value)</td></tr>
-<tr class="memdesc:a62ae0b79bdde41869f2f8cbf7cd53ef0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a value of the element at the given indices.  <br /></td></tr>
+<tr class="memdesc:a62ae0b79bdde41869f2f8cbf7cd53ef0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write an element by multi‑dimensional indices.  <br /></td></tr>
 <tr class="separator:a62ae0b79bdde41869f2f8cbf7cd53ef0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9523cefec43d0baedfd68e4711e3cba7" id="r_a9523cefec43d0baedfd68e4711e3cba7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#a9523cefec43d0baedfd68e4711e3cba7">set</a> (int index, float value)</td></tr>
-<tr class="memdesc:a9523cefec43d0baedfd68e4711e3cba7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a value of the element at the given flat index.  <br /></td></tr>
+<tr class="memdesc:a9523cefec43d0baedfd68e4711e3cba7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write an element by flat index.  <br /></td></tr>
 <tr class="separator:a9523cefec43d0baedfd68e4711e3cba7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86d70a70722d96294974fe3f675dbc83" id="r_a86d70a70722d96294974fe3f675dbc83"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNDArray.html">NDArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#a86d70a70722d96294974fe3f675dbc83">slice</a> (std::vector&lt; std::tuple&lt; int, int &gt; &gt; indices)</td></tr>
-<tr class="memdesc:a86d70a70722d96294974fe3f675dbc83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a sliced object.  <br /></td></tr>
+<tr class="memdesc:a86d70a70722d96294974fe3f675dbc83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a non‑owning view restricted by per‑axis [start, stop) slices.  <br /></td></tr>
 <tr class="separator:a86d70a70722d96294974fe3f675dbc83"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0c9759f4af71f48bfa62bca7b1aa0b5" id="r_ae0c9759f4af71f48bfa62bca7b1aa0b5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#ae0c9759f4af71f48bfa62bca7b1aa0b5">isContiguous</a> () const</td></tr>
-<tr class="memdesc:ae0c9759f4af71f48bfa62bca7b1aa0b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns boolean if the data inside is contiguous or not.  <br /></td></tr>
+<tr class="memdesc:ae0c9759f4af71f48bfa62bca7b1aa0b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether the logical layout matches standard row‑major contiguous strides for the current shape.  <br /></td></tr>
 <tr class="separator:ae0c9759f4af71f48bfa62bca7b1aa0b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa426ea20b8318201651b0bc9d7492094" id="r_aa426ea20b8318201651b0bc9d7492094"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#aa426ea20b8318201651b0bc9d7492094">reshape</a> (std::vector&lt; int &gt; newShape)</td></tr>
-<tr class="memdesc:aa426ea20b8318201651b0bc9d7492094"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reshapes the original data.  <br /></td></tr>
+<tr class="memdesc:aa426ea20b8318201651b0bc9d7492094"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reshape this array to a new shape with the same number of elements.  <br /></td></tr>
 <tr class="separator:aa426ea20b8318201651b0bc9d7492094"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7874438d315a53be5939af93bb271cd6" id="r_a7874438d315a53be5939af93bb271cd6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#a7874438d315a53be5939af93bb271cd6">print</a> ()</td></tr>
-<tr class="memdesc:a7874438d315a53be5939af93bb271cd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints the data.  <br /></td></tr>
-<tr class="separator:a7874438d315a53be5939af93bb271cd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1706712d89ebdb1e9c02343980ea7fb8" id="r_a1706712d89ebdb1e9c02343980ea7fb8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#a1706712d89ebdb1e9c02343980ea7fb8">print</a> (<a class="el" href="classNDArray.html#afa8645bfb974eb764ebc3c66eb9d172b">PrintType</a> type=<a class="el" href="classNDArray.html#afa8645bfb974eb764ebc3c66eb9d172baf6068daa29dbb05a7ead1e3b5a48bbee">PrintType::Data</a>)</td></tr>
+<tr class="memdesc:a1706712d89ebdb1e9c02343980ea7fb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pretty‑print the data or gradients.  <br /></td></tr>
+<tr class="separator:a1706712d89ebdb1e9c02343980ea7fb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad0b362f11d536d13838bf0ede8c7387a" id="r_ad0b362f11d536d13838bf0ede8c7387a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#ad0b362f11d536d13838bf0ede8c7387a">fillSequential</a> ()</td></tr>
-<tr class="memdesc:ad0b362f11d536d13838bf0ede8c7387a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fills the data in the object with sequential numbers starting from 0.  <br /></td></tr>
+<tr class="memdesc:ad0b362f11d536d13838bf0ede8c7387a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill with sequential values 0, 1, 2, ... (for demos/testing).  <br /></td></tr>
 <tr class="separator:ad0b362f11d536d13838bf0ede8c7387a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac20a83eaac2aa30c83701d9ef0850e30" id="r_ac20a83eaac2aa30c83701d9ef0850e30"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#ac20a83eaac2aa30c83701d9ef0850e30">fill</a> (float value)</td></tr>
-<tr class="memdesc:ac20a83eaac2aa30c83701d9ef0850e30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fills the data inthe object with the given floating point value.  <br /></td></tr>
+<tr class="memdesc:ac20a83eaac2aa30c83701d9ef0850e30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill with a constant value.  <br /></td></tr>
 <tr class="separator:ac20a83eaac2aa30c83701d9ef0850e30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6c76aa73291942db05591fe7b3f9aea" id="r_af6c76aa73291942db05591fe7b3f9aea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#af6c76aa73291942db05591fe7b3f9aea">zeros</a> ()</td></tr>
-<tr class="memdesc:af6c76aa73291942db05591fe7b3f9aea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fills the data in the object with 0s.  <br /></td></tr>
+<tr class="memdesc:af6c76aa73291942db05591fe7b3f9aea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set all elements to 0.  <br /></td></tr>
 <tr class="separator:af6c76aa73291942db05591fe7b3f9aea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c0f50839fc21b0cb43c520088ba201c" id="r_a9c0f50839fc21b0cb43c520088ba201c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#a9c0f50839fc21b0cb43c520088ba201c">ones</a> ()</td></tr>
-<tr class="memdesc:a9c0f50839fc21b0cb43c520088ba201c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fills the data in the object with 1s.  <br /></td></tr>
+<tr class="memdesc:a9c0f50839fc21b0cb43c520088ba201c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set all elements to 1.  <br /></td></tr>
 <tr class="separator:a9c0f50839fc21b0cb43c520088ba201c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ddcd1b60e7c30be0e5822f5a77fcb6a" id="r_a2ddcd1b60e7c30be0e5822f5a77fcb6a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#a2ddcd1b60e7c30be0e5822f5a77fcb6a">randint</a> (int low, int high)</td></tr>
-<tr class="memdesc:a2ddcd1b60e7c30be0e5822f5a77fcb6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fills the data in the object with random numbers between the given boundaries.  <br /></td></tr>
+<tr class="memdesc:a2ddcd1b60e7c30be0e5822f5a77fcb6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill with uniform integer values in [low, high).  <br /></td></tr>
 <tr class="separator:a2ddcd1b60e7c30be0e5822f5a77fcb6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa291527180dcd98850cebaef0b1373a3" id="r_aa291527180dcd98850cebaef0b1373a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNDArray.html">NDArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#aa291527180dcd98850cebaef0b1373a3">operator+</a> (const <a class="el" href="classNDArray.html">NDArray</a> &amp;other) const</td></tr>
-<tr class="memdesc:aa291527180dcd98850cebaef0b1373a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs broadcasted arithmetic addition operation.  <br /></td></tr>
-<tr class="separator:aa291527180dcd98850cebaef0b1373a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7aba05bee52025a5995c51ce305af2f4" id="r_a7aba05bee52025a5995c51ce305af2f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNDArray.html">NDArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#a7aba05bee52025a5995c51ce305af2f4">operator+</a> (float value) const</td></tr>
-<tr class="memdesc:a7aba05bee52025a5995c51ce305af2f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs broadcasted arithmetic addition operation with a constant value.  <br /></td></tr>
-<tr class="separator:a7aba05bee52025a5995c51ce305af2f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac521169147e637092d13fc16b9a38c84" id="r_ac521169147e637092d13fc16b9a38c84"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNDArray.html">NDArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#ac521169147e637092d13fc16b9a38c84">operator-</a> (const <a class="el" href="classNDArray.html">NDArray</a> &amp;other) const</td></tr>
-<tr class="memdesc:ac521169147e637092d13fc16b9a38c84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs broadcasted arithmetic subtraction operation.  <br /></td></tr>
-<tr class="separator:ac521169147e637092d13fc16b9a38c84"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea514c3334d6098fceb710d11efd22c1" id="r_aea514c3334d6098fceb710d11efd22c1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNDArray.html">NDArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#aea514c3334d6098fceb710d11efd22c1">operator-</a> (float value) const</td></tr>
-<tr class="memdesc:aea514c3334d6098fceb710d11efd22c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs broadcasted arithmetic subtraction operation with a constant value.  <br /></td></tr>
-<tr class="separator:aea514c3334d6098fceb710d11efd22c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace56e2cc56a11946a6fdaed421c02a70" id="r_ace56e2cc56a11946a6fdaed421c02a70"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNDArray.html">NDArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#ace56e2cc56a11946a6fdaed421c02a70">operator*</a> (const <a class="el" href="classNDArray.html">NDArray</a> &amp;other) const</td></tr>
-<tr class="memdesc:ace56e2cc56a11946a6fdaed421c02a70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs matrix multiplication operation.  <br /></td></tr>
-<tr class="separator:ace56e2cc56a11946a6fdaed421c02a70"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af46729baf69bfe74e828aca0e895d014" id="r_af46729baf69bfe74e828aca0e895d014"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNDArray.html">NDArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#af46729baf69bfe74e828aca0e895d014">operator/</a> (const <a class="el" href="classNDArray.html">NDArray</a> &amp;other) const</td></tr>
-<tr class="memdesc:af46729baf69bfe74e828aca0e895d014"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs broadcasted arithmetic division operation.  <br /></td></tr>
-<tr class="separator:af46729baf69bfe74e828aca0e895d014"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af47f366bd93ebcc294c99900eae4d2a3" id="r_af47f366bd93ebcc294c99900eae4d2a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNDArray.html">NDArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#af47f366bd93ebcc294c99900eae4d2a3">operator/</a> (float value) const</td></tr>
-<tr class="memdesc:af47f366bd93ebcc294c99900eae4d2a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs broadcasted arithmetic division operation with a constant as a divisor.  <br /></td></tr>
-<tr class="separator:af47f366bd93ebcc294c99900eae4d2a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2bb74b873e51bcb1422978e78cd1b9da" id="r_a2bb74b873e51bcb1422978e78cd1b9da"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNDArray.html">NDArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#a2bb74b873e51bcb1422978e78cd1b9da">element_wise_multiply</a> (const <a class="el" href="classNDArray.html">NDArray</a> &amp;other) const</td></tr>
-<tr class="memdesc:a2bb74b873e51bcb1422978e78cd1b9da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs broadcasted arithmetic element wise multiplication operation.  <br /></td></tr>
-<tr class="separator:a2bb74b873e51bcb1422978e78cd1b9da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af244b4743bd35d5b1fed5a3d28dc12d3" id="r_af244b4743bd35d5b1fed5a3d28dc12d3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNDArray.html">NDArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#af244b4743bd35d5b1fed5a3d28dc12d3">element_wise_multiply</a> (float value) const</td></tr>
-<tr class="memdesc:af244b4743bd35d5b1fed5a3d28dc12d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs broadcasted arithmetic element wise multiplication operation with a constant value.  <br /></td></tr>
-<tr class="separator:af244b4743bd35d5b1fed5a3d28dc12d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5a450494c0c2301540b939b8663219f" id="r_ac5a450494c0c2301540b939b8663219f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNDArray.html">NDArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#ac5a450494c0c2301540b939b8663219f">operator+</a> (<a class="el" href="classNDArray.html">NDArray</a> &amp;other)</td></tr>
+<tr class="memdesc:ac5a450494c0c2301540b939b8663219f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broadcasted element‑wise addition (this + other).  <br /></td></tr>
+<tr class="separator:ac5a450494c0c2301540b939b8663219f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7caf8319ff8784b4ab5c340fbe343f95" id="r_a7caf8319ff8784b4ab5c340fbe343f95"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNDArray.html">NDArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#a7caf8319ff8784b4ab5c340fbe343f95">operator+</a> (float value)</td></tr>
+<tr class="memdesc:a7caf8319ff8784b4ab5c340fbe343f95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scalar addition (this + value), shape‑preserving.  <br /></td></tr>
+<tr class="separator:a7caf8319ff8784b4ab5c340fbe343f95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95de4fb6796cefd654402e7a1be91775" id="r_a95de4fb6796cefd654402e7a1be91775"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNDArray.html">NDArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#a95de4fb6796cefd654402e7a1be91775">operator-</a> (<a class="el" href="classNDArray.html">NDArray</a> &amp;other)</td></tr>
+<tr class="memdesc:a95de4fb6796cefd654402e7a1be91775"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broadcasted element‑wise subtraction (this - other).  <br /></td></tr>
+<tr class="separator:a95de4fb6796cefd654402e7a1be91775"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae43ac5cc12828e2fe0e407c56dbbe473" id="r_ae43ac5cc12828e2fe0e407c56dbbe473"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNDArray.html">NDArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#ae43ac5cc12828e2fe0e407c56dbbe473">operator-</a> (float value)</td></tr>
+<tr class="memdesc:ae43ac5cc12828e2fe0e407c56dbbe473"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scalar subtraction (this - value), shape‑preserving.  <br /></td></tr>
+<tr class="separator:ae43ac5cc12828e2fe0e407c56dbbe473"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b15790a78d7e5ba743100f0d8fe1224" id="r_a5b15790a78d7e5ba743100f0d8fe1224"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNDArray.html">NDArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#a5b15790a78d7e5ba743100f0d8fe1224">operator*</a> (<a class="el" href="classNDArray.html">NDArray</a> &amp;other)</td></tr>
+<tr class="memdesc:a5b15790a78d7e5ba743100f0d8fe1224"><td class="mdescLeft">&#160;</td><td class="mdescRight">2D matrix multiplication (no broadcasting).  <br /></td></tr>
+<tr class="separator:a5b15790a78d7e5ba743100f0d8fe1224"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fe05daeff7e0ce9ddb4664d5f934643" id="r_a1fe05daeff7e0ce9ddb4664d5f934643"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNDArray.html">NDArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#a1fe05daeff7e0ce9ddb4664d5f934643">operator/</a> (<a class="el" href="classNDArray.html">NDArray</a> &amp;other)</td></tr>
+<tr class="memdesc:a1fe05daeff7e0ce9ddb4664d5f934643"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broadcasted element‑wise division (this / other).  <br /></td></tr>
+<tr class="separator:a1fe05daeff7e0ce9ddb4664d5f934643"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa55b1daaf3dcea3e99919e9c6cee5781" id="r_aa55b1daaf3dcea3e99919e9c6cee5781"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNDArray.html">NDArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#aa55b1daaf3dcea3e99919e9c6cee5781">operator/</a> (float value)</td></tr>
+<tr class="memdesc:aa55b1daaf3dcea3e99919e9c6cee5781"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scalar division (this / value), shape‑preserving, warns on zero.  <br /></td></tr>
+<tr class="separator:aa55b1daaf3dcea3e99919e9c6cee5781"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a767b098ca200ff9ee96f9020ada1053e" id="r_a767b098ca200ff9ee96f9020ada1053e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNDArray.html">NDArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#a767b098ca200ff9ee96f9020ada1053e">element_wise_multiply</a> (<a class="el" href="classNDArray.html">NDArray</a> &amp;other)</td></tr>
+<tr class="memdesc:a767b098ca200ff9ee96f9020ada1053e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broadcasted element‑wise multiplication.  <br /></td></tr>
+<tr class="separator:a767b098ca200ff9ee96f9020ada1053e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4823e50fb1783e936460539d452dc5ca" id="r_a4823e50fb1783e936460539d452dc5ca"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNDArray.html">NDArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#a4823e50fb1783e936460539d452dc5ca">element_wise_multiply</a> (float value)</td></tr>
+<tr class="memdesc:a4823e50fb1783e936460539d452dc5ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scalar element‑wise multiplication (this * value).  <br /></td></tr>
+<tr class="separator:a4823e50fb1783e936460539d452dc5ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12b89fe097fec83562a8dcefbaf889c9" id="r_a12b89fe097fec83562a8dcefbaf889c9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#a12b89fe097fec83562a8dcefbaf889c9">backward</a> ()</td></tr>
+<tr class="memdesc:a12b89fe097fec83562a8dcefbaf889c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reverse‑mode backprop: accumulate gradients into all reachable parents from this node.  <br /></td></tr>
+<tr class="separator:a12b89fe097fec83562a8dcefbaf889c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75b9f436264316b79e1cad3524dbd56b" id="r_a75b9f436264316b79e1cad3524dbd56b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNDArray.html">NDArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#a75b9f436264316b79e1cad3524dbd56b">clone</a> ()</td></tr>
+<tr class="memdesc:a75b9f436264316b79e1cad3524dbd56b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Materialize a contiguous, owning copy. Detached from autograd.  <br /></td></tr>
+<tr class="separator:a75b9f436264316b79e1cad3524dbd56b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -189,15 +204,57 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a80ac2affcedf5a74ce47c3cdfd701320"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf82db8bbbf88b88fd9aed4a8635ac96" id="r_abf82db8bbbf88b88fd9aed4a8635ac96"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#abf82db8bbbf88b88fd9aed4a8635ac96">ownsData</a></td></tr>
 <tr class="separator:abf82db8bbbf88b88fd9aed4a8635ac96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace16ea9cc48f8b27caa41a3914869058" id="r_ace16ea9cc48f8b27caa41a3914869058"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#ace16ea9cc48f8b27caa41a3914869058">grad</a></td></tr>
+<tr class="separator:ace16ea9cc48f8b27caa41a3914869058"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a176c16acf4d856a49c42371a867aa322" id="r_a176c16acf4d856a49c42371a867aa322"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#a176c16acf4d856a49c42371a867aa322">op</a></td></tr>
+<tr class="separator:a176c16acf4d856a49c42371a867aa322"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21d9bfde9187671beeac8edd958135d4" id="r_a21d9bfde9187671beeac8edd958135d4"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#a21d9bfde9187671beeac8edd958135d4">label</a></td></tr>
+<tr class="separator:a21d9bfde9187671beeac8edd958135d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a6a7bd2362317464e3ccf48f8bddfd6" id="r_a9a6a7bd2362317464e3ccf48f8bddfd6"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::reference_wrapper&lt; <a class="el" href="classNDArray.html">NDArray</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#a9a6a7bd2362317464e3ccf48f8bddfd6">prev</a></td></tr>
+<tr class="separator:a9a6a7bd2362317464e3ccf48f8bddfd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71a19bf4433f03ff0117bf9cf57c84ac" id="r_a71a19bf4433f03ff0117bf9cf57c84ac"><td class="memItemLeft" align="right" valign="top">std::function&lt; void()&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#a71a19bf4433f03ff0117bf9cf57c84ac">_backward</a></td></tr>
+<tr class="separator:a71a19bf4433f03ff0117bf9cf57c84ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:a6becead5229e75f921e4cbeb54f78ee4" id="r_a6becead5229e75f921e4cbeb54f78ee4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#a6becead5229e75f921e4cbeb54f78ee4">NDArray</a> (std::vector&lt; int &gt; <a class="el" href="classNDArray.html#ac0e40023142d42437d0eabd1aa6269c0">shape</a>, std::vector&lt; int &gt; <a class="el" href="classNDArray.html#a81fc72f174eb547185a106b53d5fe71f">strides</a>, float *<a class="el" href="classNDArray.html#a505f5266b3b604a1ff1e11ae1489cdea">data</a>, bool <a class="el" href="classNDArray.html#abf82db8bbbf88b88fd9aed4a8635ac96">ownsData</a>)</td></tr>
-<tr class="separator:a6becead5229e75f921e4cbeb54f78ee4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19ca4ca767ce532858400930926c03a2" id="r_a19ca4ca767ce532858400930926c03a2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#a19ca4ca767ce532858400930926c03a2">NDArray</a> (std::vector&lt; int &gt; <a class="el" href="classNDArray.html#ac0e40023142d42437d0eabd1aa6269c0">shape</a>, std::vector&lt; int &gt; <a class="el" href="classNDArray.html#a81fc72f174eb547185a106b53d5fe71f">strides</a>, float *<a class="el" href="classNDArray.html#a505f5266b3b604a1ff1e11ae1489cdea">data</a>, bool <a class="el" href="classNDArray.html#abf82db8bbbf88b88fd9aed4a8635ac96">ownsData</a>, std::string <a class="el" href="classNDArray.html#a21d9bfde9187671beeac8edd958135d4">label</a>=&quot;&quot;, std::string <a class="el" href="classNDArray.html#a176c16acf4d856a49c42371a867aa322">op</a>=&quot;&quot;, std::vector&lt; std::reference_wrapper&lt; <a class="el" href="classNDArray.html">NDArray</a> &gt; &gt; <a class="el" href="classNDArray.html#a9a6a7bd2362317464e3ccf48f8bddfd6">prev</a>={})</td></tr>
+<tr class="memdesc:a19ca4ca767ce532858400930926c03a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal constructor used for creating non-owning views or wrapping existing memory with specific strides.  <br /></td></tr>
+<tr class="separator:a19ca4ca767ce532858400930926c03a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19bc842b770edc26afe3ef1a57d40781" id="r_a19bc842b770edc26afe3ef1a57d40781"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#a19bc842b770edc26afe3ef1a57d40781">build_topo</a> (std::unordered_set&lt; <a class="el" href="classNDArray.html">NDArray</a> * &gt; &amp;visited, <a class="el" href="classNDArray.html">NDArray</a> *arr, std::vector&lt; std::reference_wrapper&lt; <a class="el" href="classNDArray.html">NDArray</a> &gt; &gt; &amp;topo)</td></tr>
+<tr class="memdesc:a19bc842b770edc26afe3ef1a57d40781"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build a topological ordering of nodes reachable from <code>arr</code>.  <br /></td></tr>
+<tr class="separator:a19bc842b770edc26afe3ef1a57d40781"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="afa8645bfb974eb764ebc3c66eb9d172b" name="afa8645bfb974eb764ebc3c66eb9d172b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa8645bfb974eb764ebc3c66eb9d172b">&#9670;&#160;</a></span>PrintType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="classNDArray.html#afa8645bfb974eb764ebc3c66eb9d172b">NDArray::PrintType</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Select between printing data or gradient buffers. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="afa8645bfb974eb764ebc3c66eb9d172baf6068daa29dbb05a7ead1e3b5a48bbee" name="afa8645bfb974eb764ebc3c66eb9d172baf6068daa29dbb05a7ead1e3b5a48bbee"></a>Data&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="afa8645bfb974eb764ebc3c66eb9d172baf616db79db9836441c1b11837ba197ce" name="afa8645bfb974eb764ebc3c66eb9d172baf616db79db9836441c1b11837ba197ce"></a>Grad&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a6becead5229e75f921e4cbeb54f78ee4" name="a6becead5229e75f921e4cbeb54f78ee4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6becead5229e75f921e4cbeb54f78ee4">&#9670;&#160;</a></span>NDArray() <span class="overload">[1/2]</span></h2>
+<a id="a19ca4ca767ce532858400930926c03a2" name="a19ca4ca767ce532858400930926c03a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19ca4ca767ce532858400930926c03a2">&#9670;&#160;</a></span>NDArray() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -227,7 +284,25 @@ Private Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>ownsData</em>&#160;</td>
+          <td class="paramname"><em>ownsData</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>label</em> = <code>&quot;&quot;</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>op</em> = <code>&quot;&quot;</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; std::reference_wrapper&lt; <a class="el" href="classNDArray.html">NDArray</a> &gt; &gt;&#160;</td>
+          <td class="paramname"><em>prev</em> = <code>{}</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -242,10 +317,14 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Internal constructor used for creating non-owning views or wrapping existing memory with specific strides. </p>
+<p>This does not allocate memory. When ownsData == false, the lifetime of the provided data pointer must outlive the <a class="el" href="classNDArray.html">NDArray</a> instance.</p>
+<p>Autograd: callers decide whether to pass graph metadata. Slice uses this constructor but returns a detached view (prev empty, op empty). </p>
+
 </div>
 </div>
-<a id="aefb68f7a38397870e2a9a4336c7a0317" name="aefb68f7a38397870e2a9a4336c7a0317"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aefb68f7a38397870e2a9a4336c7a0317">&#9670;&#160;</a></span>NDArray() <span class="overload">[2/2]</span></h2>
+<a id="a4204ffbe47363debc7278e7dc996eb1c" name="a4204ffbe47363debc7278e7dc996eb1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4204ffbe47363debc7278e7dc996eb1c">&#9670;&#160;</a></span>NDArray() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -254,44 +333,127 @@ Private Member Functions</h2></td></tr>
           <td class="memname">NDArray::NDArray </td>
           <td>(</td>
           <td class="paramtype">std::vector&lt; int &gt;&#160;</td>
-          <td class="paramname"><em>shape</em></td><td>)</td>
+          <td class="paramname"><em>shape</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>label</em> = <code>&quot;&quot;</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>op</em> = <code>&quot;&quot;</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; std::reference_wrapper&lt; <a class="el" href="classNDArray.html">NDArray</a> &gt; &gt;&#160;</td>
+          <td class="paramname"><em>prev</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
+<p>Construct an owning, contiguous <a class="el" href="classNDArray.html">NDArray</a> of given shape. </p>
+<p>Allocates <code>data</code> and <code>grad</code>, computes row‑major <code>strides</code>, and sets <code>ownsData = true</code>. This constructor creates a base tensor that can participate in autograd. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a2bb74b873e51bcb1422978e78cd1b9da" name="a2bb74b873e51bcb1422978e78cd1b9da"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2bb74b873e51bcb1422978e78cd1b9da">&#9670;&#160;</a></span>element_wise_multiply() <span class="overload">[1/2]</span></h2>
+<a id="a12b89fe097fec83562a8dcefbaf889c9" name="a12b89fe097fec83562a8dcefbaf889c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12b89fe097fec83562a8dcefbaf889c9">&#9670;&#160;</a></span>backward()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classNDArray.html">NDArray</a> NDArray::element_wise_multiply </td>
+          <td class="memname">void NDArray::backward </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classNDArray.html">NDArray</a> &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td> const</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Performs broadcasted arithmetic element wise multiplication operation. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">other</td><td>Other object taking part in multiplication operation </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A new object with the result of the multiplication operation </dd></dl>
+<p>Reverse‑mode backprop: accumulate gradients into all reachable parents from this node. </p>
+<p>Sets this-&gt;grad to ones (dOut/dOut = 1) and walks the graph in reverse topological order, invoking each node’s <code>_backward</code> closure. </p>
 
 </div>
 </div>
-<a id="af244b4743bd35d5b1fed5a3d28dc12d3" name="af244b4743bd35d5b1fed5a3d28dc12d3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af244b4743bd35d5b1fed5a3d28dc12d3">&#9670;&#160;</a></span>element_wise_multiply() <span class="overload">[2/2]</span></h2>
+<a id="a19bc842b770edc26afe3ef1a57d40781" name="a19bc842b770edc26afe3ef1a57d40781"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19bc842b770edc26afe3ef1a57d40781">&#9670;&#160;</a></span>build_topo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void NDArray::build_topo </td>
+          <td>(</td>
+          <td class="paramtype">std::unordered_set&lt; <a class="el" href="classNDArray.html">NDArray</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>visited</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classNDArray.html">NDArray</a> *&#160;</td>
+          <td class="paramname"><em>arr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; std::reference_wrapper&lt; <a class="el" href="classNDArray.html">NDArray</a> &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>topo</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Build a topological ordering of nodes reachable from <code>arr</code>. </p>
+<p>DFS that collects unique nodes (by pointer) into <code>topo</code> such that parents appear before children, enabling reverse‑mode backprop from outputs to inputs. </p>
+
+</div>
+</div>
+<a id="a75b9f436264316b79e1cad3524dbd56b" name="a75b9f436264316b79e1cad3524dbd56b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75b9f436264316b79e1cad3524dbd56b">&#9670;&#160;</a></span>clone()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classNDArray.html">NDArray</a> NDArray::clone </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Materialize a contiguous, owning copy. Detached from autograd. </p>
+<p>If the source is contiguous, performs a fast contiguous copy; otherwise uses a stride‑aware copy. The returned tensor has no graph linkage. </p>
+
+</div>
+</div>
+<a id="a4823e50fb1783e936460539d452dc5ca" name="a4823e50fb1783e936460539d452dc5ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4823e50fb1783e936460539d452dc5ca">&#9670;&#160;</a></span>element_wise_multiply() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -301,19 +463,33 @@ Private Member Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
-          <td> const</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Performs broadcasted arithmetic element wise multiplication operation with a constant value. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">value</td><td>Constant value taking part in the multiplication operation. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A new object with the result of the multiplication operation </dd></dl>
+<p>Scalar element‑wise multiplication (this * value). </p>
+
+</div>
+</div>
+<a id="a767b098ca200ff9ee96f9020ada1053e" name="a767b098ca200ff9ee96f9020ada1053e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a767b098ca200ff9ee96f9020ada1053e">&#9670;&#160;</a></span>element_wise_multiply() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classNDArray.html">NDArray</a> NDArray::element_wise_multiply </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classNDArray.html">NDArray</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Broadcasted element‑wise multiplication. </p>
+<p>Autograd: dA += other * dOut; dB += this * dOut. </p>
 
 </div>
 </div>
@@ -333,10 +509,10 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Fills the data inthe object with the given floating point value. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">value</td><td>The value to be used to fill the data </td></tr>
+<p>Fill with a constant value. </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>if the array does not own its memory </td></tr>
   </table>
   </dd>
 </dl>
@@ -358,12 +534,18 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Fills the data in the object with sequential numbers starting from 0. </p>
+<p>Fill with sequential values 0, 1, 2, ... (for demos/testing). </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>if the array does not own its memory </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
-<a id="accd6c075a430fb01b724af8adc62cb99" name="accd6c075a430fb01b724af8adc62cb99"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#accd6c075a430fb01b724af8adc62cb99">&#9670;&#160;</a></span>get() <span class="overload">[1/2]</span></h2>
+<a id="a3190ee0cf61937dae7dcb5d9121f9ad2" name="a3190ee0cf61937dae7dcb5d9121f9ad2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3190ee0cf61937dae7dcb5d9121f9ad2">&#9670;&#160;</a></span>get() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -372,26 +554,44 @@ Private Member Functions</h2></td></tr>
           <td class="memname">float NDArray::get </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
-          <td> const</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classNDArray.html#afa8645bfb974eb764ebc3c66eb9d172b">NDArray::PrintType</a>&#160;</td>
+          <td class="paramname"><em>type</em> = <code><a class="el" href="classNDArray.html#afa8645bfb974eb764ebc3c66eb9d172baf6068daa29dbb05a7ead1e3b5a48bbee">PrintType::Data</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Returns an element based on a flat index. </p>
-<p>It disregards any shape or stride, and returns the element as if it was a flat array.</p>
+<p>Read an element by flat index. </p>
+<p>Valid only for contiguous, owning arrays. Treats memory as a flat buffer regardless of shape, primarily for debugging and demos.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">index</td><td>Flat index of the element asked </td></tr>
+    <tr><td class="paramname">index</td><td>Flat position in [0, size) </td></tr>
+    <tr><td class="paramname">type</td><td>Whether to read data or grad </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Element at the given index </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The element value </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::out_of_range</td><td>if index is outside [0, size) </td></tr>
+    <tr><td class="paramname">std::runtime_error</td><td>if the array is not contiguous or not owning </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
-<a id="aff2550b30d523d0b5d10a051ca8f43a4" name="aff2550b30d523d0b5d10a051ca8f43a4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aff2550b30d523d0b5d10a051ca8f43a4">&#9670;&#160;</a></span>get() <span class="overload">[2/2]</span></h2>
+<a id="a7f76278064ed7fecaf282b13a40b9a04" name="a7f76278064ed7fecaf282b13a40b9a04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f76278064ed7fecaf282b13a40b9a04">&#9670;&#160;</a></span>get() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -400,20 +600,37 @@ Private Member Functions</h2></td></tr>
           <td class="memname">float NDArray::get </td>
           <td>(</td>
           <td class="paramtype">std::vector&lt; int &gt;&#160;</td>
-          <td class="paramname"><em>indices</em></td><td>)</td>
-          <td> const</td>
+          <td class="paramname"><em>indices</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classNDArray.html#afa8645bfb974eb764ebc3c66eb9d172b">NDArray::PrintType</a>&#160;</td>
+          <td class="paramname"><em>type</em> = <code><a class="el" href="classNDArray.html#afa8645bfb974eb764ebc3c66eb9d172baf6068daa29dbb05a7ead1e3b5a48bbee">PrintType::Data</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Returns an element based on the indices. </p>
+<p>Read an element by multi‑dimensional indices. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">indices</td><td>Indices of the element asked </td></tr>
+    <tr><td class="paramname">indices</td><td>A vector of length <code>ndim</code> specifying the coordinate </td></tr>
+    <tr><td class="paramname">type</td><td>Whether to read from data or grad buffer </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Element at the given indices </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The element value </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::invalid_argument</td><td>if indices.size() != ndim </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -432,8 +649,7 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Returns boolean if the data inside is contiguous or not. </p>
-<dl class="section return"><dt>Returns</dt><dd>Boolean value, true if the data is contiguous, false otherwise </dd></dl>
+<p>Whether the logical layout matches standard row‑major contiguous strides for the current shape. </p>
 
 </div>
 </div>
@@ -481,14 +697,14 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Prints the metadata information of the object. </p>
+<p>Print selected metadata fields. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">shapeInfo</td><td>Print shape? </td></tr>
-    <tr><td class="paramname">stridesInfo</td><td>Print strides? </td></tr>
-    <tr><td class="paramname">ndimInfo</td><td>Print ndim? </td></tr>
-    <tr><td class="paramname">sizeInfo</td><td>Print size? </td></tr>
-    <tr><td class="paramname">ownsDataInfo</td><td>Print ownsData? </td></tr>
+    <tr><td class="paramname">shapeInfo</td><td>Whether to print shape </td></tr>
+    <tr><td class="paramname">stridesInfo</td><td>Whether to print strides (row‑major steps) </td></tr>
+    <tr><td class="paramname">ndimInfo</td><td>Whether to print number of dimensions </td></tr>
+    <tr><td class="paramname">sizeInfo</td><td>Whether to print total size (elements) </td></tr>
+    <tr><td class="paramname">ownsDataInfo</td><td>Whether to print ownership flag </td></tr>
   </table>
   </dd>
 </dl>
@@ -510,12 +726,12 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Fills the data in the object with 1s. </p>
+<p>Set all elements to 1. </p>
 
 </div>
 </div>
-<a id="ace56e2cc56a11946a6fdaed421c02a70" name="ace56e2cc56a11946a6fdaed421c02a70"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ace56e2cc56a11946a6fdaed421c02a70">&#9670;&#160;</a></span>operator*()</h2>
+<a id="a5b15790a78d7e5ba743100f0d8fe1224" name="a5b15790a78d7e5ba743100f0d8fe1224"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b15790a78d7e5ba743100f0d8fe1224">&#9670;&#160;</a></span>operator*()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -523,53 +739,25 @@ Private Member Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classNDArray.html">NDArray</a> NDArray::operator* </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classNDArray.html">NDArray</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classNDArray.html">NDArray</a> &amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
-          <td> const</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Performs matrix multiplication operation. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">other</td><td>Other object taking part in the matrix multiplication. </td></tr>
+<p>2D matrix multiplication (no broadcasting). </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::invalid_argument</td><td>if either input is not 2D or dims mismatch Autograd: implements dA = dC * B^T and dB = A^T * dC. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A new object with the result of the multiplication operator </dd></dl>
 
 </div>
 </div>
-<a id="aa291527180dcd98850cebaef0b1373a3" name="aa291527180dcd98850cebaef0b1373a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa291527180dcd98850cebaef0b1373a3">&#9670;&#160;</a></span>operator+() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classNDArray.html">NDArray</a> NDArray::operator+ </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classNDArray.html">NDArray</a> &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Performs broadcasted arithmetic addition operation. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">other</td><td>Other object taking part in addition operation </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A new object with the result of the addition operation </dd></dl>
-
-</div>
-</div>
-<a id="a7aba05bee52025a5995c51ce305af2f4" name="a7aba05bee52025a5995c51ce305af2f4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7aba05bee52025a5995c51ce305af2f4">&#9670;&#160;</a></span>operator+() <span class="overload">[2/2]</span></h2>
+<a id="a7caf8319ff8784b4ab5c340fbe343f95" name="a7caf8319ff8784b4ab5c340fbe343f95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7caf8319ff8784b4ab5c340fbe343f95">&#9670;&#160;</a></span>operator+() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -579,51 +767,38 @@ Private Member Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
-          <td> const</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Performs broadcasted arithmetic addition operation with a constant value. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">value</td><td>Constant value taking part in the addition operation. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A new object with the result of the addition operation </dd></dl>
+<p>Scalar addition (this + value), shape‑preserving. </p>
 
 </div>
 </div>
-<a id="ac521169147e637092d13fc16b9a38c84" name="ac521169147e637092d13fc16b9a38c84"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac521169147e637092d13fc16b9a38c84">&#9670;&#160;</a></span>operator-() <span class="overload">[1/2]</span></h2>
+<a id="ac5a450494c0c2301540b939b8663219f" name="ac5a450494c0c2301540b939b8663219f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5a450494c0c2301540b939b8663219f">&#9670;&#160;</a></span>operator+() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classNDArray.html">NDArray</a> NDArray::operator- </td>
+          <td class="memname"><a class="el" href="classNDArray.html">NDArray</a> NDArray::operator+ </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classNDArray.html">NDArray</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classNDArray.html">NDArray</a> &amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
-          <td> const</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Performs broadcasted arithmetic subtraction operation. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">other</td><td>Other object taking part in subtraction operation </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A new object with the result of the subtraction operation </dd></dl>
+<p>Broadcasted element‑wise addition (this + other). </p>
+<p>Autograd: result records graph metadata and accumulates dA += dOut and dB += dOut with broadcasting. </p>
 
 </div>
 </div>
-<a id="aea514c3334d6098fceb710d11efd22c1" name="aea514c3334d6098fceb710d11efd22c1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea514c3334d6098fceb710d11efd22c1">&#9670;&#160;</a></span>operator-() <span class="overload">[2/2]</span></h2>
+<a id="ae43ac5cc12828e2fe0e407c56dbbe473" name="ae43ac5cc12828e2fe0e407c56dbbe473"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae43ac5cc12828e2fe0e407c56dbbe473">&#9670;&#160;</a></span>operator-() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -633,52 +808,38 @@ Private Member Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
-          <td> const</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Performs broadcasted arithmetic subtraction operation with a constant value. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">value</td><td>Constant value taking part in the subtraction operation. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A new object with the result of the subtraction operation </dd></dl>
+<p>Scalar subtraction (this - value), shape‑preserving. </p>
 
 </div>
 </div>
-<a id="af46729baf69bfe74e828aca0e895d014" name="af46729baf69bfe74e828aca0e895d014"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af46729baf69bfe74e828aca0e895d014">&#9670;&#160;</a></span>operator/() <span class="overload">[1/2]</span></h2>
+<a id="a95de4fb6796cefd654402e7a1be91775" name="a95de4fb6796cefd654402e7a1be91775"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95de4fb6796cefd654402e7a1be91775">&#9670;&#160;</a></span>operator-() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classNDArray.html">NDArray</a> NDArray::operator/ </td>
+          <td class="memname"><a class="el" href="classNDArray.html">NDArray</a> NDArray::operator- </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classNDArray.html">NDArray</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classNDArray.html">NDArray</a> &amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
-          <td> const</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Performs broadcasted arithmetic division operation. </p>
-<p>The object on which this operation is being performed will be the dividend and the other object will be the divisor.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">other</td><td>Divisor object taking part in division operation </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A new object with the result of the division operation </dd></dl>
+<p>Broadcasted element‑wise subtraction (this - other). </p>
+<p>Autograd: dA += dOut, dB += -dOut with broadcasting. </p>
 
 </div>
 </div>
-<a id="af47f366bd93ebcc294c99900eae4d2a3" name="af47f366bd93ebcc294c99900eae4d2a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af47f366bd93ebcc294c99900eae4d2a3">&#9670;&#160;</a></span>operator/() <span class="overload">[2/2]</span></h2>
+<a id="aa55b1daaf3dcea3e99919e9c6cee5781" name="aa55b1daaf3dcea3e99919e9c6cee5781"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa55b1daaf3dcea3e99919e9c6cee5781">&#9670;&#160;</a></span>operator/() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -688,25 +849,38 @@ Private Member Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
-          <td> const</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Performs broadcasted arithmetic division operation with a constant as a divisor. </p>
-<p>The object on which this operation is being performed will be the dividend and the value will be the divisor.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">value</td><td>Divisor value taking part in division operation </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A new object with the result of the division operation </dd></dl>
+<p>Scalar division (this / value), shape‑preserving, warns on zero. </p>
 
 </div>
 </div>
-<a id="a7874438d315a53be5939af93bb271cd6" name="a7874438d315a53be5939af93bb271cd6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7874438d315a53be5939af93bb271cd6">&#9670;&#160;</a></span>print()</h2>
+<a id="a1fe05daeff7e0ce9ddb4664d5f934643" name="a1fe05daeff7e0ce9ddb4664d5f934643"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fe05daeff7e0ce9ddb4664d5f934643">&#9670;&#160;</a></span>operator/() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classNDArray.html">NDArray</a> NDArray::operator/ </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classNDArray.html">NDArray</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Broadcasted element‑wise division (this / other). </p>
+<p>Warns on division by zero. Autograd: dA += dOut / other, dB += -(this / other^2) * dOut. </p>
+
+</div>
+</div>
+<a id="a1706712d89ebdb1e9c02343980ea7fb8" name="a1706712d89ebdb1e9c02343980ea7fb8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1706712d89ebdb1e9c02343980ea7fb8">&#9670;&#160;</a></span>print()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -714,14 +888,15 @@ Private Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void NDArray::print </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classNDArray.html#afa8645bfb974eb764ebc3c66eb9d172b">NDArray::PrintType</a>&#160;</td>
+          <td class="paramname"><em>type</em> = <code><a class="el" href="classNDArray.html#afa8645bfb974eb764ebc3c66eb9d172baf6068daa29dbb05a7ead1e3b5a48bbee">PrintType::Data</a></code></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Prints the data. </p>
-<p>Prints the data in layout if it's 1d or 2d, otherwise prints the flattened array. </p>
+<p>Pretty‑print the data or gradients. </p>
+<p>Prints 1D and 2D arrays in nested list form; higher‑dimensional arrays are printed flattened for brevity. </p>
 
 </div>
 </div>
@@ -751,11 +926,17 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Fills the data in the object with random numbers between the given boundaries. </p>
+<p>Fill with uniform integer values in [low, high). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">low</td><td>The lower end of the boundary (inclusive) </td></tr>
-    <tr><td class="paramname">high</td><td>The higher end of the boundary (exclusive) </td></tr>
+    <tr><td class="paramname">low</td><td>Inclusive lower bound </td></tr>
+    <tr><td class="paramname">high</td><td>Exclusive upper bound </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>if the array does not own its memory </td></tr>
   </table>
   </dd>
 </dl>
@@ -778,11 +959,18 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Reshapes the original data. </p>
-<p>The new shape should be compatible with the old shape.</p>
+<p>Reshape this array to a new shape with the same number of elements. </p>
+<p>Only allowed for owning, contiguous arrays. Updates <code>shape</code> and recomputes <code>strides</code> to standard row‑major.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">newShape</td><td>The new shape in which the data has to be shaped </td></tr>
+    <tr><td class="paramname">newShape</td><td>Target shape (product must equal current size) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>if the array is not owning or not contiguous </td></tr>
+    <tr><td class="paramname">std::invalid_argument</td><td>if newShape is empty or incompatible in size </td></tr>
   </table>
   </dd>
 </dl>
@@ -815,12 +1003,19 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Sets a value of the element at the given flat index. </p>
-<p>It disregards any shape or stride, and finds the element as if it was a flat array.</p>
+<p>Write an element by flat index. </p>
+<p>Valid only for contiguous, owning arrays. Writes into the underlying memory ignoring shape.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">index</td><td>Flat index of the element where the value has to be set </td></tr>
-    <tr><td class="paramname">value</td><td>The value which is to be set at the given flat index </td></tr>
+    <tr><td class="paramname">index</td><td>Flat position in [0, size) </td></tr>
+    <tr><td class="paramname">value</td><td>Value to write </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::out_of_range</td><td>if index is outside [0, size) </td></tr>
+    <tr><td class="paramname">std::runtime_error</td><td>if the array is not contiguous or not owning </td></tr>
   </table>
   </dd>
 </dl>
@@ -853,11 +1048,17 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Sets a value of the element at the given indices. </p>
+<p>Write an element by multi‑dimensional indices. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">indices</td><td>Indices of the element where the value has to be set </td></tr>
-    <tr><td class="paramname">value</td><td>The value which is to be set at the given indices </td></tr>
+    <tr><td class="paramname">indices</td><td>Coordinate of the element (length == ndim) </td></tr>
+    <tr><td class="paramname">value</td><td>Value to write into data buffer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::invalid_argument</td><td>if indices.size() != ndim </td></tr>
   </table>
   </dd>
 </dl>
@@ -880,15 +1081,21 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Returns a sliced object. </p>
-<p>Given the indices, this function returns an <a class="el" href="classNDArray.html">NDArray</a> which is a view of the original data but with the indices boundary.</p>
+<p>Return a non‑owning view restricted by per‑axis [start, stop) slices. </p>
+<p>The returned <a class="el" href="classNDArray.html">NDArray</a> shares <code>data</code> with the base tensor and has updated shape/strides/offset. It is DETACHED from autograd: no graph is recorded and its <code>_backward</code> is a no‑op.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">indices</td><td>Vector (same size as the axis of the object) of tuple, where the first element is start (inclusive) and second element is stop (exclusive)</td></tr>
+    <tr><td class="paramname">indices</td><td>A vector (length == ndim) of (start, stop) pairs, inclusive start and exclusive stop for each axis </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Sliced object with new boundaries. This object DOES NOT own the data </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A detached view (non‑owning) </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::invalid_argument</td><td>if the number of slices != ndim </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -907,11 +1114,26 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Fills the data in the object with 0s. </p>
+<p>Set all elements to 0. </p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a71a19bf4433f03ff0117bf9cf57c84ac" name="a71a19bf4433f03ff0117bf9cf57c84ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71a19bf4433f03ff0117bf9cf57c84ac">&#9670;&#160;</a></span>_backward</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::function&lt;void()&gt; NDArray::_backward</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Backpropagation closure; invoked during <a class="el" href="classNDArray.html#a12b89fe097fec83562a8dcefbaf889c9" title="Reverse‑mode backprop: accumulate gradients into all reachable parents from this node.">backward()</a>. Node‑local backward function. </p>
+
+</div>
+</div>
 <a id="a505f5266b3b604a1ff1e11ae1489cdea" name="a505f5266b3b604a1ff1e11ae1489cdea"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a505f5266b3b604a1ff1e11ae1489cdea">&#9670;&#160;</a></span>data</h2>
 
@@ -923,6 +1145,37 @@ Private Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Raw data pointer in row‑major layout. Points to <code>size</code> floats. Raw data pointer in row‑major layout (length = size). </p>
+
+</div>
+</div>
+<a id="ace16ea9cc48f8b27caa41a3914869058" name="ace16ea9cc48f8b27caa41a3914869058"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace16ea9cc48f8b27caa41a3914869058">&#9670;&#160;</a></span>grad</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float* NDArray::grad</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Gradient buffer aligned with logical indexing (allocated when constructed). Gradient storage parallel to <code>data</code>. </p>
+
+</div>
+</div>
+<a id="a21d9bfde9187671beeac8edd958135d4" name="a21d9bfde9187671beeac8edd958135d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21d9bfde9187671beeac8edd958135d4">&#9670;&#160;</a></span>label</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string NDArray::label</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Optional human‑readable label for this tensor. User/debug label. </p>
 
 </div>
 </div>
@@ -937,6 +1190,22 @@ Private Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Number of dimensions (shape.size()). Number of axes. </p>
+
+</div>
+</div>
+<a id="a176c16acf4d856a49c42371a867aa322" name="a176c16acf4d856a49c42371a867aa322"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a176c16acf4d856a49c42371a867aa322">&#9670;&#160;</a></span>op</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string NDArray::op</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Operation tag for debug/inspection (e.g. "+", "-", "elem_mul", "*"). Debug op tag. </p>
 
 </div>
 </div>
@@ -951,6 +1220,22 @@ Private Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Whether this <a class="el" href="classNDArray.html">NDArray</a> owns and manages the memory referenced by <code>data</code>. True if this tensor allocated and owns its memory. </p>
+
+</div>
+</div>
+<a id="a9a6a7bd2362317464e3ccf48f8bddfd6" name="a9a6a7bd2362317464e3ccf48f8bddfd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a6a7bd2362317464e3ccf48f8bddfd6">&#9670;&#160;</a></span>prev</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::reference_wrapper&lt;<a class="el" href="classNDArray.html">NDArray</a>&gt; &gt; NDArray::prev</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Parents in autograd graph. Empty for detached tensors (slice/clone). Graph parents. </p>
 
 </div>
 </div>
@@ -965,6 +1250,7 @@ Private Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Dimensions of the array, e.g. {rows, cols} for 2D. Shape dimensions; product equals <code>size</code>. </p>
 
 </div>
 </div>
@@ -979,6 +1265,7 @@ Private Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Total number of elements (product of <code>shape</code>). Total element count. </p>
 
 </div>
 </div>
@@ -993,6 +1280,7 @@ Private Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Row‑major strides in elements; stride[i] is step for axis i. Row‑major strides per axis (in elements). </p>
 
 </div>
 </div>

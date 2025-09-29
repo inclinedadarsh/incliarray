@@ -166,7 +166,7 @@ public:
    * @param other Other object taking part in addition operation
    * @return A new object with the result of the addition operation
    */
-  NDArray operator+(const NDArray &other) const;
+  NDArray operator+(const NDArray &other);
 
   /**
    * @brief Performs broadcasted arithmetic addition operation with a constant
@@ -174,14 +174,14 @@ public:
    * @param value Constant value taking part in the addition operation.
    * @return A new object with the result of the addition operation
    */
-  NDArray operator+(float value) const;
+  NDArray operator+(float value);
 
   /**
    * @brief Performs broadcasted arithmetic subtraction operation.
    * @param other Other object taking part in subtraction operation
    * @return A new object with the result of the subtraction operation
    */
-  NDArray operator-(const NDArray &other) const;
+  NDArray operator-(const NDArray &other);
 
   /**
    * @brief Performs broadcasted arithmetic subtraction operation with a
@@ -189,14 +189,14 @@ public:
    * @param value Constant value taking part in the subtraction operation.
    * @return A new object with the result of the subtraction operation
    */
-  NDArray operator-(float value) const;
+  NDArray operator-(float value);
 
   /**
    * @brief Performs matrix multiplication operation.
    * @param other Other object taking part in the matrix multiplication.
    * @return A new object with the result of the multiplication operator
    */
-  NDArray operator*(const NDArray &other) const;
+  NDArray operator*(const NDArray &other);
 
   /**
    * @brief Performs broadcasted arithmetic division operation.
@@ -207,7 +207,7 @@ public:
    * @param other Divisor object taking part in division operation
    * @return A new object with the result of the division operation
    */
-  NDArray operator/(const NDArray &other) const;
+  NDArray operator/(const NDArray &other);
 
   /**
    * @brief Performs broadcasted arithmetic division operation with a constant
@@ -219,7 +219,7 @@ public:
    * @param value Divisor value taking part in division operation
    * @return A new object with the result of the division operation
    */
-  NDArray operator/(float value) const;
+  NDArray operator/(float value);
 
   /**
    * @brief Performs broadcasted arithmetic element wise multiplication
@@ -227,7 +227,7 @@ public:
    * @param other Other object taking part in multiplication operation
    * @return A new object with the result of the multiplication operation
    */
-  NDArray element_wise_multiply(const NDArray &other) const;
+  NDArray element_wise_multiply(const NDArray &other);
 
   /**
    * @brief Performs broadcasted arithmetic element wise multiplication
@@ -235,7 +235,7 @@ public:
    * @param value Constant value taking part in the multiplication operation.
    * @return A new object with the result of the multiplication operation
    */
-  NDArray element_wise_multiply(float value) const;
+  NDArray element_wise_multiply(float value);
 
   void backward();
 };

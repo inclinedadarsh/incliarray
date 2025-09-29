@@ -277,7 +277,7 @@ void NDArray::randint(int low, int high) {
   }
 }
 
-NDArray NDArray::operator+(const NDArray &other) const {
+NDArray NDArray::operator+(const NDArray &other) {
   std::vector<int> outShape = detail::_broadcastShape(shape, other.shape);
   std::vector<int> stridesA =
       detail::_broadcastStrides(shape, strides, outShape);
@@ -304,7 +304,7 @@ NDArray NDArray::operator+(const NDArray &other) const {
   return result;
 }
 
-NDArray NDArray::operator+(float value) const {
+NDArray NDArray::operator+(float value) {
   NDArray result(shape);
   std::vector<int> index(shape.size(), 0);
 
@@ -323,7 +323,7 @@ NDArray NDArray::operator+(float value) const {
   return result;
 }
 
-NDArray NDArray::operator-(const NDArray &other) const {
+NDArray NDArray::operator-(const NDArray &other) {
   std::vector<int> outShape = detail::_broadcastShape(shape, other.shape);
   std::vector<int> stridesA =
       detail::_broadcastStrides(shape, strides, outShape);
@@ -349,7 +349,7 @@ NDArray NDArray::operator-(const NDArray &other) const {
   return result;
 }
 
-NDArray NDArray::operator-(float value) const {
+NDArray NDArray::operator-(float value) {
   NDArray result(shape);
   std::vector<int> index(shape.size(), 0);
 
@@ -368,7 +368,7 @@ NDArray NDArray::operator-(float value) const {
   return result;
 }
 
-NDArray NDArray::operator*(const NDArray &other) const {
+NDArray NDArray::operator*(const NDArray &other) {
   if (this->ndim != 2 || other.ndim != 2) {
     throw std::invalid_argument(
         "Matrix multiplication is only supported for 2d arrays! Exiting.");
@@ -401,7 +401,7 @@ NDArray NDArray::operator*(const NDArray &other) const {
   return result;
 }
 
-NDArray NDArray::operator/(const NDArray &other) const {
+NDArray NDArray::operator/(const NDArray &other) {
   std::vector<int> outShape = detail::_broadcastShape(shape, other.shape);
   std::vector<int> stridesA =
       detail::_broadcastStrides(shape, strides, outShape);
@@ -432,7 +432,7 @@ NDArray NDArray::operator/(const NDArray &other) const {
   return result;
 }
 
-NDArray NDArray::operator/(float value) const {
+NDArray NDArray::operator/(float value) {
   NDArray result(shape);
   std::vector<int> index(shape.size(), 0);
 
@@ -456,7 +456,7 @@ NDArray NDArray::operator/(float value) const {
   return result;
 }
 
-NDArray NDArray::element_wise_multiply(const NDArray &other) const {
+NDArray NDArray::element_wise_multiply(const NDArray &other) {
   std::vector<int> outShape = detail::_broadcastShape(shape, other.shape);
   std::vector<int> stridesA =
       detail::_broadcastStrides(shape, strides, outShape);
@@ -482,7 +482,7 @@ NDArray NDArray::element_wise_multiply(const NDArray &other) const {
   return result;
 }
 
-NDArray NDArray::element_wise_multiply(float value) const {
+NDArray NDArray::element_wise_multiply(float value) {
   NDArray result(shape);
   std::vector<int> index(shape.size(), 0);
 

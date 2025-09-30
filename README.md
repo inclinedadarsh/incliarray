@@ -149,16 +149,18 @@ int main() {
   NDArray B({1, 3});
   B.ones();
 
-  NDArray C = A + B;                       // broadcast add
-  NDArray D = C.slice({{0, 2}, {1, 3}});   // detached view (2x2)
-  NDArray E = D.element_wise_multiply(2.0f);
-  NDArray F = E - 3.0f;
+  NDArray C = A + B;                        // broadcast add
+  NDArray D = C.element_wise_multiply(2.0f);
+  NDArray E = D - 3.0f;                     // scalar sub
 
-  NDArray W({2, 2});
+  NDArray W({3, 2});
   W.randint(1, 5);
-  NDArray H = F * W;                        // 2D matmul
+  NDArray G = A * W;                        // 2D matmul (2x3) * (3x2)
 
-  H.backward();
+  NDArray S = G.sum();                      // reduce to scalar (1)
+  S.backward();
+
+  std::cout << "Grad A:" << std::endl;
   A.print(NDArray::PrintType::Grad);
 }
 ```

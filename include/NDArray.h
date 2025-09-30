@@ -272,6 +272,14 @@ public:
   NDArray operator/(float value);
 
   /**
+   * @brief Scalar element-wise power (this ^ value).
+   *
+   * Raises each element to the given scalar power. Autograd: dA += value *
+   * A^(value - 1) * dOut.
+   */
+  NDArray operator^(float value);
+
+  /**
    * @brief Broadcasted element‑wise multiplication.
    *
    * Autograd: dA += other * dOut; dB += this * dOut.

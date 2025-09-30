@@ -1,6 +1,7 @@
 #include "../include/NDArray.h"
 #include "../include/utils.h"
 #include <algorithm>
+#include <cmath>
 #include <iostream>
 #include <random>
 #include <stdexcept>
@@ -683,6 +684,40 @@ NDArray NDArray::operator/(float value) {
       return; // already warned; skip accumulation to avoid NaNs
     for (int i = 0; i < outSize; ++i) {
       aGradPtr[i] += outGradPtr[i] / c;
+    }
+  };
+
+  return result;
+}
+
+NDArray NDArray::operator^(float value) {
+  NDArray result(shape, "", "^", {std::ref(*this)});
+  std::vector<int> index(shape.size(), 0);
+
+  for (int i = 0; i < result.size; ++i) {
+    int offset = detail::_computeOffset(index, strides);
+    result.data[i] = std::pow(data[offset], value);
+
+    for (int dim = shape.size() - 1; dim >= 0; --dim) {
+      index[dim]++;
+      if (index[dim] < shape[dim])
+        break;
+      index[dim] = 0;
+    }
+  }
+
+  // Backward: y = a^c => dA += c * a^(c-1) * dOut
+  float *aGradPtr = this->grad;
+  float *outGradPtr = result.grad;
+  float *aDataPtr = this->data;
+  int outSize = result.size;
+  float c = value;
+  result._backward = [aGradPtr, outGradPtr, aDataPtr, outSize, c]() mutable {
+    for (int i = 0; i < outSize; ++i) {
+      float aVal = aDataPtr[i];
+      float localGrad =
+          (c == 0.0f && aVal == 0.0f) ? 0.0f : (c * std::pow(aVal, c - 1.0f));
+      aGradPtr[i] += outGradPtr[i] * localGrad;
     }
   };
 

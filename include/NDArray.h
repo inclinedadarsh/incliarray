@@ -221,6 +221,19 @@ public:
   void randint(int low, int high);
 
   /**
+   * @brief Fill with uniform real values in [0, 1).
+   * @throws std::runtime_error if the array does not own its memory
+   */
+  void rand();
+
+  /**
+   * @brief Fill with uniform real values in [low, high).
+   * @throws std::invalid_argument if low >= high
+   * @throws std::runtime_error if the array does not own its memory
+   */
+  void rand(float low, float high);
+
+  /**
    * @brief Broadcasted element‑wise addition (this + other).
    *
    * Autograd: result records graph metadata and accumulates dA += dOut and
@@ -290,6 +303,26 @@ public:
    * @brief Scalar element‑wise multiplication (this * value).
    */
   NDArray element_wise_multiply(float value);
+
+  /**
+   * @brief Reduce all elements to a scalar sum.
+   *
+   * Returns a 1-element NDArray holding the total sum. Autograd: distributes
+   * the upstream gradient uniformly to every input element (dA += 1 * dOut).
+   */
+  NDArray sum();
+
+  /**
+   * @brief Sum along a specified axis (keep dimension as size 1).
+   *
+   * The output shape matches the input except `shape[axis] == 1`. Negative
+   * axes are supported (Python-style indexing). Autograd: broadcasts upstream
+   * gradient across the reduced axis into the input gradient.
+   *
+   * @param axis The axis along which to compute the sum (supports negatives)
+   * @throws std::invalid_argument if axis is out of range after normalization
+   */
+  NDArray sum(int axis);
 
   /**
    * @brief Reverse‑mode backprop: accumulate gradients into all reachable

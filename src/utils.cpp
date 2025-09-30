@@ -1,4 +1,4 @@
-#include "../include/utils.h"
+#include "./utils.h"
 #include <stdexcept>
 
 std::vector<int> detail::_computeStrides(std::vector<int> newShape) {

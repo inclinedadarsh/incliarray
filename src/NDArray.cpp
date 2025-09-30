@@ -836,3 +836,181 @@ void NDArray::backward() {
     topo[i].get()._backward();
   }
 }
+
+NDArray NDArray::sum() {
+  // Create scalar output (shape {1}) participating in autograd
+  NDArray result({1}, "", "sum", {std::ref(*this)});
+
+  // Accumulate sum respecting strides (works for contiguous and views)
+  float total = 0.0f;
+  if (isContiguous()) {
+    for (int i = 0; i < size; ++i) {
+      total += data[i];
+    }
+  } else {
+    std::vector<int> index(shape.size(), 0);
+    for (int i = 0; i < size; ++i) {
+      int offset = detail::_computeOffset(index, strides);
+      total += data[offset];
+
+      for (int dim = static_cast<int>(shape.size()) - 1; dim >= 0; --dim) {
+        index[dim]++;
+        if (index[dim] < shape[dim])
+          break;
+        index[dim] = 0;
+      }
+    }
+  }
+
+  result.data[0] = total;
+
+  // Backward: dA += 1 * dOut broadcasted to every element position
+  float *aGradPtr = this->grad;
+  float *outGradPtr = result.grad;
+  float upstreamScalar = 1.0f; // outGrad will be set by caller's backward
+
+  std::vector<int> shapeCopy = shape;
+  std::vector<int> stridesCopy = strides;
+  int sizeCopy = size;
+
+  result._backward = [aGradPtr, outGradPtr, upstreamScalar, shapeCopy,
+                      stridesCopy, sizeCopy]() mutable {
+    float g = outGradPtr[0] * upstreamScalar;
+    if (shapeCopy.empty()) {
+      // Scalar input edge case (size == 1)
+      aGradPtr[0] += g;
+      return;
+    }
+
+    // Iterate logical indices, accumulate into corresponding gradient slots
+    std::vector<int> index(shapeCopy.size(), 0);
+    for (int i = 0; i < sizeCopy; ++i) {
+      int off = detail::_computeOffset(index, stridesCopy);
+      aGradPtr[off] += g;
+
+      for (int d = static_cast<int>(shapeCopy.size()) - 1; d >= 0; --d) {
+        index[d]++;
+        if (index[d] < shapeCopy[d])
+          break;
+        index[d] = 0;
+      }
+    }
+  };
+
+  return result;
+}
+
+NDArray NDArray::sum(int axis) {
+  if (ndim == 0) {
+    // Treat scalar as shape {1}
+    NDArray result({1}, "", "sum_axis", {std::ref(*this)});
+    result.data[0] = data[0];
+    float *aGradPtr = this->grad;
+    float *outGradPtr = result.grad;
+    result._backward = [aGradPtr, outGradPtr]() mutable {
+      aGradPtr[0] += outGradPtr[0];
+    };
+    return result;
+  }
+
+  int ax = axis;
+  if (ax < 0)
+    ax += ndim;
+  if (ax < 0 || ax >= ndim) {
+    throw std::invalid_argument("Axis out of range in sum(axis)");
+  }
+
+  // Output shape: same dims but axis size becomes 1
+  std::vector<int> outShape = shape;
+  int reducedDim = outShape[ax];
+  outShape[ax] = 1;
+
+  NDArray result(outShape, "", "sum_axis", {std::ref(*this)});
+
+  // Compute outer (before axis), axis length, and inner (after axis) sizes
+  int outer = 1;
+  for (int i = 0; i < ax; ++i)
+    outer *= shape[i];
+  int inner = 1;
+  for (int i = ax + 1; i < ndim; ++i)
+    inner *= shape[i];
+
+  // Strides for quick offset computation
+  std::vector<int> stridesCopy = strides;
+
+  // We'll iterate over outer and inner positions; for each, sum along axis
+  for (int o = 0; o < outer; ++o) {
+    for (int in = 0; in < inner; ++in) {
+      // Build base multi-index corresponding to this (o, in) position
+      // Decode o to indices[0..ax-1], and in to indices[ax+1..]
+      std::vector<int> idx(ndim, 0);
+      int tmp = o;
+      for (int d = ax - 1; d >= 0; --d) {
+        int dimSize = shape[d];
+        idx[d] = tmp % dimSize;
+        tmp /= dimSize;
+      }
+      tmp = in;
+      for (int d = ndim - 1; d > ax; --d) {
+        int dimSize = shape[d];
+        idx[d] = tmp % dimSize;
+        tmp /= dimSize;
+      }
+
+      // Sum along axis at this base position
+      float accum = 0.0f;
+      for (int a = 0; a < reducedDim; ++a) {
+        idx[ax] = a;
+        int off = detail::_computeOffset(idx, stridesCopy);
+        accum += data[off];
+      }
+
+      // Write to output at corresponding location (axis index forced to 0)
+      idx[ax] = 0;
+      int outOff = detail::_computeOffset(idx, result.strides);
+      result.data[outOff] = accum;
+    }
+  }
+
+  // Backward: each input position along reduced axis receives upstream grad
+  float *aGradPtr = this->grad;
+  float *outGradPtr = result.grad;
+  std::vector<int> shapeCopy = shape;
+  std::vector<int> outStridesCopy = result.strides;
+
+  result._backward = [aGradPtr, outGradPtr, stridesCopy, outStridesCopy,
+                      shapeCopy, ax, reducedDim, outer, inner]() mutable {
+    // For each outer/inner location, distribute output grad to all axis slots
+    std::vector<int> idx(shapeCopy.size(), 0);
+    for (int o = 0; o < outer; ++o) {
+      int tmp = o;
+      for (int d = ax - 1; d >= 0; --d) {
+        int dimSize = shapeCopy[d];
+        idx[d] = tmp % dimSize;
+        tmp /= dimSize;
+      }
+      for (int in = 0; in < inner; ++in) {
+        int tmp2 = in;
+        for (int d = static_cast<int>(shapeCopy.size()) - 1; d > ax; --d) {
+          int dimSize = shapeCopy[d];
+          idx[d] = tmp2 % dimSize;
+          tmp2 /= dimSize;
+        }
+
+        // Read upstream grad at output position (axis fixed to 0)
+        idx[ax] = 0;
+        int outOff = detail::_computeOffset(idx, outStridesCopy);
+        float g = outGradPtr[outOff];
+
+        // Distribute to all input positions along axis
+        for (int a = 0; a < reducedDim; ++a) {
+          idx[ax] = a;
+          int inOff = detail::_computeOffset(idx, stridesCopy);
+          aGradPtr[inOff] += g;
+        }
+      }
+    }
+  };
+
+  return result;
+}

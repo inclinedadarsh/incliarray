@@ -18,6 +18,7 @@ var classNDArray =
     [ "isContiguous", "classNDArray.html#ae0c9759f4af71f48bfa62bca7b1aa0b5", null ],
     [ "metadata", "classNDArray.html#aac7dd909848ec151e7e6e377326a46ea", null ],
     [ "ones", "classNDArray.html#a9c0f50839fc21b0cb43c520088ba201c", null ],
+    [ "operator*", "classNDArray.html#a4a9caff8befc6a77c9a87bd4c0a1c7c9", null ],
     [ "operator*", "classNDArray.html#a5b15790a78d7e5ba743100f0d8fe1224", null ],
     [ "operator+", "classNDArray.html#a7caf8319ff8784b4ab5c340fbe343f95", null ],
     [ "operator+", "classNDArray.html#ac5a450494c0c2301540b939b8663219f", null ],

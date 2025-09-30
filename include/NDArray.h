@@ -253,6 +253,12 @@ public:
   NDArray operator*(NDArray &other);
 
   /**
+   * @brief Scalar element wise multiplication (no broadcasting).
+   * @param value Value to multiply array with.
+   */
+  NDArray operator*(float value);
+
+  /**
    * @brief Broadcasted element‑wise division (this / other).
    *
    * Warns on division by zero. Autograd: dA += dOut / other, dB += -(this /

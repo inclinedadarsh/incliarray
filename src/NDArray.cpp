@@ -579,6 +579,8 @@ NDArray NDArray::operator*(NDArray &other) {
   return result;
 }
 
+NDArray NDArray::operator*(float value) { return element_wise_multiply(value); }
+
 NDArray NDArray::operator/(NDArray &other) {
   std::vector<int> outShape = detail::_broadcastShape(shape, other.shape);
   std::vector<int> stridesA =

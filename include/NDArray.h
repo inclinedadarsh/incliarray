@@ -221,6 +221,19 @@ public:
   void randint(int low, int high);
 
   /**
+   * @brief Fill with uniform real values in [0, 1).
+   * @throws std::runtime_error if the array does not own its memory
+   */
+  void rand();
+
+  /**
+   * @brief Fill with uniform real values in [low, high).
+   * @throws std::invalid_argument if low >= high
+   * @throws std::runtime_error if the array does not own its memory
+   */
+  void rand(float low, float high);
+
+  /**
    * @brief Broadcasted element‑wise addition (this + other).
    *
    * Autograd: result records graph metadata and accumulates dA += dOut and

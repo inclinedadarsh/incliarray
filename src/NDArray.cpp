@@ -304,6 +304,36 @@ void NDArray::randint(int low, int high) {
   }
 }
 
+void NDArray::rand() {
+  if (!ownsData) {
+    throw std::runtime_error("Cannot fill a view or non-owning array.");
+  }
+
+  std::mt19937 engine(std::random_device{}());
+  std::uniform_real_distribution<float> dist(0.0f, 1.0f);
+
+  for (int i = 0; i < size; i++) {
+    data[i] = dist(engine);
+  }
+}
+
+void NDArray::rand(float low, float high) {
+  if (!ownsData) {
+    throw std::runtime_error("Cannot fill a view or non-owning array.");
+  }
+  if (!(low < high)) {
+    throw std::invalid_argument(
+        "Invalid range: low >= high for rand(low, high)");
+  }
+
+  std::mt19937 engine(std::random_device{}());
+  std::uniform_real_distribution<float> dist(low, high);
+
+  for (int i = 0; i < size; i++) {
+    data[i] = dist(engine);
+  }
+}
+
 NDArray NDArray::clone() {
   NDArray result(shape);
 

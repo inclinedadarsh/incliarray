@@ -1,5 +1,5 @@
 #include "../include/NDArray.h"
-#include "../include/utils.h"
+#include "./utils.h"
 #include <algorithm>
 #include <cmath>
 #include <iostream>

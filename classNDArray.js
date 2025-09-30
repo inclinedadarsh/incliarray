@@ -26,6 +26,7 @@ var classNDArray =
     [ "operator-", "classNDArray.html#a95de4fb6796cefd654402e7a1be91775", null ],
     [ "operator/", "classNDArray.html#aa55b1daaf3dcea3e99919e9c6cee5781", null ],
     [ "operator/", "classNDArray.html#a1fe05daeff7e0ce9ddb4664d5f934643", null ],
+    [ "operator^", "classNDArray.html#acbaeee5165ba26660b238306b70d1882", null ],
     [ "print", "classNDArray.html#a1706712d89ebdb1e9c02343980ea7fb8", null ],
     [ "randint", "classNDArray.html#a2ddcd1b60e7c30be0e5822f5a77fcb6a", null ],
     [ "reshape", "classNDArray.html#aa426ea20b8318201651b0bc9d7492094", null ],

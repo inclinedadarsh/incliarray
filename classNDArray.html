@@ -180,6 +180,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa55b1daaf3dcea3e99919e9c6cee5781" id="r_aa55b1daaf3dcea3e99919e9c6cee5781"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNDArray.html">NDArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#aa55b1daaf3dcea3e99919e9c6cee5781">operator/</a> (float value)</td></tr>
 <tr class="memdesc:aa55b1daaf3dcea3e99919e9c6cee5781"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scalar division (this / value), shape‑preserving, warns on zero.  <br /></td></tr>
 <tr class="separator:aa55b1daaf3dcea3e99919e9c6cee5781"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbaeee5165ba26660b238306b70d1882" id="r_acbaeee5165ba26660b238306b70d1882"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNDArray.html">NDArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#acbaeee5165ba26660b238306b70d1882">operator^</a> (float value)</td></tr>
+<tr class="memdesc:acbaeee5165ba26660b238306b70d1882"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scalar element-wise power (this ^ value).  <br /></td></tr>
+<tr class="separator:acbaeee5165ba26660b238306b70d1882"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a767b098ca200ff9ee96f9020ada1053e" id="r_a767b098ca200ff9ee96f9020ada1053e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNDArray.html">NDArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNDArray.html#a767b098ca200ff9ee96f9020ada1053e">element_wise_multiply</a> (<a class="el" href="classNDArray.html">NDArray</a> &amp;other)</td></tr>
 <tr class="memdesc:a767b098ca200ff9ee96f9020ada1053e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broadcasted element‑wise multiplication.  <br /></td></tr>
 <tr class="separator:a767b098ca200ff9ee96f9020ada1053e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -905,6 +908,27 @@ Private Member Functions</h2></td></tr>
 
 <p>Broadcasted element‑wise division (this / other). </p>
 <p>Warns on division by zero. Autograd: dA += dOut / other, dB += -(this / other^2) * dOut. </p>
+
+</div>
+</div>
+<a id="acbaeee5165ba26660b238306b70d1882" name="acbaeee5165ba26660b238306b70d1882"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbaeee5165ba26660b238306b70d1882">&#9670;&#160;</a></span>operator^()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classNDArray.html">NDArray</a> NDArray::operator^ </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Scalar element-wise power (this ^ value). </p>
+<p>Raises each element to the given scalar power. Autograd: dA += value * A^(value - 1) * dOut. </p>
 
 </div>
 </div>

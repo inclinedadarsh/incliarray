@@ -27,12 +27,17 @@ var NAVTREE =
   [ "IncliArray", "index.html", [
     [ "Highlights", "index.html#autotoc_md1", null ],
     [ "Features", "index.html#autotoc_md2", null ],
-    [ "Build with CMake", "index.html#autotoc_md3", null ],
-    [ "Build Doxygen documentation", "index.html#autotoc_md4", null ],
-    [ "Project Structure", "index.html#autotoc_md5", null ],
-    [ "Quickstart Example", "index.html#autotoc_md6", null ],
-    [ "Author", "index.html#autotoc_md7", null ],
-    [ "License", "index.html#autotoc_md8", null ],
+    [ "Build and run examples (development flow)", "index.html#autotoc_md3", null ],
+    [ "Install the library system‑wide", "index.html#autotoc_md4", null ],
+    [ "Use in your project", "index.html#autotoc_md5", [
+      [ "With CMake", "index.html#autotoc_md6", null ],
+      [ "With a plain compiler (no CMake)", "index.html#autotoc_md7", null ]
+    ] ],
+    [ "Doxygen documentation", "index.html#autotoc_md8", null ],
+    [ "Project structure", "index.html#autotoc_md9", null ],
+    [ "Quickstart demo", "index.html#autotoc_md10", null ],
+    [ "Author", "index.html#autotoc_md11", null ],
+    [ "License", "index.html#autotoc_md12", null ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [

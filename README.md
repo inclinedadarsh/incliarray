@@ -1,138 +1,165 @@
 # IncliArray
 
-Minimal N-dimensional float array library in C++.  
-Built from scratch to learn memory layout, strides, slicing, broadcasting, and autograd.
+Minimal N-dimensional float array library in C++.
 
-Checkout the [documentation](https://inclinedadarsh.github.io/incliarray/).
+Checkout the documentation: https://inclinedadarsh.github.io/incliarray/.
 
 ![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white) ![CMake](https://img.shields.io/badge/CMake-%23008FBA.svg?style=for-the-badge&logo=cmake&logoColor=white) ![Doxygen](https://img.shields.io/badge/doxygen-2C4AA8?style=for-the-badge&logo=doxygen&logoColor=white)
 
 ## Highlights
 
-- Tiny, readable implementation (~single header+source) focused on concepts
-- Explicit strides and offsets; safe guards around views/ownership
-- Lightweight reverse-mode autograd for core ops
+- Tiny, readable implementation (single header + single source) focused on concepts
+- Explicit shapes/strides and careful ownership rules (base vs view)
+- Lightweight reverse‑mode autograd for core ops
 
 ## Features
 
-- N-dimensional float arrays with row‑major layout
-- Manual stride-based indexing: `get`, `set`, flat `get(int)`, `set(int)`
-- Introspection helpers: `metadata`, `isContiguous`, `print` (data or grads)
-- Initialization/fill: `zeros`, `ones`, `fill`, `fillSequential`, `randint(low, high)`
-- Slicing: `slice` returns a detached view (non-owning, no autograd) with shared data
-- Materialization: use `clone()` to get an owning tensor (detached, no autograd link)
-- Reshape: `reshape` on contiguous, owning arrays
-- Broadcasting arithmetic between arrays:
-  - `+`, `-`, `/`, and element-wise `element_wise_multiply`
-- Scalar arithmetic on arrays: `+ float`, `- float`, `/ float`, `element_wise_multiply(float)`
-- Matrix multiplication for 2D arrays: `operator*` (no broadcasting)
-- Autograd (reverse-mode) support:
-  - Graph capture with `prev`, `op`, `label`
-  - `backward()` builds a topo order and accumulates gradients
-  - Implemented grads for: add/sub (array & scalar), div (array & scalar),
-    element-wise multiply (array & scalar), and matrix multiply
-- Safety and constraints:
-  - Flat indexing and reshape allowed only on contiguous, owning arrays
-  - Slice views do not own memory; fill operations disallowed on non-owning views
-  - Division warns on divisor 0; grad contributions on zero divisors are skipped
+- N‑dimensional float arrays with row‑major layout
+- Safe, stride‑aware indexing:
+  - `get(std::vector<int>)`, `set(std::vector<int>, float)`
+  - Flat `get(int)`, `set(int)` on contiguous, owning arrays only
+- Introspection and layout helpers: `metadata`, `isContiguous`, `print` (data or grads)
+- Initialization/fill:
+  - `zeros`, `ones`, `fill`, `fillSequential`
+  - `randint(low, high)`, `rand()` in [0,1), `rand(low, high)`
+- Views and materialization:
+  - `slice` returns a detached, non‑owning view (shares data, no autograd linkage)
+  - `clone()` creates a contiguous, owning copy (detached)
+- Reshape: `reshape(newShape)` for contiguous, owning arrays
+- Broadcasting arithmetic (array ⊕ array): `+`, `-`, `/`, `element_wise_multiply`
+- Scalar arithmetic (array ⊕ scalar): `+ float`, `- float`, `/ float`, `element_wise_multiply(float)`
+- Element‑wise power with scalar exponent: `operator^(float)`
+- 2D matrix multiplication: `operator*` (no broadcasting)
+- Reductions:
+  - `sum()` reduces all elements to a 1‑element array
+  - `sum(axis)` keeps reduced dimension as size 1, supports negative axes
+- Autograd:
+  - Results from core ops capture `prev`, `op`, `label`
+  - `backward()` builds a topological order and accumulates gradients
+  - Implemented grads for add/sub (array & scalar), div (array & scalar),
+    element‑wise multiply (array & scalar), matrix multiply, and power (scalar exponent)
+- Safety/constraints:
+  - Flat indexing and reshape are allowed only on contiguous, owning arrays
+  - Views are non‑owning; fill operations are disallowed on non‑owning arrays
+  - Division warns on divisor 0; gradient contributions on zero divisors are skipped
 
-## Build with CMake
+## Build and run examples (development flow)
 
-1. Clone this repository and change directory
-    ```bash
-    git clone https://github.com/inclinedadarsh/incliarray.git
-    cd incliarray
-    ```
+```bash
+mkdir build && cd build
+cmake ..
+make
+./examples/basic_scalars
+```
 
-2. Create and change directory to the `build` directory
-    ```bash
-    mkdir build && cd build
-    ```
+Examples are built from `examples/` when `BUILD_EXAMPLES` is ON (default). You can also run `./examples/basic_vectors` if present.
 
-3. Use `cmake` to build the program
-    ```bash
-    cmake ..
-    make
-    ```
+See `examples/README.md` for details about each example.
 
-4. Run the executable
-    ```bash
-    ./IncliArray
-    ```
+## Install the library system‑wide
 
-## Build Doxygen documentation
+```bash
+mkdir build && cd build
+cmake .. -DBUILD_EXAMPLES=OFF
+sudo make install
+```
 
-1. Install Doxygen and `graphviz`
-    ```bash
-    sudo apt install doxygen graphviz
-    ```
+This installs headers to `/usr/local/include` and the library to `/usr/local/lib` by default.
 
-2. Generate HTML docs
-    ```bash
-    doxygen Doxyfile
-    ```
+## Use in your project
 
-3. Open the docs in your browser. The index file can be found at `html/index.html`.
+### With CMake
 
-## Project Structure
+In your project's `CMakeLists.txt`:
+
+```cmake
+find_package(NDArray REQUIRED)
+add_executable(myapp myapp.cpp)
+target_link_libraries(myapp PRIVATE NDArray)
+```
+
+Then include it in code as:
+
+```cpp
+#include <NDArray.h>
+```
+
+### With a plain compiler (no CMake)
+
+If installed to default prefixes, this typically works:
+
+```bash
+g++ -std=c++17 myapp.cpp -lNDArray -o myapp
+```
+
+And in your code:
+
+```cpp
+#include <NDArray.h>
+```
+
+If you installed to a custom prefix, add `-I<include_dir>` and `-L<lib_dir>` accordingly.
+
+## Doxygen documentation
+
+1) Install Doxygen and `graphviz`:
+
+```bash
+sudo apt-get install -y doxygen graphviz
+```
+
+2) Generate docs:
+
+```bash
+./build-docs.sh
+```
+
+Open `html/index.html` in your browser.
+
+## Project structure
 
 ```
 .
-├── CMakeLists.txt      // Build configuration
-├── Doxyfile            // Doxygen config for documentation
-├── include/            // Header files
-│   ├── NDArray.h       // NDArray class declaration
-│   └── utils.h         // Helper functions
-├── src/                // Source files
-│   ├── NDArray.cpp     // NDArray class implementation
-│   └── utils.cpp       // Helper function definitions
-├── main.cpp            // Example/test runner
-├── LICENSE             // Project license
-└── README.md           // Project documentation
+├── CMakeLists.txt       // Library build + install rules
+├── Doxyfile             // Doxygen configuration
+├── include/
+│   ├── NDArray.h        // NDArray class declaration
+│   └── utils.h          // Internal helpers (strides, offsets, broadcasting)
+├── src/
+│   ├── NDArray.cpp      // NDArray implementation
+│   └── utils.cpp        // Helper implementations
+├── examples/
+│   ├── CMakeLists.txt   // Example build targets
+│   ├── basic_scalars.cpp
+│   └── basic_vectors.cpp
+├── LICENSE
+└── README.md
 ```
 
-## Quickstart Example
-
-A compact example that demonstrates slicing, reshape, broadcasting, scalar ops, element‑wise ops, division, matrix multiplication, and a backward pass.
+## Quickstart demo
 
 ```cpp
-#include "./include/NDArray.h"
+#include <NDArray.h>
 #include <iostream>
 
 int main() {
   NDArray A({2, 3});
   A.fillSequential();
-  A.set({0, 1}, 10.0f);         // manual set using indices
 
   NDArray B({1, 3});
-  B.ones();                      // broadcast row vector
+  B.ones();
 
-  NDArray C = A + B;             // broadcasted add
-  NDArray D = C.slice({{0, 2}, {1, 3}});  // view: shape (2, 2)
-  
-  NDArray E = D.element_wise_multiply(2.0f); // scalar mul
-  NDArray F = E - 3.0f;            // scalar sub
-
-  NDArray Bb = B.slice({{0, 1}, {1, 3}});    // shape (1, 2)
-  NDArray G = F / (Bb + 1.0f);     // broadcasted div with scalar add
+  NDArray C = A + B;                       // broadcast add
+  NDArray D = C.slice({{0, 2}, {1, 3}});   // detached view (2x2)
+  NDArray E = D.element_wise_multiply(2.0f);
+  NDArray F = E - 3.0f;
 
   NDArray W({2, 2});
   W.randint(1, 5);
-  NDArray H = G * W;               // matrix multiply (2x2) * (2x2)
+  NDArray H = F * W;                        // 2D matmul
 
-  H.metadata();
-  std::cout << "H(1,1) = " << H.get({1, 1}) << std::endl;
-
-  H.backward();                    // autograd
-
-  std::cout << "\nGrad A:" << std::endl;
+  H.backward();
   A.print(NDArray::PrintType::Grad);
-
-  std::cout << "\nGrad B:" << std::endl;
-  B.print(NDArray::PrintType::Grad);
-
-  std::cout << "\nGrad W:" << std::endl;
-  W.print(NDArray::PrintType::Grad);
 }
 ```
 
